@@ -1,0 +1,25 @@
+# MPLAB IDE generated this makefile for use with Microsoft `nmake'.
+# Project: MicroMenu_Lib.mcp
+# Date: Thu May 18 18:31:37 2017
+
+AS = MPASMWIN.exe
+CC = 
+LD = mplink.exe
+AR = mplib.exe
+RM = del
+
+"MicroMenu_Lib.cof" : "Main.o" "HD44780_Lib.o" "MicroMenu_Lib.o"
+	$(CC) /p16F84 "Main.o" "HD44780_Lib.o" "MicroMenu_Lib.o" /z__MPLAB_BUILD=1 /o"MicroMenu_Lib.cof" /M"MicroMenu_Lib.map" /W
+
+"Main.o" : "Main.asm" "hardware_profile.inc" "C:\Program Files\Microchip\MPASM Suite\p16f84.inc" "Macro.h" "HD44780_Lib.h" "hardware_profile.inc" "C:\Program Files\Microchip\MPASM Suite\p16f84.inc" "MicroMenu_Lib.h" "hardware_profile.inc" "C:\Program Files\Microchip\MPASM Suite\p16f84.inc"
+	$(AS) /q /p16F84 "Main.asm" /l"Main.lst" /e"Main.err" /o"Main.o"
+
+"HD44780_Lib.o" : "HD44780_Lib.asm" "HD44780_Lib.h" "hardware_profile.inc" "C:\Program Files\Microchip\MPASM Suite\p16f84.inc"
+	$(AS) /q /p16F84 "HD44780_Lib.asm" /l"HD44780_Lib.lst" /e"HD44780_Lib.err" /o"HD44780_Lib.o"
+
+"MicroMenu_Lib.o" : "MicroMenu_Lib.asm" "MicroMenu_Lib.h" "hardware_profile.inc" "C:\Program Files\Microchip\MPASM Suite\p16f84.inc" "HD44780_Lib.h" "hardware_profile.inc" "C:\Program Files\Microchip\MPASM Suite\p16f84.inc"
+	$(AS) /q /p16F84 "MicroMenu_Lib.asm" /l"MicroMenu_Lib.lst" /e"MicroMenu_Lib.err" /o"MicroMenu_Lib.o"
+
+"clean" : 
+	$(CC) "Main.o" "Main.err" "Main.lst" "HD44780_Lib.o" "HD44780_Lib.err" "HD44780_Lib.lst" "MicroMenu_Lib.o" "MicroMenu_Lib.err" "MicroMenu_Lib.lst" "MicroMenu_Lib.cof" "MicroMenu_Lib.hex"
+
