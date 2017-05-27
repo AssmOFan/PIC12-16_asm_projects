@@ -101,8 +101,7 @@ Menu_5_Submenu_3_action					; Выполняем действие 3 подпункта 5 пункта
 	goto	End_Action			
 
 ;===================================================================================================
-Debounce_CLR_DISP						; Подпрограмма антидребезговой задержки сомещенной с очисткой дисплея
-	call	Debounce_Delay
+CLR_DISP_delay							; Подпрограмма очистки дисплея
 	movlw   CLR_DISP
 	call	Send_LCD_Command
 	call	Delay_4ms					; Обязательная задержка после очистки дисплея !!!
@@ -173,7 +172,7 @@ Check_1
 Skip_Check_1
 endif
 
-	call	Debounce_CLR_DISP
+	call	CLR_DISP_delay				; Очистим дисплей перед самой перерисовкой пунктов меню, чтобы уменьшить мерцание
 
 if	USE_MOVING_CURSOR
 	btfss	Press_UP
@@ -241,18 +240,25 @@ Correct_index_menu						; Достигли последнего пункта меню, следующим отображаем 
 Skip_Correct_index_menu
 endif
 
+	call	Debounce_Delay				; Антидребезговая задержка, при нажатии кнопок Вверх/Вниз, первом входе в пункт меню, выходе из подпункта меню
+
+	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
+	andwf	flags	
+	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
+	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
+
 	movlw	EXIT_DELAY					; Заносим счетчик проходов опроса клавиш
 	movwf	menu_counter
 	clrf	temp_1
 	clrf	temp_2
 Loop_Menu								; Вычисляем нажатую клавишу
-	btfss	UP
+	btfsc	Press_UP
 	goto	Cursor_UP				
-	btfss	DOWN
+	btfsc	Press_DOWN
 	goto	Cursor_DOWN
-	btfss	ENTER
+	btfsc	Press_ENTER
 	goto	ENTER_Menu
-	btfss	EXIT
+	btfsc	Press_EXIT
 	goto	EXIT_Menu
 ;-----------------------------------------------------------------										
 	decfsz	temp_1						; Ни одна клавиша не нажата						
@@ -264,7 +270,6 @@ Loop_Menu								; Вычисляем нажатую клавишу
 	goto	Zastavka					; Вышел таймаут нахождения в меню, выходим в заставку	
 ;-----------------------------------------------------------------
 Cursor_UP								; Была нажата клавиша "Вверх"
-	call	Debounce_Delay
 
 if	USE_MOVING_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
@@ -280,7 +285,6 @@ endif
 	goto	Switch_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
 Cursor_DOWN								; Была нажата клавиша "Вниз"
-	call	Debounce_Delay
 
 if	USE_MOVING_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
@@ -296,7 +300,12 @@ endif
 	goto	Switch_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
 EXIT_Menu								; Была нажата клавиша "Выход"
-	call	Debounce_Delay
+
+	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
+	andwf	flags	
+	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
+	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
+
 	goto	Zastavka					; Выходим в заставку
 ;-----------------------------------------------------------------
 ENTER_Menu								; Была нажата клавиша "Вход"
@@ -331,7 +340,7 @@ Check_2
 Skip_Check_2
 endif
 
-	call	Debounce_CLR_DISP
+	call	CLR_DISP_delay				; Очистим дисплей перед самой перерисовкой подпунктов меню, чтобы уменьшить мерцание
 
 if	USE_MOVING_CURSOR
 	btfss	Press_UP
@@ -402,18 +411,25 @@ Correct_index_submenu					; Достигли последнего подпункта меню, следующим отобра
 Skip_Correct_index_submenu
 endif
 
+	call	Debounce_Delay				; Антидребезговая задержка, при нажатии кнопок Вверх/Вниз, первом входе в подпункт меню, выходе из действия подпункта меню
+
+	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
+	andwf	flags	
+	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
+	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
+
 	movlw	EXIT_DELAY					; Заносим счетчик проходов опроса клавиш
 	movwf	menu_counter
 	clrf	temp_1
 	clrf	temp_2
 Loop_Submenu							; Мы зашли в пункт меню, ждем нажатия следующей кнопки
-	btfss	UP
+	btfsc	Press_UP
 	goto	Cursor_UP_submenu				
-	btfss	DOWN
+	btfsc	Press_DOWN
 	goto	Cursor_DOWN_submenu
-	btfss	ENTER
+	btfsc	Press_ENTER
 	goto	ENTER_submenu
-	btfss	EXIT
+	btfsc	Press_EXIT
 	goto	EXIT_submenu
 ;-----------------------------------------------------------------
 	decfsz	temp_1						; Ни одна клавиша не нажата	
@@ -425,7 +441,6 @@ Loop_Submenu							; Мы зашли в пункт меню, ждем нажатия следующей кнопки
 	goto	Switch_Menu					; Вышел таймаут нахождения в подменю, выходим в предыдущий пункт меню
 ;-----------------------------------------------------------------
 Cursor_UP_submenu						; Была нажата клавиша "Вверх"
-	call	Debounce_Delay
 
 if	USE_MOVING_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
@@ -442,7 +457,6 @@ endif
 	goto	Switch_Submenu				; Отрисовываем новый текущий подпункт меню	
 ;-----------------------------------------------------------------
 Cursor_DOWN_submenu						; Была нажата клавиша "Вниз"
-	call	Debounce_Delay
 
 if	USE_MOVING_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
@@ -458,12 +472,11 @@ endif
 	goto	Switch_Submenu				; Отрисовываем новый текущий подпункт меню
 ;-----------------------------------------------------------------	
 EXIT_submenu							; Была нажата клавиша "Выход"
-	call	Debounce_Delay
 	clrf	index_submenu				; Обнуляем индекс пункта подменю, чтобы при следующем заходе в любой пункт меню курсор находился на 1 пункте подменю			
 	goto	Switch_Menu					; Выходим в меню
 ;-----------------------------------------------------------------
 ENTER_submenu							; Была нажата клавиша "Вход"
-	call	Debounce_CLR_DISP			; Очистим дисплей
+	call	CLR_DISP_delay				; Очистим дисплей
 	goto	Switch_Action				; Делаем действие текущего подпункта меню
 End_Action
 ;-----------------------------------------------------------------

@@ -1,4 +1,4 @@
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  1
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (include)
                       00032         Table
                       00033                 endm
                       00034 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  2
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00033 #define MENU_NAME_5                             "5.Menu_5"      
                       00034 
                       00035 #define NUM_OF_SUBMENU_PUNKTS_1 .3                              ; Количество пунктов каждого подменю, до
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  3
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00083                                 endw
                       00084                         endm
                       00085 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  4
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00130                                 endif
                       00131 ;-------------------------------------------------------------------------------------------------------
                             ----
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  5
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00175                                 Menu_#v(d)_Table
                       00176                                         mod_PCL index_submenu
                       00177                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  6
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00222 ;-------------------------------------------------------------------------------------------------------
                             ----
                       00223 ; Переходы на подпункты 10 пункта меню
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  7
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00266                                         mod_PCL index_submenu
                       00267                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
                       00268                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  8
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             ----
                       00313 ; Действия подпунктов 6 пункта меню
                       00314 ;-------------------------------------------------------------------------------------------------------
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE  9
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -529,7 +529,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00358                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
                       00359                                         goto    Menu_#v(d)_Submenu_#v(a)_action
                       00360                                         a+=1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 10
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -588,7 +588,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00404                                                 dt              MENU_SUBMENU_NAME_2_#v(a),0
                       00405                                         a+=1
                       00406                                 endw
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 11
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -647,7 +647,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00450 ;-------------------------------------------------------------------------------------------------------
                             ----
                       00451                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 12
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -706,7 +706,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00496                                 endw
                       00497                                         d+=1
                       00498                                 endif
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 13
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -765,7 +765,7 @@ Message[310]: Superseding current maximum RAM and RAM map.
                       00018 
                       00019         else
                       00020 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 14
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -824,7 +824,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00069                                         
                       00003 
                       00004 MicroMenu_Lib_udata     udata_shr
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 15
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -883,7 +883,7 @@ Warning[207]: Found label after column 1. (a)
   00000003                M                                         a+=1
 000A   2???               M                                         goto    Menu_3
 Warning[207]: Found label after column 1. (a)
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 16
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 16
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -942,7 +942,7 @@ Warning[207]: Found label after column 1. (c)
                             ----
                           M ; Переходы на подпункты 1 пункта меню
                           M ;-------------------------------------------------------------------------------------------------------
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 17
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 17
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1001,7 +1001,7 @@ Warning[207]: Found label after column 1. (Menu_2_Table)
 0027   00??               M                 movwf   offset                  ; Сохранить младшие 8 бит требуемого адреса
                           M         if      USE_SHORT_MOD_PCL
 0028   0D??               M                 rlf             known_zero,w    ; так сохраняют бит переполнения от сложения 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 18
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 18
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1060,7 +1060,7 @@ Warning[207]: Found label after column 1. (Menu_3_Table)
 Warning[207]: Found label after column 1. (Table)
 0038                      M         Table
                           M                                 while   a<NUM_OF_SUBMENU_PUNKTS_3+1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 19
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 19
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1119,7 +1119,7 @@ Warning[207]: Found label after column 1. (a)
                           M                                 endw
 Warning[207]: Found label after column 1. (d)
   00000005                M                                         d+=1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 20
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 20
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1178,7 +1178,7 @@ Warning[207]: Found label after column 1. (d)
                           M                                         mod_PCL index_submenu
                           M                                 while   a<NUM_OF_SUBMENU_PUNKTS_6+1
                           M                                         goto    Menu_6_Submenu_4
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 21
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 21
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1237,7 +1237,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             ----
                           M ; Переходы на подпункты 10 пункта меню
                           M ;-------------------------------------------------------------------------------------------------------
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 22
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 22
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1296,7 +1296,7 @@ Warning[207]: Found label after column 1. (c)
 005D   2???               M                                         goto    Menu_5_Table_action
 Warning[207]: Found label after column 1. (c)
   00000006                M                                         c+=1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 23
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 23
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1355,7 +1355,7 @@ Warning[207]: Found label after column 1. (d)
 Warning[207]: Found label after column 1. (Menu_2_Table_action)
 0069                      M                                 Menu_2_Table_action
                           M                                         mod_PCL index_submenu
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 24
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 24
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1414,7 +1414,7 @@ Warning[207]: Found label after column 1. (Menu_3_Table_action)
                           M                 btfsc   STATUS,C                ; Перешли границу страницы памяти программ?
                           M                 addlw   1                               ; Если да, увеличить на 1 старшие 5 бит
                           M         endif
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 25
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 25
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1473,7 +1473,7 @@ Warning[207]: Found label after column 1. (a)
 0088   2???               M                                         goto    Menu_4_Submenu_2_action
 Warning[207]: Found label after column 1. (a)
   00000003                M                                         a+=1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 26
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 26
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1532,7 +1532,7 @@ Warning[207]: Found label after column 1. (d)
                           M ; Действия подпунктов 6 пункта меню
                           M ;-------------------------------------------------------------------------------------------------------
                             ----
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 27
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 27
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1591,7 +1591,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M                                         goto    Menu_6_Submenu_4_action
                           M                                         a+=1
                           M                                 endw
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 28
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 28
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1650,7 +1650,7 @@ Warning[207]: Found label after column 1. (Menu_2)
 00A6                      M                                 Menu_2
                           M                                         mod_PCL symbol_pointer
   0000                    M                 local   Table
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 29
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 29
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1709,7 +1709,7 @@ Warning[207]: Found label after column 1. (Menu_4)
 00C8   08??               M                 movfw   symbol_pointer
 00C9   3E??               M                 addlw   low Table               ; Добавить 8 младших бит адреса таблицы к смещению
 00CA   00??               M                 movwf   offset                  ; Сохранить младшие 8 бит требуемого адреса
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 30
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 30
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1768,7 +1768,7 @@ Warning[207]: Found label after column 1. (a)
 00EA   08??               M                 movfw   index_menu
 00EB   3E??               M                 addlw   low Table               ; Добавить 8 младших бит адреса таблицы к смещению
 00EC   00??               M                 movwf   offset                  ; Сохранить младшие 8 бит требуемого адреса
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 31
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 31
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1827,7 +1827,7 @@ Warning[207]: Found label after column 1. (Table)
 00FF                      M         Table
 00FF   3420 3420 344D 00040         dt              ZASTAVKA_FIRST_STRING,0
        3469 3463 3472 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 32
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 32
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1886,7 +1886,7 @@ Warning[207]: Found label after column 1. (Table)
        3420 3443 346F 
        346D 3470 346C 
        3465 3474 3465 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 33
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 33
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -1945,7 +1945,7 @@ Warning[207]: Found label after column 1. (Menu_1_Submenu_2)
                           M                 movlw   high Table              ; Загрузить 5 старших бит адреса
                           M                 btfsc   STATUS,C                ; Перешли границу страницы памяти программ?
                           M                 addlw   1                               ; Если да, увеличить на 1 старшие 5 бит
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 34
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 34
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2004,7 +2004,7 @@ Warning[207]: Found label after column 1. (d)
 Warning[207]: Found label after column 1. (Menu_2_Submenu_1)
 0175                      M                                         Menu_2_Submenu_1
                           M                                                 mod_PCL symbol_pointer
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 35
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 35
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2063,7 +2063,7 @@ Warning[207]: Found label after column 1. (Menu_2_Submenu_3)
 019A                      M                                         Menu_2_Submenu_3
                           M                                                 mod_PCL symbol_pointer
   0000                    M                 local   Table
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 36
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 36
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2122,7 +2122,7 @@ Warning[207]: Found label after column 1. (Menu_3_Submenu_1)
 01B2   08??               M                 movfw   offset                  ; Загрузить рассчитанное значание младшей части адреса
 01B3   0082               M                 movwf   PCL                             ; Установить младшую часть адреса
 Warning[207]: Found label after column 1. (Table)
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 37
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 37
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2181,7 +2181,7 @@ Warning[207]: Found label after column 1. (Menu_3_Submenu_3)
 01DA   08??               M                 movfw   offset                  ; Загрузить рассчитанное значание младшей части адреса
 01DB   0082               M                 movwf   PCL                             ; Установить младшую часть адреса
 Warning[207]: Found label after column 1. (Table)
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 38
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 38
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2240,7 +2240,7 @@ Warning[207]: Found label after column 1. (Menu_4_Submenu_2)
 01F9   00??               M                 movwf   offset                  ; Сохранить младшие 8 бит требуемого адреса
                           M         if      USE_SHORT_MOD_PCL
 01FA   0D??               M                 rlf             known_zero,w    ; так сохраняют бит переполнения от сложения 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 39
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 39
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2299,7 +2299,7 @@ Warning[207]: Found label after column 1. (d)
                           M ;-------------------------------------------------------------------------------------------------------
                             ----
                           M                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 40
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 40
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2358,7 +2358,7 @@ Warning[207]: Found label after column 1. (Table)
        3474 3474 3469 
        346E 3467 3473 
        3400 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 41
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 41
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2417,7 +2417,7 @@ Warning[207]: Found label after column 1. (d)
                           M ;-------------------------------------------------------------------------------------------------------
                             ----
                           M                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 42
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 42
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2476,7 +2476,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                           M                                 endw
                           M                                         d+=1
                           M                                 endif
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 43
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 43
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -2535,636 +2535,670 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00100 ;       nop
 0264   2???           00101         goto    End_Action                      
                       00102 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 44
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 44
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00103 ;===================================================================================================
-0265                  00104 Debounce_CLR_DISP                                               ; Подпрограмма антидребезговой задержки 
-                            сомещенной с очисткой дисплея
-0265   2???           00105         call    Debounce_Delay
-0266   3001           00106         movlw   CLR_DISP
-0267   2???           00107         call    Send_LCD_Command
-0268   2???           00108         call    Delay_4ms                                       ; Обязательная задержка после очистки ди
+0265                  00104 CLR_DISP_delay                                                  ; Подпрограмма очистки дисплея
+0265   3001           00105         movlw   CLR_DISP
+0266   2???           00106         call    Send_LCD_Command
+0267   2???           00107         call    Delay_4ms                                       ; Обязательная задержка после очистки ди
                             сплея !!!
-0269   0008           00109         return
-                      00110 
-                      00111 ;===================================================================================================
-026A                  00112 Second_String_routine                                   ; Подпрограмма перевода указателя на 2-ю строку 
+0268   0008           00108         return
+                      00109 
+                      00110 ;===================================================================================================
+0269                  00111 Second_String_routine                                   ; Подпрограмма перевода указателя на 2-ю строку 
 Warning[205]: Found directive in column 1. (if)
-                      00113 if      USE_CURSOR
-                      00114         movlw   b'10001111'                                     ; Установим курсор на последний символ 1
+                      00112 if      USE_CURSOR
+                      00113         movlw   b'10001111'                                     ; Установим курсор на последний символ 1
                             -й строки
-                      00115         call    Send_LCD_Command
-                      00116         movlw   '<'                                                     ; И нарисуем там указатель текущ
+                      00114         call    Send_LCD_Command
+                      00115         movlw   '<'                                                     ; И нарисуем там указатель текущ
                             его пункта меню
-                      00117         call    Send_LCD_Symbol
-                      00118 endif
-026A   30C0           00119         movlw   SECOND_LINE                                     ; Переводим указатель на 2-ю строку     
-026B   2???           00120         call    Send_LCD_Command
-026C   0008           00121         return                                                          ; И приступаем к отрисовке следу
+                      00116         call    Send_LCD_Symbol
+                      00117 endif
+0269   30C0           00118         movlw   SECOND_LINE                                     ; Переводим указатель на 2-ю строку     
+026A   2???           00119         call    Send_LCD_Command
+026B   0008           00120         return                                                          ; И приступаем к отрисовке следу
                             ющего пункта меню
-                      00122 
-                      00123 ;===================================================================================================
-026D                  00124 Switch_Menu_routine                                             ; Подпрограмма вывода названия пункта ме
+                      00121 
+                      00122 ;===================================================================================================
+026C                  00123 Switch_Menu_routine                                             ; Подпрограмма вывода названия пункта ме
                             ню на дисплей
-026D   01??           00125         clrf    symbol_pointer
-026E                  00126 String_Menu
-026E   2???           00127         call    Switch_Menu_Table
-026F   39FF           00128         andlw   0FFh
-0270   1903           00129         btfsc   STATUS,Z
-0271   0008           00130         return 
-0272   2???           00131         call    Send_LCD_Symbol
+026C   01??           00124         clrf    symbol_pointer
+026D                  00125 String_Menu
+026D   2???           00126         call    Switch_Menu_Table
+026E   39FF           00127         andlw   0FFh
+026F   1903           00128         btfsc   STATUS,Z
+0270   0008           00129         return 
+0271   2???           00130         call    Send_LCD_Symbol
 Message[305]: Using default destination of 1 (file).
-0273   0A??           00132         incf    symbol_pointer  
-0274   2???           00133         goto    String_Menu
-                      00134 ;-------------------------------------------------------------------------------------------------------
+0272   0A??           00131         incf    symbol_pointer  
+0273   2???           00132         goto    String_Menu
+                      00133 ;-------------------------------------------------------------------------------------------------------
                             ---------------------
-0275                  00135 Switch_Submenu_routine                                  ; Подпрограмма вывода названия подпункта меню на
+0274                  00134 Switch_Submenu_routine                                  ; Подпрограмма вывода названия подпункта меню на
                              дисплей
-0275   01??           00136         clrf    symbol_pointer
-0276                  00137 String_Submenu
-0276   2???           00138         call    Switch_Submenu_Table
-0277   39FF           00139         andlw   0FFh
-0278   1903           00140         btfsc   STATUS,Z
-0279   0008           00141         return 
-027A   2???           00142         call    Send_LCD_Symbol
+0274   01??           00135         clrf    symbol_pointer
+0275                  00136 String_Submenu
+0275   2???           00137         call    Switch_Submenu_Table
+0276   39FF           00138         andlw   0FFh
+0277   1903           00139         btfsc   STATUS,Z
+0278   0008           00140         return 
+0279   2???           00141         call    Send_LCD_Symbol
 Message[305]: Using default destination of 1 (file).
-027B   0A??           00143         incf    symbol_pointer  
-027C   2???           00144         goto    String_Submenu
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 45
+027A   0A??           00142         incf    symbol_pointer  
+027B   2???           00143         goto    String_Submenu
+                      00144 
+                      00145 ;===================================================================================================
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 45
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00145 
-                      00146 ;===================================================================================================
-027D                  00147 Menu_heandler                                                   ; Обработчик меню
-027D   01??           00148         clrf    index_menu                                      ; Была нажатая какая-то кнопка, очистим 
+027C                  00146 Menu_heandler                                                   ; Обработчик меню
+027C   01??           00147         clrf    index_menu                                      ; Была нажатая какая-то кнопка, очистим 
                             индекс пункта меню                                      
-                      00149 
+                      00148 
 Warning[205]: Found directive in column 1. (if)
 Warning[225]: Invalid label in operand (USE_TOP_4_FIRST_AND_BOTTOM_4_LAST)
-                      00150 if      USE_MOVING_CURSOR & !USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
-                      00151         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00149 if      USE_MOVING_CURSOR & !USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+                      00150         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
-                      00152         andwf   flags                                           
-                      00153         bsf             Press_UP                                        ; И установим признак нажатия то
+                      00151         andwf   flags                                           
+                      00152         bsf             Press_UP                                        ; И установим признак нажатия то
                             лько для кнопки "ВВЕРХ"
-                      00154 endif
-                      00155 
-027E                  00156 Switch_Menu                                                             ; Поместим курсор на нужный пунк
+                      00153 endif
+                      00154 
+027D                  00155 Switch_Menu                                                             ; Поместим курсор на нужный пунк
                             т меню                                                  
-                      00157 
+                      00156 
 Warning[205]: Found directive in column 1. (if)
 Warning[225]: Invalid label in operand (USE_TOP_4_FIRST_AND_BOTTOM_4_LAST)
-                      00158 if      USE_MOVING_CURSOR & USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
-027E   08??           00159         movfw   index_menu
-027F   1D03           00160         btfss   STATUS,Z
-0280   2???           00161         goto    Check_1         
-0281   30F0           00162         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00157 if      USE_MOVING_CURSOR & USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+027D   08??           00158         movfw   index_menu
+027E   1D03           00159         btfss   STATUS,Z
+027F   2???           00160         goto    Check_1         
+0280   30F0           00161         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-0282   05??           00163         andwf   flags   
-0283   1400           00164         bsf             Press_UP                                        ; И установим признак нажатия то
+0281   05??           00162         andwf   flags   
+0282   1400           00163         bsf             Press_UP                                        ; И установим признак нажатия то
                             лько для кнопки "ВВЕРХ"
-0284   2???           00165         goto    Skip_Check_1
-0285                  00166 Check_1
-0285   3C04           00167         sublw   NUM_OF_MAIN_MENU_PUNKTS-1       ; Сравниваем с количеством пунктов меню
-0286   1D03           00168         btfss   STATUS,Z        
-0287   2???           00169         goto    Skip_Check_1    
-0288   30F0           00170         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+0283   2???           00164         goto    Skip_Check_1
+0284                  00165 Check_1
+0284   3C04           00166         sublw   NUM_OF_MAIN_MENU_PUNKTS-1       ; Сравниваем с количеством пунктов меню
+0285   1D03           00167         btfss   STATUS,Z        
+0286   2???           00168         goto    Skip_Check_1    
+0287   30F0           00169         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-0289   05??           00171         andwf   flags
-028A   1480           00172         bsf             Press_DOWN                                      ; И установим признак нажатия то
+0288   05??           00170         andwf   flags
+0289   1480           00171         bsf             Press_DOWN                                      ; И установим признак нажатия то
                             лько для кнопки "ВНИЗ"
-028B                  00173 Skip_Check_1
+028A                  00172 Skip_Check_1
 Warning[205]: Found directive in column 1. (endif)
-                      00174 endif
-                      00175 
-028B   2???           00176         call    Debounce_CLR_DISP
-                      00177 
+                      00173 endif
+                      00174 
+028A   2???           00175         call    CLR_DISP_delay                          ; Очистим дисплей перед самой перерисовкой пункт
+                            ов меню, чтобы уменьшить мерцание
+                      00176 
 Warning[205]: Found directive in column 1. (if)
-                      00178 if      USE_MOVING_CURSOR
-028C   1C00           00179         btfss   Press_UP
-028D   2???           00180         goto    Pressing_DOWN                   
-028E   2???           00181         call    Switch_Menu_routine                     ; Рисуем текущий пункт меню     
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 46
+                      00177 if      USE_MOVING_CURSOR
+028B   1C00           00178         btfss   Press_UP
+028C   2???           00179         goto    Pressing_DOWN                   
+028D   2???           00180         call    Switch_Menu_routine                     ; Рисуем текущий пункт меню     
+028E   308F           00181         movlw   b'10001111'                                     ; Установим курсор на последний символ 1
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 46
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-028F   308F           00182         movlw   b'10001111'                                     ; Установим курсор на последний символ 1
                             -й строки       
-0290   2???           00183         call    Send_LCD_Command
-0291   303C           00184         movlw   '<'                                                     ; И нарисуем там указатель текущ
+028F   2???           00182         call    Send_LCD_Command
+0290   303C           00183         movlw   '<'                                                     ; И нарисуем там указатель текущ
                             его пункта меню
-0292   2???           00185         call    Send_LCD_Symbol
-0293   2???           00186         call    Second_String_routine           ; Указатель на 2 строку
+0291   2???           00184         call    Send_LCD_Symbol
+0292   2???           00185         call    Second_String_routine           ; Указатель на 2 строку
 Message[305]: Using default destination of 1 (file).
-0294   0A??           00187         incf    index_menu                                      ; Берем следующий пункт
-0295   08??           00188         movfw   index_menu      
-0296   3C05           00189         sublw   NUM_OF_MAIN_MENU_PUNKTS         ; Сравниваем с количеством пунктов меню
-0297   1903           00190         btfsc   STATUS,Z
-0298   2???           00191         goto    Correct_index_menu                      
-0299   2???           00192         call    Switch_Menu_routine                     ; Рисуем пункт меню под текущим 
+0293   0A??           00186         incf    index_menu                                      ; Берем следующий пункт
+0294   08??           00187         movfw   index_menu      
+0295   3C05           00188         sublw   NUM_OF_MAIN_MENU_PUNKTS         ; Сравниваем с количеством пунктов меню
+0296   1903           00189         btfsc   STATUS,Z
+0297   2???           00190         goto    Correct_index_menu                      
+0298   2???           00191         call    Switch_Menu_routine                     ; Рисуем пункт меню под текущим 
 Message[305]: Using default destination of 1 (file).
-029A   03??           00193         decf    index_menu                                      ; Не забудем вернуть назад текущий пункт
+0299   03??           00192         decf    index_menu                                      ; Не забудем вернуть назад текущий пункт
                              меню   
-029B   2???           00194         goto    Skip_Correct_index_menu_3
-029C                  00195 Correct_index_menu                                              ; Достигли последнего пункта меню, следу
+029A   2???           00193         goto    Skip_Correct_index_menu_3
+029B                  00194 Correct_index_menu                                              ; Достигли последнего пункта меню, следу
                             ющим отображаем 1 пункт
-029C   01??           00196         clrf    index_menu
-029D   2???           00197         call    Switch_Menu_routine
-029E   3004           00198         movlw   NUM_OF_MAIN_MENU_PUNKTS-1
-029F   00??           00199         movwf   index_menu      
-02A0   2???           00200         goto    Skip_Correct_index_menu_3
-                      00201 
-02A1                  00202 Pressing_DOWN
+029B   01??           00195         clrf    index_menu
+029C   2???           00196         call    Switch_Menu_routine
+029D   3004           00197         movlw   NUM_OF_MAIN_MENU_PUNKTS-1
+029E   00??           00198         movwf   index_menu      
+029F   2???           00199         goto    Skip_Correct_index_menu_3
+                      00200 
+02A0                  00201 Pressing_DOWN
 Message[305]: Using default destination of 1 (file).
-02A1   03??           00203         decf    index_menu                                      ; Берем предыдущий пункт меню
-02A2   1B80           00204         btfsc   index_menu,.7                           ; Проверяем на "<0"     простой проверкой 7 бита
+02A0   03??           00202         decf    index_menu                                      ; Берем предыдущий пункт меню
+02A1   1B80           00203         btfsc   index_menu,.7                           ; Проверяем на "<0"     простой проверкой 7 бита
                             , максимальное количество пунктов меню ограничено 64
-02A3   2???           00205         goto    Correct_index_menu_2
-02A4   2???           00206         call    Switch_Menu_routine                     ; Рисуем предыдущий пункт меню
-02A5   2???           00207         call    Second_String_routine           ; Указатель на 2 строку
+02A2   2???           00204         goto    Correct_index_menu_2
+02A3   2???           00205         call    Switch_Menu_routine                     ; Рисуем предыдущий пункт меню
+02A4   2???           00206         call    Second_String_routine           ; Указатель на 2 строку
 Message[305]: Using default destination of 1 (file).
-02A6   0A??           00208         incf    index_menu                                      ; Вернем текущий пункт                  
+02A5   0A??           00207         incf    index_menu                                      ; Вернем текущий пункт                  
                                             
-02A7   08??           00209         movfw   index_menu      
-02A8   2???           00210         goto    Skip_Correct_index_menu_2
-02A9                  00211 Correct_index_menu_2
-02A9   3004           00212         movlw   NUM_OF_MAIN_MENU_PUNKTS-1
-02AA   00??           00213         movwf   index_menu
-02AB   2???           00214         call    Switch_Menu_routine                     ; Рисуем предыдущий пункт меню
-02AC   2???           00215         call    Second_String_routine           ; Указатель на 2 строку
-02AD   01??           00216         clrf    index_menu
-02AE                  00217 Skip_Correct_index_menu_2
-02AE   2???           00218         call    Switch_Menu_routine                     ; Рисуем текущий пункт меню под предыдущим 
-02AF   30CF           00219         movlw   b'11001111'                                     ; Установим курсор на последний символ 2
+02A6   08??           00208         movfw   index_menu      
+02A7   2???           00209         goto    Skip_Correct_index_menu_2
+02A8                  00210 Correct_index_menu_2
+02A8   3004           00211         movlw   NUM_OF_MAIN_MENU_PUNKTS-1
+02A9   00??           00212         movwf   index_menu
+02AA   2???           00213         call    Switch_Menu_routine                     ; Рисуем предыдущий пункт меню
+02AB   2???           00214         call    Second_String_routine           ; Указатель на 2 строку
+02AC   01??           00215         clrf    index_menu
+02AD                  00216 Skip_Correct_index_menu_2
+02AD   2???           00217         call    Switch_Menu_routine                     ; Рисуем текущий пункт меню под предыдущим 
+02AE   30CF           00218         movlw   b'11001111'                                     ; Установим курсор на последний символ 2
                             -й строки
-02B0   2???           00220         call    Send_LCD_Command
-02B1   303C           00221         movlw   '<'                                                     ; И нарисуем там указатель текущ
+02AF   2???           00219         call    Send_LCD_Command
+02B0   303C           00220         movlw   '<'                                                     ; И нарисуем там указатель текущ
                             его пункта меню
-02B2   2???           00222         call    Send_LCD_Symbol
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 47
+02B1   2???           00221         call    Send_LCD_Symbol
+02B2                  00222 Skip_Correct_index_menu_3
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 47
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-02B3                  00223 Skip_Correct_index_menu_3
-                      00224 
+                      00223 
 Warning[205]: Found directive in column 1. (else)
-                      00225 else
-                      00226         call    Switch_Menu_routine                     ; Рисуем текущий пункт меню
-                      00227         call    Second_String_routine           ; Указатель на 2 строку
-                      00228         incf    index_menu                                      ; Берем следующий пункт
-                      00229         movfw   index_menu      
-                      00230         sublw   NUM_OF_MAIN_MENU_PUNKTS         ; Сравниваем с количеством пунктов меню
-                      00231         btfsc   STATUS,Z
-                      00232         goto    Correct_index_menu                      
-                      00233         call    Switch_Menu_routine                     ; Рисуем пункт меню под текущим 
-                      00234         decf    index_menu                                      ; Не забудем вернуть назад текущий пункт
+                      00224 else
+                      00225         call    Switch_Menu_routine                     ; Рисуем текущий пункт меню
+                      00226         call    Second_String_routine           ; Указатель на 2 строку
+                      00227         incf    index_menu                                      ; Берем следующий пункт
+                      00228         movfw   index_menu      
+                      00229         sublw   NUM_OF_MAIN_MENU_PUNKTS         ; Сравниваем с количеством пунктов меню
+                      00230         btfsc   STATUS,Z
+                      00231         goto    Correct_index_menu                      
+                      00232         call    Switch_Menu_routine                     ; Рисуем пункт меню под текущим 
+                      00233         decf    index_menu                                      ; Не забудем вернуть назад текущий пункт
                              меню   
-                      00235         goto    Skip_Correct_index_menu
-                      00236 Correct_index_menu                                              ; Достигли последнего пункта меню, следу
+                      00234         goto    Skip_Correct_index_menu
+                      00235 Correct_index_menu                                              ; Достигли последнего пункта меню, следу
                             ющим отображаем 1 пункт
-                      00237         clrf    index_menu
-                      00238         call    Switch_Menu_routine
-                      00239         movlw   NUM_OF_MAIN_MENU_PUNKTS-1
-                      00240         movwf   index_menu      
-                      00241 Skip_Correct_index_menu
-                      00242 endif
-                      00243 
-02B3   3014           00244         movlw   EXIT_DELAY                                      ; Заносим счетчик проходов опроса клавиш
-02B4   00??           00245         movwf   menu_counter
-02B5   01??           00246         clrf    temp_1
-02B6   01??           00247         clrf    temp_2
-02B7                  00248 Loop_Menu                                                               ; Вычисляем нажатую клавишу
-02B7   1E06           00249         btfss   UP
-02B8   2???           00250         goto    Cursor_UP                               
-02B9   1E86           00251         btfss   DOWN
-02BA   2???           00252         goto    Cursor_DOWN
-02BB   1F06           00253         btfss   ENTER
-02BC   2???           00254         goto    ENTER_Menu
-02BD   1F86           00255         btfss   EXIT
-02BE   2???           00256         goto    EXIT_Menu
-                      00257 ;-----------------------------------------------------------------                                      
+                      00236         clrf    index_menu
+                      00237         call    Switch_Menu_routine
+                      00238         movlw   NUM_OF_MAIN_MENU_PUNKTS-1
+                      00239         movwf   index_menu      
+                      00240 Skip_Correct_index_menu
+                      00241 endif
+                      00242 
+02B2   2???           00243         call    Debounce_Delay                          ; Антидребезговая задержка, при нажатии кнопок В
+                            верх/Вниз, первом входе в пункт меню, выходе из подпункта меню
+                      00244 
+02B3   30F0           00245         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                            к                                       
+Message[305]: Using default destination of 1 (file).
+02B4   05??           00246         andwf   flags   
+02B5   100B           00247         bcf             INTCON,RBIF                                     ; Сбросим флаг возможно вызваног
+                            о прерывания
+02B6   158B           00248         bsf             INTCON,RBIE                                     ; И разрешим прерывания от кнопо
+                            к
+                      00249 
+02B7   3014           00250         movlw   EXIT_DELAY                                      ; Заносим счетчик проходов опроса клавиш
+02B8   00??           00251         movwf   menu_counter
+02B9   01??           00252         clrf    temp_1
+02BA   01??           00253         clrf    temp_2
+02BB                  00254 Loop_Menu                                                               ; Вычисляем нажатую клавишу
+02BB   1800           00255         btfsc   Press_UP
+02BC   2???           00256         goto    Cursor_UP                               
+02BD   1880           00257         btfsc   Press_DOWN
+02BE   2???           00258         goto    Cursor_DOWN
+02BF   1980           00259         btfsc   Press_ENTER
+02C0   2???           00260         goto    ENTER_Menu
+02C1   1900           00261         btfsc   Press_EXIT
+02C2   2???           00262         goto    EXIT_Menu
+                      00263 ;-----------------------------------------------------------------                                      
                                                                     
 Message[305]: Using default destination of 1 (file).
-02BF   0B??           00258         decfsz  temp_1                                          ; Ни одна клавиша не нажата             
+02C3   0B??           00264         decfsz  temp_1                                          ; Ни одна клавиша не нажата             
                                                             
-02C0   2???           00259         goto    Loop_Menu                                       ; Цикл ожидания нажатия в главном меню  
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 48
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02C4   2???           00265         goto    Loop_Menu                                       ; Цикл ожидания нажатия в главном меню  
 Message[305]: Using default destination of 1 (file).
-02C1   0B??           00260         decfsz  temp_2  
-02C2   2???           00261         goto    Loop_Menu
+02C5   0B??           00266         decfsz  temp_2  
+02C6   2???           00267         goto    Loop_Menu
 Message[305]: Using default destination of 1 (file).
-02C3   0B??           00262         decfsz  menu_counter                            ; Декремент счетчика проходов опроса клавиш     
-02C4   2???           00263         goto    Loop_Menu
-02C5   2???           00264         goto    Zastavka                                        ; Вышел таймаут нахождения в меню, выход
+02C7   0B??           00268         decfsz  menu_counter                            ; Декремент счетчика проходов опроса клавиш     
+02C8   2???           00269         goto    Loop_Menu
+02C9   2???           00270         goto    Zastavka                                        ; Вышел таймаут нахождения в меню, выход
                             им в заставку   
-                      00265 ;-----------------------------------------------------------------
-02C6                  00266 Cursor_UP                                                               ; Была нажата клавиша "Вверх"
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 48
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-02C6   2???           00267         call    Debounce_Delay
-                      00268 
+                      00271 ;-----------------------------------------------------------------
+02CA                  00272 Cursor_UP                                                               ; Была нажата клавиша "Вверх"
+                      00273 
 Warning[205]: Found directive in column 1. (if)
-                      00269 if      USE_MOVING_CURSOR
-02C7   30F0           00270         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00274 if      USE_MOVING_CURSOR
+02CA   30F0           00275         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-02C8   05??           00271         andwf   flags                                           
-02C9   1400           00272         bsf             Press_UP                                        ; И установим признак нажатия то
+02CB   05??           00276         andwf   flags                                           
+02CC   1400           00277         bsf             Press_UP                                        ; И установим признак нажатия то
                             лько для кнопки "ВВЕРХ"
 Warning[205]: Found directive in column 1. (endif)
-                      00273 endif
-                      00274 
+                      00278 endif
+                      00279 
 Message[305]: Using default destination of 1 (file).
-02CA   03??           00275         decf    index_menu                                      ; Берем предыдущий пункт меню
-02CB   1F80           00276         btfss   index_menu,.7                           ; Проверяем на "<0"     простой проверкой 7 бита
+02CD   03??           00280         decf    index_menu                                      ; Берем предыдущий пункт меню
+02CE   1F80           00281         btfss   index_menu,.7                           ; Проверяем на "<0"     простой проверкой 7 бита
                             , максимальное количество пунктов меню ограничено 64
-02CC   2???           00277         goto    Switch_Menu
-02CD   3004           00278         movlw   NUM_OF_MAIN_MENU_PUNKTS-1       ; Стало "<0", сделаем текущим последний пункт меню. Учит
+02CF   2???           00282         goto    Switch_Menu
+02D0   3004           00283         movlw   NUM_OF_MAIN_MENU_PUNKTS-1       ; Стало "<0", сделаем текущим последний пункт меню. Учит
                             ываем, что индекс пункта меню на 1 меньше его порядкового номера
-02CE   00??           00279         movwf   index_menu
-02CF   2???           00280         goto    Switch_Menu                                     ; Отрисовываем новый текущий пункт меню
-                      00281 ;-----------------------------------------------------------------
-02D0                  00282 Cursor_DOWN                                                             ; Была нажата клавиша "Вниз"
-02D0   2???           00283         call    Debounce_Delay
-                      00284 
+02D1   00??           00284         movwf   index_menu
+02D2   2???           00285         goto    Switch_Menu                                     ; Отрисовываем новый текущий пункт меню
+                      00286 ;-----------------------------------------------------------------
+02D3                  00287 Cursor_DOWN                                                             ; Была нажата клавиша "Вниз"
+                      00288 
 Warning[205]: Found directive in column 1. (if)
-                      00285 if      USE_MOVING_CURSOR
-02D1   30F0           00286         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00289 if      USE_MOVING_CURSOR
+02D3   30F0           00290         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-02D2   05??           00287         andwf   flags                                           
-02D3   1480           00288         bsf             Press_DOWN                                      ; И установим признак нажатия то
+02D4   05??           00291         andwf   flags                                           
+02D5   1480           00292         bsf             Press_DOWN                                      ; И установим признак нажатия то
                             лько для кнопки "ВНИЗ"
 Warning[205]: Found directive in column 1. (endif)
-                      00289 endif
-                      00290 
+                      00293 endif
+                      00294 
 Message[305]: Using default destination of 1 (file).
-02D4   0A??           00291         incf    index_menu                                      ; Берем следущий пункт меню
-02D5   08??           00292         movfw   index_menu
-02D6   3C05           00293         sublw   NUM_OF_MAIN_MENU_PUNKTS         ; Достигли последнего ?
-02D7   1903           00294         btfsc   STATUS,Z
-02D8   01??           00295         clrf    index_menu                                      ; Если да, делаем текущим первый пункт м
+02D6   0A??           00295         incf    index_menu                                      ; Берем следущий пункт меню
+02D7   08??           00296         movfw   index_menu
+02D8   3C05           00297         sublw   NUM_OF_MAIN_MENU_PUNKTS         ; Достигли последнего ?
+02D9   1903           00298         btfsc   STATUS,Z
+02DA   01??           00299         clrf    index_menu                                      ; Если да, делаем текущим первый пункт м
                             еню     
-02D9   2???           00296         goto    Switch_Menu                                     ; Отрисовываем новый текущий пункт меню
-                      00297 ;-----------------------------------------------------------------
-02DA                  00298 EXIT_Menu                                                               ; Была нажата клавиша "Выход"
-02DA   2???           00299         call    Debounce_Delay
-02DB   2???           00300         goto    Zastavka                                        ; Выходим в заставку
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 49
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+02DB   2???           00300         goto    Switch_Menu                                     ; Отрисовываем новый текущий пункт меню
                       00301 ;-----------------------------------------------------------------
-02DC                  00302 ENTER_Menu                                                              ; Была нажата клавиша "Вход"
-02DC   01??           00303         clrf    index_submenu                           ; Очистим индекс пункта подменю 
-                      00304 
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 49
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
+02DC                  00302 EXIT_Menu                                                               ; Была нажата клавиша "Выход"
+                      00303 
+02DC   30F0           00304         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                            к                                       
+Message[305]: Using default destination of 1 (file).
+02DD   05??           00305         andwf   flags   
+02DE   100B           00306         bcf             INTCON,RBIF                                     ; Сбросим флаг возможно вызваног
+                            о прерывания
+02DF   158B           00307         bsf             INTCON,RBIE                                     ; И разрешим прерывания от кнопо
+                            к
+                      00308 
+02E0   2???           00309         goto    Zastavka                                        ; Выходим в заставку
+                      00310 ;-----------------------------------------------------------------
+02E1                  00311 ENTER_Menu                                                              ; Была нажата клавиша "Вход"
+02E1   01??           00312         clrf    index_submenu                           ; Очистим индекс пункта подменю 
+                      00313 
 Warning[205]: Found directive in column 1. (if)
 Warning[225]: Invalid label in operand (USE_TOP_4_FIRST_AND_BOTTOM_4_LAST)
-                      00305 if      USE_MOVING_CURSOR & !USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
-                      00306         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00314 if      USE_MOVING_CURSOR & !USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+                      00315         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
-                      00307         andwf   flags                                           
-                      00308         bsf             Press_UP                                        ; И установим признак нажатия то
+                      00316         andwf   flags                                           
+                      00317         bsf             Press_UP                                        ; И установим признак нажатия то
                             лько для кнопки "ВВЕРХ"
-                      00309 endif
-                      00310 
-02DD                  00311 Switch_Submenu                                                  ; Поместим курсор на нужный подпункт нуж
+                      00318 endif
+                      00319 
+02E2                  00320 Switch_Submenu                                                  ; Поместим курсор на нужный подпункт нуж
                             ного пункта
-                      00312 
+                      00321 
 Warning[205]: Found directive in column 1. (if)
 Warning[225]: Invalid label in operand (USE_TOP_4_FIRST_AND_BOTTOM_4_LAST)
-                      00313 if      USE_MOVING_CURSOR & USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
-02DD   08??           00314         movfw   index_submenu
-02DE   1D03           00315         btfss   STATUS,Z
-02DF   2???           00316         goto    Check_2         
-02E0   30F0           00317         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00322 if      USE_MOVING_CURSOR & USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+02E2   08??           00323         movfw   index_submenu
+02E3   1D03           00324         btfss   STATUS,Z
+02E4   2???           00325         goto    Check_2         
+02E5   30F0           00326         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-02E1   05??           00318         andwf   flags   
-02E2   1400           00319         bsf             Press_UP                                        ; И установим признак нажатия то
+02E6   05??           00327         andwf   flags   
+02E7   1400           00328         bsf             Press_UP                                        ; И установим признак нажатия то
                             лько для кнопки "ВВЕРХ"
-02E3   2???           00320         goto    Skip_Check_2
-02E4                  00321 Check_2
-02E4   2???           00322         call    Num_of_Submenu_Table                    
-02E5   00??           00323         movwf   temp_1  
-02E6   03??           00324         decf    temp_1, w                                       ; Учитываем, что индекс подпункта начина
+02E8   2???           00329         goto    Skip_Check_2
+02E9                  00330 Check_2
+02E9   2???           00331         call    Num_of_Submenu_Table                    
+02EA   00??           00332         movwf   temp_1  
+02EB   03??           00333         decf    temp_1, w                                       ; Учитываем, что индекс подпункта начина
                             ется с 0
-02E7   02??           00325         subwf   index_submenu,w                         ; Сравниваем с количеством подпунктов меню
-02E8   1D03           00326         btfss   STATUS,Z        
-02E9   2???           00327         goto    Skip_Check_2    
-02EA   30F0           00328         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+02EC   02??           00334         subwf   index_submenu,w                         ; Сравниваем с количеством подпунктов меню
+02ED   1D03           00335         btfss   STATUS,Z        
+02EE   2???           00336         goto    Skip_Check_2    
+02EF   30F0           00337         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 50
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                             к                                       
 Message[305]: Using default destination of 1 (file).
-02EB   05??           00329         andwf   flags
-02EC   1480           00330         bsf             Press_DOWN                                      ; И установим признак нажатия то
+02F0   05??           00338         andwf   flags
+02F1   1480           00339         bsf             Press_DOWN                                      ; И установим признак нажатия то
                             лько для кнопки "ВНИЗ"
-02ED                  00331 Skip_Check_2
+02F2                  00340 Skip_Check_2
 Warning[205]: Found directive in column 1. (endif)
-                      00332 endif
-                      00333 
-02ED   2???           00334         call    Debounce_CLR_DISP
-                      00335 
+                      00341 endif
+                      00342 
+02F2   2???           00343         call    CLR_DISP_delay                          ; Очистим дисплей перед самой перерисовкой подпу
+                            нктов меню, чтобы уменьшить мерцание
+                      00344 
 Warning[205]: Found directive in column 1. (if)
-                      00336 if      USE_MOVING_CURSOR
-02EE   1C00           00337         btfss   Press_UP
-02EF   2???           00338         goto    Pressing_DOWN_2                 
-02F0   2???           00339         call    Switch_Submenu_routine          ; Рисуем текущий подпункт меню  
-02F1   308F           00340         movlw   b'10001111'                                     ; Установим курсор на последний символ 1
+                      00345 if      USE_MOVING_CURSOR
+02F3   1C00           00346         btfss   Press_UP
+02F4   2???           00347         goto    Pressing_DOWN_2                 
+02F5   2???           00348         call    Switch_Submenu_routine          ; Рисуем текущий подпункт меню  
+02F6   308F           00349         movlw   b'10001111'                                     ; Установим курсор на последний символ 1
                             -й строки       
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 50
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-02F2   2???           00341         call    Send_LCD_Command
-02F3   303C           00342         movlw   '<'                                                     ; И нарисуем там указатель текущ
+02F7   2???           00350         call    Send_LCD_Command
+02F8   303C           00351         movlw   '<'                                                     ; И нарисуем там указатель текущ
                             его пункта меню
-02F4   2???           00343         call    Send_LCD_Symbol
-02F5   2???           00344         call    Second_String_routine           ; Указатель на 2 строку
+02F9   2???           00352         call    Send_LCD_Symbol
+02FA   2???           00353         call    Second_String_routine           ; Указатель на 2 строку
 Message[305]: Using default destination of 1 (file).
-02F6   0A??           00345         incf    index_submenu                           ; Берем следующий пункт
-02F7   2???           00346         call    Num_of_Submenu_Table                    
-02F8   02??           00347         subwf   index_submenu,w                         ; Сравниваем с количеством подпунктов меню
-02F9   1903           00348         btfsc   STATUS,Z
-02FA   2???           00349         goto    Correct_index_submenu                   
-02FB   2???           00350         call    Switch_Submenu_routine          ; Рисуем подпункт меню под текущим 
+02FB   0A??           00354         incf    index_submenu                           ; Берем следующий пункт
+02FC   2???           00355         call    Num_of_Submenu_Table                    
+02FD   02??           00356         subwf   index_submenu,w                         ; Сравниваем с количеством подпунктов меню
+02FE   1903           00357         btfsc   STATUS,Z
+02FF   2???           00358         goto    Correct_index_submenu                   
+0300   2???           00359         call    Switch_Submenu_routine          ; Рисуем подпункт меню под текущим 
 Message[305]: Using default destination of 1 (file).
-02FC   03??           00351         decf    index_submenu                           ; Не забудем вернуть назад текущий пункт меню   
-02FD   2???           00352         goto    Skip_Correct_index_submenu_3
-02FE                  00353 Correct_index_submenu                                   ; Достигли последнего подпункта меню, следующим 
+0301   03??           00360         decf    index_submenu                           ; Не забудем вернуть назад текущий пункт меню   
+0302   2???           00361         goto    Skip_Correct_index_submenu_3
+0303                  00362 Correct_index_submenu                                   ; Достигли последнего подпункта меню, следующим 
                             отображаем 1 подпункт
-02FE   01??           00354         clrf    index_submenu
-02FF   2???           00355         call    Switch_Submenu_routine
-0300   2???           00356         call    Num_of_Submenu_Table
-0301   00??           00357         movwf   index_submenu
+0303   01??           00363         clrf    index_submenu
+0304   2???           00364         call    Switch_Submenu_routine
+0305   2???           00365         call    Num_of_Submenu_Table
+0306   00??           00366         movwf   index_submenu
 Message[305]: Using default destination of 1 (file).
-0302   03??           00358         decf    index_submenu                           ; Учитываем, что индекс подпункта начинается с 0
+0307   03??           00367         decf    index_submenu                           ; Учитываем, что индекс подпункта начинается с 0
                                     
-0303   2???           00359         goto    Skip_Correct_index_submenu_3
-                      00360 
-0304                  00361 Pressing_DOWN_2
+0308   2???           00368         goto    Skip_Correct_index_submenu_3
+                      00369 
+0309                  00370 Pressing_DOWN_2
 Message[305]: Using default destination of 1 (file).
-0304   03??           00362         decf    index_submenu                           ; Берем предыдущий пункт меню
-0305   1B80           00363         btfsc   index_submenu,.7                        ; Проверяем на "<0"     простой проверкой 7 бита
+0309   03??           00371         decf    index_submenu                           ; Берем предыдущий пункт меню
+030A   1B80           00372         btfsc   index_submenu,.7                        ; Проверяем на "<0"     простой проверкой 7 бита
                             , максимальное количество пунктов меню ограничено 64
-0306   2???           00364         goto    Correct_index_submenu_2
-0307   2???           00365         call    Switch_Submenu_routine          ; Рисуем предыдущий пункт меню
-0308   2???           00366         call    Second_String_routine           ; Указатель на 2 строку
+030B   2???           00373         goto    Correct_index_submenu_2
+030C   2???           00374         call    Switch_Submenu_routine          ; Рисуем предыдущий пункт меню
+030D   2???           00375         call    Second_String_routine           ; Указатель на 2 строку
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 51
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 Message[305]: Using default destination of 1 (file).
-0309   0A??           00367         incf    index_submenu                           ; Вернем текущий пункт                          
+030E   0A??           00376         incf    index_submenu                           ; Вернем текущий пункт                          
                                     
-030A   08??           00368         movfw   index_submenu   
-030B   2???           00369         goto    Skip_Correct_index_submenu_2
-030C                  00370 Correct_index_submenu_2
-030C   2???           00371         call    Num_of_Submenu_Table            ; Стало "<0", возвращаем количество пунктов в даном подм
+030F   08??           00377         movfw   index_submenu   
+0310   2???           00378         goto    Skip_Correct_index_submenu_2
+0311                  00379 Correct_index_submenu_2
+0311   2???           00380         call    Num_of_Submenu_Table            ; Стало "<0", возвращаем количество пунктов в даном подм
                             еню     
-030D   00??           00372         movwf   index_submenu                           ; Сделаем текущим последний пункт подменю
+0312   00??           00381         movwf   index_submenu                           ; Сделаем текущим последний пункт подменю
 Message[305]: Using default destination of 1 (file).
-030E   03??           00373         decf    index_submenu                           ; Учитываем, что индекс пункта подменю на 1 мень
+0313   03??           00382         decf    index_submenu                           ; Учитываем, что индекс пункта подменю на 1 мень
                             ше его порядкового номера
-030F   2???           00374         call    Switch_Submenu_routine          ; Рисуем предыдущий пункт меню
-0310   2???           00375         call    Second_String_routine           ; Указатель на 2 строку
-0311   01??           00376         clrf    index_submenu
-0312                  00377 Skip_Correct_index_submenu_2
-0312   2???           00378         call    Switch_Submenu_routine          ; Рисуем текущий пункт меню под предыдущим 
-0313   30CF           00379         movlw   b'11001111'                                     ; Установим курсор на последний символ 2
+0314   2???           00383         call    Switch_Submenu_routine          ; Рисуем предыдущий пункт меню
+0315   2???           00384         call    Second_String_routine           ; Указатель на 2 строку
+0316   01??           00385         clrf    index_submenu
+0317                  00386 Skip_Correct_index_submenu_2
+0317   2???           00387         call    Switch_Submenu_routine          ; Рисуем текущий пункт меню под предыдущим 
+0318   30CF           00388         movlw   b'11001111'                                     ; Установим курсор на последний символ 2
                             -й строки
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 51
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0314   2???           00380         call    Send_LCD_Command
-0315   303C           00381         movlw   '<'                                                     ; И нарисуем там указатель текущ
+0319   2???           00389         call    Send_LCD_Command
+031A   303C           00390         movlw   '<'                                                     ; И нарисуем там указатель текущ
                             его пункта меню
-0316   2???           00382         call    Send_LCD_Symbol
-0317                  00383 Skip_Correct_index_submenu_3
-                      00384 
+031B   2???           00391         call    Send_LCD_Symbol
+031C                  00392 Skip_Correct_index_submenu_3
+                      00393 
 Warning[205]: Found directive in column 1. (else)
-                      00385 else
-                      00386         call    Switch_Submenu_routine          ; Рисуем текущий подпункт меню  
-                      00387         call    Second_String_routine           ; Указатель на 2 строку
-                      00388         incf    index_submenu
-                      00389         call    Num_of_Submenu_Table                    
-                      00390         subwf   index_submenu,w                         ; Сравниваем с количеством подпунктов меню
-                      00391         btfsc   STATUS,Z
-                      00392         goto    Correct_index_submenu
-                      00393         call    Switch_Submenu_routine          ; Рисуем подпункт меню под текущим 
-                      00394         decf    index_submenu                           ; Не забудем вернуть назад текущий подпункт меню
-                      00395         goto    Skip_Correct_index_submenu      
-                      00396 Correct_index_submenu                                   ; Достигли последнего подпункта меню, следующим 
+                      00394 else
+                      00395         call    Switch_Submenu_routine          ; Рисуем текущий подпункт меню  
+                      00396         call    Second_String_routine           ; Указатель на 2 строку
+                      00397         incf    index_submenu
+                      00398         call    Num_of_Submenu_Table                    
+                      00399         subwf   index_submenu,w                         ; Сравниваем с количеством подпунктов меню
+                      00400         btfsc   STATUS,Z
+                      00401         goto    Correct_index_submenu
+                      00402         call    Switch_Submenu_routine          ; Рисуем подпункт меню под текущим 
+                      00403         decf    index_submenu                           ; Не забудем вернуть назад текущий подпункт меню
+                      00404         goto    Skip_Correct_index_submenu      
+                      00405 Correct_index_submenu                                   ; Достигли последнего подпункта меню, следующим 
                             отображаем 1 подпункт
-                      00397         clrf    index_submenu   
-                      00398         call    Switch_Submenu_routine
-                      00399         call    Num_of_Submenu_Table
-                      00400         movwf   index_submenu   
-                      00401         decf    index_submenu                           ; Учитываем, что индекс подпункта начинается с 0
-                      00402 Skip_Correct_index_submenu
-                      00403 endif
-                      00404 
-0317   3014           00405         movlw   EXIT_DELAY                                      ; Заносим счетчик проходов опроса клавиш
-0318   00??           00406         movwf   menu_counter
-0319   01??           00407         clrf    temp_1
-031A   01??           00408         clrf    temp_2
-031B                  00409 Loop_Submenu                                                    ; Мы зашли в пункт меню, ждем нажатия сл
-                            едующей кнопки
-031B   1E06           00410         btfss   UP
-031C   2???           00411         goto    Cursor_UP_submenu                               
-031D   1E86           00412         btfss   DOWN
-031E   2???           00413         goto    Cursor_DOWN_submenu
-031F   1F06           00414         btfss   ENTER
-0320   2???           00415         goto    ENTER_submenu
-0321   1F86           00416         btfss   EXIT
-0322   2???           00417         goto    EXIT_submenu
-                      00418 ;-----------------------------------------------------------------
-Message[305]: Using default destination of 1 (file).
-0323   0B??           00419         decfsz  temp_1                                          ; Ни одна клавиша не нажата     
-0324   2???           00420         goto    Loop_Submenu                            ; Цикл ожидания нажатия в пункте меню
-Message[305]: Using default destination of 1 (file).
-0325   0B??           00421         decfsz  temp_2  
-0326   2???           00422         goto    Loop_Submenu
-Message[305]: Using default destination of 1 (file).
-0327   0B??           00423         decfsz  menu_counter                            ; Декремент счетчика проходов опроса клавиш     
-                                    
-0328   2???           00424         goto    Loop_Submenu
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 52
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-0329   2???           00425         goto    Switch_Menu                                     ; Вышел таймаут нахождения в подменю, вы
-                            ходим в предыдущий пункт меню
-                      00426 ;-----------------------------------------------------------------
-032A                  00427 Cursor_UP_submenu                                               ; Была нажата клавиша "Вверх"
-032A   2???           00428         call    Debounce_Delay
-                      00429 
-Warning[205]: Found directive in column 1. (if)
-                      00430 if      USE_MOVING_CURSOR
-032B   30F0           00431         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00406         clrf    index_submenu   
+                      00407         call    Switch_Submenu_routine
+                      00408         call    Num_of_Submenu_Table
+                      00409         movwf   index_submenu   
+                      00410         decf    index_submenu                           ; Учитываем, что индекс подпункта начинается с 0
+                      00411 Skip_Correct_index_submenu
+                      00412 endif
+                      00413 
+031C   2???           00414         call    Debounce_Delay                          ; Антидребезговая задержка, при нажатии кнопок В
+                            верх/Вниз, первом входе в подпункт меню, выходе из действия подпункта меню
+                      00415 
+031D   30F0           00416         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-032C   05??           00432         andwf   flags                                           
-032D   1400           00433         bsf             Press_UP                                        ; И установим признак нажатия то
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 52
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+031E   05??           00417         andwf   flags   
+031F   100B           00418         bcf             INTCON,RBIF                                     ; Сбросим флаг возможно вызваног
+                            о прерывания
+0320   158B           00419         bsf             INTCON,RBIE                                     ; И разрешим прерывания от кнопо
+                            к
+                      00420 
+0321   3014           00421         movlw   EXIT_DELAY                                      ; Заносим счетчик проходов опроса клавиш
+0322   00??           00422         movwf   menu_counter
+0323   01??           00423         clrf    temp_1
+0324   01??           00424         clrf    temp_2
+0325                  00425 Loop_Submenu                                                    ; Мы зашли в пункт меню, ждем нажатия сл
+                            едующей кнопки
+0325   1800           00426         btfsc   Press_UP
+0326   2???           00427         goto    Cursor_UP_submenu                               
+0327   1880           00428         btfsc   Press_DOWN
+0328   2???           00429         goto    Cursor_DOWN_submenu
+0329   1980           00430         btfsc   Press_ENTER
+032A   2???           00431         goto    ENTER_submenu
+032B   1900           00432         btfsc   Press_EXIT
+032C   2???           00433         goto    EXIT_submenu
+                      00434 ;-----------------------------------------------------------------
+Message[305]: Using default destination of 1 (file).
+032D   0B??           00435         decfsz  temp_1                                          ; Ни одна клавиша не нажата     
+032E   2???           00436         goto    Loop_Submenu                            ; Цикл ожидания нажатия в пункте меню
+Message[305]: Using default destination of 1 (file).
+032F   0B??           00437         decfsz  temp_2  
+0330   2???           00438         goto    Loop_Submenu
+Message[305]: Using default destination of 1 (file).
+0331   0B??           00439         decfsz  menu_counter                            ; Декремент счетчика проходов опроса клавиш     
+                                    
+0332   2???           00440         goto    Loop_Submenu
+0333   2???           00441         goto    Switch_Menu                                     ; Вышел таймаут нахождения в подменю, вы
+                            ходим в предыдущий пункт меню
+                      00442 ;-----------------------------------------------------------------
+0334                  00443 Cursor_UP_submenu                                               ; Была нажата клавиша "Вверх"
+                      00444 
+Warning[205]: Found directive in column 1. (if)
+                      00445 if      USE_MOVING_CURSOR
+0334   30F0           00446         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                            к                                       
+Message[305]: Using default destination of 1 (file).
+0335   05??           00447         andwf   flags                                           
+0336   1400           00448         bsf             Press_UP                                        ; И установим признак нажатия то
                             лько для кнопки "ВВЕРХ"
 Warning[205]: Found directive in column 1. (endif)
-                      00434 endif
-                      00435 
+                      00449 endif
+                      00450 
 Message[305]: Using default destination of 1 (file).
-032E   03??           00436         decf    index_submenu                           ; Берем предыдущий пункт подменю
-032F   1F80           00437         btfss   index_submenu,.7                        ; Проверяем на "<0"     простой проверкой 7 бита
+0337   03??           00451         decf    index_submenu                           ; Берем предыдущий пункт подменю
+0338   1F80           00452         btfss   index_submenu,.7                        ; Проверяем на "<0"     простой проверкой 7 бита
                             , максимальное количество пунктов подменю ограничено 64
-0330   2???           00438         goto    Switch_Submenu  
-0331   2???           00439         call    Num_of_Submenu_Table            ; Стало "<0", возвращаем количество пунктов в даном подм
+0339   2???           00453         goto    Switch_Submenu  
+033A   2???           00454         call    Num_of_Submenu_Table            ; Стало "<0", возвращаем количество пунктов в даном подм
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 53
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                             еню     
-0332   00??           00440         movwf   index_submenu                           ; Сделаем текущим последний пункт подменю
+033B   00??           00455         movwf   index_submenu                           ; Сделаем текущим последний пункт подменю
 Message[305]: Using default destination of 1 (file).
-0333   03??           00441         decf    index_submenu                           ; Учитываем, что индекс пункта подменю на 1 мень
+033C   03??           00456         decf    index_submenu                           ; Учитываем, что индекс пункта подменю на 1 мень
                             ше его порядкового номера
-0334   2???           00442         goto    Switch_Submenu                          ; Отрисовываем новый текущий подпункт меню      
-                      00443 ;-----------------------------------------------------------------
-0335                  00444 Cursor_DOWN_submenu                                             ; Была нажата клавиша "Вниз"
-0335   2???           00445         call    Debounce_Delay
-                      00446 
+033D   2???           00457         goto    Switch_Submenu                          ; Отрисовываем новый текущий подпункт меню      
+                      00458 ;-----------------------------------------------------------------
+033E                  00459 Cursor_DOWN_submenu                                             ; Была нажата клавиша "Вниз"
+                      00460 
 Warning[205]: Found directive in column 1. (if)
-                      00447 if      USE_MOVING_CURSOR
-0336   30F0           00448         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
+                      00461 if      USE_MOVING_CURSOR
+033E   30F0           00462         movlw   b'11110000'                                     ; Сбросим признак нажатия для всех кнопо
                             к                                       
 Message[305]: Using default destination of 1 (file).
-0337   05??           00449         andwf   flags                                           
-0338   1480           00450         bsf             Press_DOWN                                      ; И установим признак нажатия то
+033F   05??           00463         andwf   flags                                           
+0340   1480           00464         bsf             Press_DOWN                                      ; И установим признак нажатия то
                             лько для кнопки "ВНИЗ"
 Warning[205]: Found directive in column 1. (endif)
-                      00451 endif
-                      00452 
+                      00465 endif
+                      00466 
 Message[305]: Using default destination of 1 (file).
-0339   0A??           00453         incf    index_submenu                           ; Берем следущий пункт подменю
-033A   2???           00454         call    Num_of_Submenu_Table            ; Возвращаем количество пунктов в даном подменю 
-033B   02??           00455         subwf   index_submenu,w                         ; Достигли последнего ? 
-033C   1903           00456         btfsc   STATUS,Z
-033D   01??           00457         clrf    index_submenu                           ; Если да, делаем текущим первый подпункт меню  
+0341   0A??           00467         incf    index_submenu                           ; Берем следущий пункт подменю
+0342   2???           00468         call    Num_of_Submenu_Table            ; Возвращаем количество пунктов в даном подменю 
+0343   02??           00469         subwf   index_submenu,w                         ; Достигли последнего ? 
+0344   1903           00470         btfsc   STATUS,Z
+0345   01??           00471         clrf    index_submenu                           ; Если да, делаем текущим первый подпункт меню  
                                     
-033E   2???           00458         goto    Switch_Submenu                          ; Отрисовываем новый текущий подпункт меню
-                      00459 ;-----------------------------------------------------------------      
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 53
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-033F                  00460 EXIT_submenu                                                    ; Была нажата клавиша "Выход"
-033F   2???           00461         call    Debounce_Delay
-0340   01??           00462         clrf    index_submenu                           ; Обнуляем индекс пункта подменю, чтобы при след
+0346   2???           00472         goto    Switch_Submenu                          ; Отрисовываем новый текущий подпункт меню
+                      00473 ;-----------------------------------------------------------------      
+0347                  00474 EXIT_submenu                                                    ; Была нажата клавиша "Выход"
+0347   01??           00475         clrf    index_submenu                           ; Обнуляем индекс пункта подменю, чтобы при след
                             ующем заходе в любой пункт меню курсор находился на 1 пункте подменю                    
-0341   2???           00463         goto    Switch_Menu                                     ; Выходим в меню
-                      00464 ;-----------------------------------------------------------------
-0342                  00465 ENTER_submenu                                                   ; Была нажата клавиша "Вход"
-0342   2???           00466         call    Debounce_CLR_DISP                       ; Очистим дисплей
-0343   2???           00467         goto    Switch_Action                           ; Делаем действие текущего подпункта меню
-0344                  00468 End_Action
-                      00469 ;-----------------------------------------------------------------
-0344   01??           00470         clrf    symbol_pointer                          ; Рисуем подтверждение действия
-0345                  00471 String_Action_Complete
-0345   2???           00472         call    Table_Action_Complete   
-0346   39FF           00473         andlw   0FFh
-0347   1903           00474         btfsc   STATUS,Z
-0348   2???           00475         goto    Out_Action_Complete
-0349   2???           00476         call    Send_LCD_Symbol
+0348   2???           00476         goto    Switch_Menu                                     ; Выходим в меню
+                      00477 ;-----------------------------------------------------------------
+0349                  00478 ENTER_submenu                                                   ; Была нажата клавиша "Вход"
+0349   2???           00479         call    CLR_DISP_delay                          ; Очистим дисплей
+034A   2???           00480         goto    Switch_Action                           ; Делаем действие текущего подпункта меню
+034B                  00481 End_Action
+                      00482 ;-----------------------------------------------------------------
+034B   01??           00483         clrf    symbol_pointer                          ; Рисуем подтверждение действия
+034C                  00484 String_Action_Complete
+034C   2???           00485         call    Table_Action_Complete   
+034D   39FF           00486         andlw   0FFh
+034E   1903           00487         btfsc   STATUS,Z
+034F   2???           00488         goto    Out_Action_Complete
+0350   2???           00489         call    Send_LCD_Symbol
 Message[305]: Using default destination of 1 (file).
-034A   0A??           00477         incf    symbol_pointer  
-034B   2???           00478         goto    String_Action_Complete
-034C                  00479 Out_Action_Complete
-034C   01??           00480         clrf    temp_3                                          ; Задержка, чтобы успеть прочесть уведом
+0351   0A??           00490         incf    symbol_pointer  
+0352   2???           00491         goto    String_Action_Complete
+0353                  00492 Out_Action_Complete
+0353   01??           00493         clrf    temp_3                                          ; Задержка, чтобы успеть прочесть уведом
                             ление о выполнении действи
-034D   2???           00481         call    Debounce_Delay
-Message[305]: Using default destination of 1 (file).
-034E   0B??           00482         decfsz  temp_3
-034F   2???           00483         goto    $-2
-                      00484 ;-----------------------------------------------------------------
-0350   2???           00485         goto    Switch_Submenu                          ; И идем отрисовывать подменю, курсор на том же 
-                            подпункте
-                      00486 
-                      00487 ;===================================================================================================
-0351                  00488 Zastavka_routine
-0351   3001           00489         movlw   CLR_DISP
-0352   2???           00490         call    Send_LCD_Command
-0353   2???           00491         call    Delay_4ms                                       ; Обязательная задержка после очистки ди
-                            сплея !!!
-0354   01??           00492         clrf    symbol_pointer
-0355                  00493 First_String
-0355   2???           00494         call    Table_Zastavka_First_String     
-0356   39FF           00495         andlw   0FFh
-0357   1903           00496         btfsc   STATUS,Z
-0358   2???           00497         goto    Out_First_String
-0359   2???           00498         call    Send_LCD_Symbol
-Message[305]: Using default destination of 1 (file).
-035A   0A??           00499         incf    symbol_pointer  
-035B   2???           00500         goto    First_String
-035C                  00501 Out_First_String
-035C   30C0           00502         movlw   SECOND_LINE     
-035D   2???           00503         call    Send_LCD_Command
-035E   01??           00504         clrf    symbol_pointer
-035F                  00505 Next_String
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 54
+0354   2???           00494         call    Debounce_Delay
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 54
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-035F   2???           00506         call    Table_Zastavka_Second_String
-0360   39FF           00507         andlw   0FFh
-0361   1903           00508         btfsc   STATUS,Z
-0362   2???           00509         goto    Out_Next_String
-0363   2???           00510         call    Send_LCD_Symbol
 Message[305]: Using default destination of 1 (file).
-0364   0A??           00511         incf    symbol_pointer  
-0365   2???           00512         goto    Next_String
-0366                  00513 Out_Next_String
-0366   2???           00514         goto    Main    
-                      00515 
-                      00516 ;===================================================================================================
-0367                  00517 Debounce_Delay
-0367   3002           00518         movlw   .2
-0368   00??           00519         movwf   temp_2
-0369   01??           00520         clrf    temp_1
-036A                  00521 Loop_Delay
-036A   0806           00522         movfw   PORTB                                           
-036B   380F           00523         iorlw   b'00001111'                                     ; Установим незначущие разряды
-036C   3E01           00524         addlw   .1
-036D   1D03           00525         btfss   STATUS,Z
-036E   2???           00526         goto    Loop_Delay                                      ; Если хоть одна кнопка нажата, просто з
+0355   0B??           00495         decfsz  temp_3
+0356   2???           00496         goto    $-2
+                      00497 ;-----------------------------------------------------------------
+0357   2???           00498         goto    Switch_Submenu                          ; И идем отрисовывать подменю, курсор на том же 
+                            подпункте
+                      00499 
+                      00500 ;===================================================================================================
+0358                  00501 Zastavka_routine
+0358   3001           00502         movlw   CLR_DISP
+0359   2???           00503         call    Send_LCD_Command
+035A   2???           00504         call    Delay_4ms                                       ; Обязательная задержка после очистки ди
+                            сплея !!!
+035B   01??           00505         clrf    symbol_pointer
+035C                  00506 First_String
+035C   2???           00507         call    Table_Zastavka_First_String     
+035D   39FF           00508         andlw   0FFh
+035E   1903           00509         btfsc   STATUS,Z
+035F   2???           00510         goto    Out_First_String
+0360   2???           00511         call    Send_LCD_Symbol
+Message[305]: Using default destination of 1 (file).
+0361   0A??           00512         incf    symbol_pointer  
+0362   2???           00513         goto    First_String
+0363                  00514 Out_First_String
+0363   30C0           00515         movlw   SECOND_LINE     
+0364   2???           00516         call    Send_LCD_Command
+0365   01??           00517         clrf    symbol_pointer
+0366                  00518 Next_String
+0366   2???           00519         call    Table_Zastavka_Second_String
+0367   39FF           00520         andlw   0FFh
+0368   1903           00521         btfsc   STATUS,Z
+0369   2???           00522         goto    Out_Next_String
+036A   2???           00523         call    Send_LCD_Symbol
+Message[305]: Using default destination of 1 (file).
+036B   0A??           00524         incf    symbol_pointer  
+036C   2???           00525         goto    Next_String
+036D                  00526 Out_Next_String
+036D   2???           00527         goto    Main    
+                      00528 
+                      00529 ;===================================================================================================
+036E                  00530 Debounce_Delay
+036E   3002           00531         movlw   .2
+036F   00??           00532         movwf   temp_2
+0370   01??           00533         clrf    temp_1
+0371                  00534 Loop_Delay
+0371   0806           00535         movfw   PORTB                                           
+0372   380F           00536         iorlw   b'00001111'                                     ; Установим незначущие разряды
+0373   3E01           00537         addlw   .1
+0374   1D03           00538         btfss   STATUS,Z
+0375   2???           00539         goto    Loop_Delay                                      ; Если хоть одна кнопка нажата, просто з
                             ациклимся
 Message[305]: Using default destination of 1 (file).
-036F   0B??           00527         decfsz  temp_1  
-0370   2???           00528         goto    $-1
+0376   0B??           00540         decfsz  temp_1  
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 55
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0377   2???           00541         goto    $-1
 Message[305]: Using default destination of 1 (file).
-0371   0B??           00529         decfsz  temp_2  
-0372   2???           00530         goto    Loop_Delay
-0373   0008           00531         return
-                      00532 
-                      00533 ;===================================================================================================
-                      00534         end
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 55
+0378   0B??           00542         decfsz  temp_2  
+0379   2???           00543         goto    Loop_Delay
+037A   0008           00544         return
+                      00545 
+                      00546 ;===================================================================================================
+                      00547         end
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 56
 
 
 SYMBOL TABLE
@@ -3172,19 +3206,20 @@ SYMBOL TABLE
 
 C                                 00000000
 CLR_DISP                          00000001
+CLR_DISP_delay                    00000265
 CNTL_TRIS_MASK                    000000F5
-Check_1                           00000285
-Check_2                           000002E4
-Correct_index_menu                0000029C
-Correct_index_menu_2              000002A9
-Correct_index_submenu             000002FE
-Correct_index_submenu_2           0000030C
+Check_1                           00000284
+Check_2                           000002E9
+Correct_index_menu                0000029B
+Correct_index_menu_2              000002A8
+Correct_index_submenu             00000303
+Correct_index_submenu_2           00000311
 Create_Menu_Names                 
 Create_Submenu_Names              
-Cursor_DOWN                       000002D0
-Cursor_DOWN_submenu               00000335
-Cursor_UP                         000002C6
-Cursor_UP_submenu                 0000032A
+Cursor_DOWN                       000002D3
+Cursor_DOWN_submenu               0000033E
+Cursor_UP                         000002CA
+Cursor_UP_submenu                 00000334
 DC                                00000001
 DD_RAM_ADDR                       00000080
 DD_RAM_UL                         00000080
@@ -3193,8 +3228,7 @@ DISP_ON                           0000000C
 DISP_ON_B                         0000000F
 DISP_ON_C                         0000000E
 DOWN                              PORTB,5
-Debounce_CLR_DISP                 00000265
-Debounce_Delay                    00000367
+Debounce_Delay                    0000036E
 Delay_4ms                         00000000
 E                                 00000001
 EEADR                             00000009
@@ -3204,26 +3238,26 @@ EEDATA                            00000008
 EEIE                              00000006
 EEIF                              00000004
 ENTER                             PORTB,6
-ENTER_Menu                        000002DC
-ENTER_submenu                     00000342
+ENTER_Menu                        000002E1
+ENTER_submenu                     00000349
 ENTRY_DEC                         00000004
 ENTRY_DEC_S                       00000005
 ENTRY_INC                         00000006
 ENTRY_INC_S                       00000007
 EXIT                              PORTB,7
 EXIT_DELAY                        .20
-EXIT_Menu                         000002DA
-EXIT_submenu                      0000033F
-End_Action                        00000344
+EXIT_Menu                         000002DC
+EXIT_submenu                      00000347
+End_Action                        0000034B
 F                                 00000001
 FSR                               00000004
-First_String                      00000355
+First_String                      0000035C
 GIE                               00000007
 INDF                              00000000
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 56
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 57
 
 
 SYMBOL TABLE
@@ -3235,9 +3269,9 @@ LCD_CNTL                          00000005
 LCD_CNTL_TRIS                     00000085
 LCD_DATA                          00000006
 LCD_DATA_TRIS                     00000086
-Loop_Delay                        0000036A
-Loop_Menu                         000002B7
-Loop_Submenu                      0000031B
+Loop_Delay                        00000371
+Loop_Menu                         000002BB
+Loop_Submenu                      00000325
 MENU_NAME_1                       "1.Menu_1"
 MENU_NAME_2                       "2.Menu_2"
 MENU_NAME_3                       "3.Menu_3"
@@ -3282,7 +3316,7 @@ Menu_3_Submenu_1                  000001AC
 Menu_3_Submenu_1_action           0000025C
 Menu_3_Submenu_2                  000001BF
 Menu_3_Submenu_2_action           0000025D
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 57
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 58
 
 
 SYMBOL TABLE
@@ -3310,7 +3344,7 @@ Menu_5_Submenu_3                  00000244
 Menu_5_Submenu_3_action           00000264
 Menu_5_Table                      00000046
 Menu_5_Table_action               0000008A
-Menu_heandler                     0000027D
+Menu_heandler                     0000027C
 NOT_PD                            00000003
 NOT_RBPU                          00000007
 NOT_TO                            00000004
@@ -3320,13 +3354,13 @@ NUM_OF_SUBMENU_PUNKTS_2           .3
 NUM_OF_SUBMENU_PUNKTS_3           .3
 NUM_OF_SUBMENU_PUNKTS_4           .3
 NUM_OF_SUBMENU_PUNKTS_5           .3
-Next_String                       0000035F
+Next_String                       00000366
 Num_of_Submenu_Table              000000EA
 OPTION_REG                        00000081
 Only_Write                        00000001
-Out_Action_Complete               0000034C
-Out_First_String                  0000035C
-Out_Next_String                   00000366
+Out_Action_Complete               00000353
+Out_First_String                  00000363
+Out_Next_String                   0000036D
 PCL                               00000002
 PCLATH                            0000000A
 PORTA                             00000005
@@ -3339,9 +3373,9 @@ Press_DOWN                        flags,1
 Press_ENTER                       flags,3
 Press_EXIT                        flags,2
 Press_UP                          flags,0
-Pressing_DOWN                     000002A1
-Pressing_DOWN_2                   00000304
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 58
+Pressing_DOWN                     000002A0
+Pressing_DOWN_2                   00000309
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 59
 
 
 SYMBOL TABLE
@@ -3368,25 +3402,25 @@ RP1                               00000006
 RS                                00000003
 SECOND_LINE                       000000C0
 STATUS                            00000003
-Second_String_routine             0000026A
+Second_String_routine             00000269
 Send_LCD_Command                  00000000
 Send_LCD_Symbol                   00000000
-Skip_Check_1                      0000028B
-Skip_Check_2                      000002ED
-Skip_Correct_index_menu_2         000002AE
-Skip_Correct_index_menu_3         000002B3
-Skip_Correct_index_submenu_2      00000312
-Skip_Correct_index_submenu_3      00000317
-String_Action_Complete            00000345
-String_Menu                       0000026E
-String_Submenu                    00000276
+Skip_Check_1                      0000028A
+Skip_Check_2                      000002F2
+Skip_Correct_index_menu_2         000002AD
+Skip_Correct_index_menu_3         000002B2
+Skip_Correct_index_submenu_2      00000317
+Skip_Correct_index_submenu_3      0000031C
+String_Action_Complete            0000034C
+String_Menu                       0000026D
+String_Submenu                    00000275
 Switch_Action                     00000051
-Switch_Menu                       0000027E
+Switch_Menu                       0000027D
 Switch_Menu_Table                 00000000
-Switch_Menu_routine               0000026D
-Switch_Submenu                    000002DD
+Switch_Menu_routine               0000026C
+Switch_Submenu                    000002E2
 Switch_Submenu_Table              0000000D
-Switch_Submenu_routine            00000275
+Switch_Submenu_routine            00000274
 T0CS                              00000005
 T0IE                              00000005
 T0IF                              00000002
@@ -3400,7 +3434,7 @@ TRISA1                            00000001
 TRISA2                            00000002
 TRISA3                            00000003
 TRISA4                            00000004
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 59
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 60
 
 
 SYMBOL TABLE
@@ -3434,7 +3468,7 @@ Z                                 00000002
 ZASTAVKA_FIRST_STRING             "  MicroMenuLib"
 ZASTAVKA_SECOND_STRING            "  ver 1.0 beta"
 Zastavka                          00000000
-Zastavka_routine                  00000351
+Zastavka_routine                  00000358
 _CONFIG                           00002007
 _CP_OFF                           00003FFF
 _CP_ON                            0000000F
@@ -3448,8 +3482,8 @@ _IDLOC1                           00002001
 _IDLOC2                           00002002
 _IDLOC3                           00002003
 _LP_OSC                           00003FFC
-_MicroMenu_034F                   0000034F
-_MicroMenu_0370                   00000370
+_MicroMenu_0356                   00000356
+_MicroMenu_0377                   00000377
 _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FF7
 _RC_OSC                           00003FFF
@@ -3459,7 +3493,7 @@ _WDT_OFF                          00003FFB
 _WDT_ON                           00003FFF
 _XT_OSC                           00003FFD
 __16F84                           00000001
-MPASM  5.51                 MICROMENU_LIB.ASM   5-24-2017  23:18:34         PAGE 60
+MPASM  5.51                 MICROMENU_LIB.ASM   5-27-2017  21:06:52         PAGE 61
 
 
 SYMBOL TABLE
@@ -3488,6 +3522,6 @@ y                                 00000001
 
 Errors   :     0
 Warnings :   180 reported,     0 suppressed
-Messages :    38 reported,     0 suppressed
+Messages :    41 reported,     0 suppressed
 
 

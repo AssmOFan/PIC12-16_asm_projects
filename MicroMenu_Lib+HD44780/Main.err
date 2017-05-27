@@ -1,2 +1,6 @@
-Warning[205] D:\DOCS\DROPBOX\EMBED\PIC\PROJECTS\ASM\MICROMENU_LIB+HD44780\MICROMENU_LIB+HD44780_9\MAIN.ASM 14 : Found directive in column 1. (global)
-Message[302] D:\DOCS\DROPBOX\EMBED\PIC\PROJECTS\ASM\MICROMENU_LIB+HD44780\MICROMENU_LIB+HD44780_9\MAIN.ASM 38 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Warning[205] D:\DOCS\GITHUB\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MICROMENU_LIB.H 3 : Found directive in column 1. (include)
+Message[310] C:\PROGRAM FILES\MICROCHIP\MPASM SUITE\P16F84.INC 366 : Superseding current maximum RAM and RAM map.
+Warning[205] D:\DOCS\GITHUB\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MICROMENU_LIB.H 4 : Found directive in column 1. (include)
+Warning[205] D:\DOCS\GITHUB\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MAIN.ASM 14 : Found directive in column 1. (global)
+Message[302] D:\DOCS\GITHUB\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MAIN.ASM 52 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[305] D:\DOCS\GITHUB\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MAIN.ASM 59 : Using default destination of 1 (file).
