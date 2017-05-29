@@ -16,16 +16,18 @@ global	known_zero
 
 	global	flags,offset
 
-	global	End_Interrupt_Heandler,Zastavka,Main
+	global	End_Interrupt_Heandler,Main
 	extern	LCD_Line_Init,LCD_Init
-	extern	Menu_heandler,Zastavka_routine
+	extern	Menu_heandler,Zastavka
 ;==============================================================================================
 RESET_VECTOR	code	0h
 	goto	Init
 ;==============================================================================================
 ISR				code	4h				; Вектор прерывания
 Interrupt_Heandler
-	push								; Сохраним контекст	
+	push								; Сохраним контекст
+
+if	USE_RBIE
 	bcf		INTCON,RBIF					; Сбросим флаг вызваного прерывания
 	movfw	PORTB						
 	iorlw	b'00001111'					; Установим незначущие разряды
@@ -41,6 +43,8 @@ Interrupt_Heandler
 	bsf		Press_ENTER
 	btfss	EXIT
 	bsf		Press_EXIT
+endif
+
 End_Interrupt_Heandler
 	pop									; Восстановим контекст	
 	retfie
@@ -54,20 +58,24 @@ Init
 	banksel TMR0
 	call	LCD_Init					; Инициалзация самого дисплея
 	clrf	flags
-
+if	USE_RBIE
 	movlw	(1<<RBIE)|(1<<GIE)
 	iorwf	INTCON
-
-Zastavka								
-	goto	Zastavka_routine			; Выведем на экран заставку
+endif
+	goto	Zastavka					; Выведем на экран заставку
 Main
-
+if	USE_RBIE
 	sleep
 	nop
-
 	movfw	flags						
 	andlw	b'00001111'					; Занулим незначущие разряды
 	btfsc	STATUS,Z
+else
+	movfw	PORTB						
+	iorlw	b'00001111'					; Установим незначущие разряды
+	addlw	.1
+	btfsc	STATUS,Z
+endif
 	goto	Main						; Если ни одна кнопка не нажата, просто зациклимся
 	goto	Menu_heandler				; Иначе входим в обработчик меню
 

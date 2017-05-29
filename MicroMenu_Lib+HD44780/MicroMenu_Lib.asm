@@ -16,10 +16,25 @@ extern	flags,offset
 extern	known_zero
 	endif
 
-	global	Menu_heandler,Zastavka_routine
-	extern	Send_LCD_Symbol,Send_LCD_Command,Delay_4ms,Zastavka,Main
+	global	Menu_heandler,Zastavka
+	extern	Send_LCD_Symbol,Send_LCD_Command,Delay_4ms,Main
 ;===================================================================================================
-MicroMenu		code					; Адрес начала сегмента кода библиотеки меню
+MicroMenu		code					; Сегмент кода библиотеки меню
+;===================================================================================================
+Table_Action_Complete 
+	mod_PCL	symbol_pointer
+ 	dt		"Action Complete!",0
+
+Table_Zastavka_First_String
+	mod_PCL	symbol_pointer
+	dt		ZASTAVKA_FIRST_STRING,0
+
+Table_Zastavka_Second_String 
+	mod_PCL	symbol_pointer
+	dt		ZASTAVKA_SECOND_STRING,0
+;===================================================================================================
+Num_of_Submenu_Table					
+	retlw_num_of_submenu_punkts			; Макрос, возвращает количество подпунктов текущего пункта меню
 ;===================================================================================================
 Switch_Menu_Table						; Переходим на нужный пункт меню
 	goto_Punkt_Menu						; Макрос, создает переходы на все пункты меню. Первое GOTO должно находится по адресу 0x100							
@@ -31,22 +46,6 @@ Switch_Action							; Выполним действие, на котором находится курсор
 	goto_Punkt_Submenu_action			; Макрос, создает переходы на действия всех подпунктов меню
 ;===================================================================================================
 	Create_Menu_Names					; Макрос, создает имена всех пунктов меню
-;===================================================================================================
-Num_of_Submenu_Table					
-	retlw_num_of_submenu_punkts			; Макрос, возвращает количество подпунктов текущего пункта меню
-;===================================================================================================
-Table_Zastavka_First_String
-	mod_PCL	symbol_pointer
-	dt		ZASTAVKA_FIRST_STRING,0
-
-Table_Zastavka_Second_String 
-	mod_PCL	symbol_pointer
-	dt		ZASTAVKA_SECOND_STRING,0
-
-Table_Action_Complete 
-	mod_PCL	symbol_pointer
- 	dt		"Action Complete!",0
-
 ;===================================================================================================
 	Create_Submenu_Names				; Макрос, создает имена всех подпунктов меню
 ;===================================================================================================
@@ -99,14 +98,12 @@ Menu_5_Submenu_2_action					; Выполняем действие 2 подпункта 5 пункта
 Menu_5_Submenu_3_action					; Выполняем действие 3 подпункта 5 пункта
 ;	nop
 	goto	End_Action			
-
 ;===================================================================================================
-CLR_DISP_delay							; Подпрограмма очистки дисплея
+CLR_Display_routine						; Подпрограмма очистки дисплея
 	movlw   CLR_DISP
 	call	Send_LCD_Command
 	call	Delay_4ms					; Обязательная задержка после очистки дисплея !!!
 	return
-
 ;===================================================================================================
 Second_String_routine					; Подпрограмма перевода указателя на 2-ю строку	
 if	USE_CURSOR
@@ -118,7 +115,6 @@ endif
 	movlw	SECOND_LINE					; Переводим указатель на 2-ю строку	
 	call	Send_LCD_Command
 	return								; И приступаем к отрисовке следующего пункта меню
-
 ;===================================================================================================
 Switch_Menu_routine						; Подпрограмма вывода названия пункта меню на дисплей
 	clrf	symbol_pointer
@@ -141,12 +137,11 @@ String_Submenu
 	call    Send_LCD_Symbol
 	incf	symbol_pointer	
 	goto    String_Submenu
-
 ;===================================================================================================
 Menu_heandler							; Обработчик меню
 	clrf	index_menu					; Была нажатая какая-то кнопка, очистим индекс пункта меню					
 
-if	USE_MOVING_CURSOR & !USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
@@ -154,7 +149,7 @@ endif
 
 Switch_Menu								; Поместим курсор на нужный пункт меню							
 
-if	USE_MOVING_CURSOR & USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
 	movfw	index_menu
 	btfss	STATUS,Z
 	goto	Check_1		
@@ -172,7 +167,7 @@ Check_1
 Skip_Check_1
 endif
 
-	call	CLR_DISP_delay				; Очистим дисплей перед самой перерисовкой пунктов меню, чтобы уменьшить мерцание
+	call	CLR_Display_routine			; Очистим дисплей перед самой перерисовкой пунктов меню, чтобы уменьшить моргание
 
 if	USE_MOVING_CURSOR
 	btfss	Press_UP
@@ -240,26 +235,40 @@ Correct_index_menu						; Достигли последнего пункта меню, следующим отображаем 
 Skip_Correct_index_menu
 endif
 
-	call	Debounce_Delay				; Антидребезговая задержка, при нажатии кнопок Вверх/Вниз, первом входе в пункт меню, выходе из подпункта меню
+	call	Debounce_Delay				; Процедура антидребезга, вызывается при первом входе в меню, при нажатии кнопок "Вверх", "Вниз", выходе из подпункта меню
 
+if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
+endif
 
 	movlw	EXIT_DELAY					; Заносим счетчик проходов опроса клавиш
 	movwf	menu_counter
 	clrf	temp_1
 	clrf	temp_2
 Loop_Menu								; Вычисляем нажатую клавишу
+
+if	USE_RBIE
 	btfsc	Press_UP
-	goto	Cursor_UP				
+	goto	Cursor_UP_menu				
 	btfsc	Press_DOWN
-	goto	Cursor_DOWN
+	goto	Cursor_DOWN_menu
 	btfsc	Press_ENTER
-	goto	ENTER_Menu
+	goto	ENTER_menu
 	btfsc	Press_EXIT
-	goto	EXIT_Menu
+	goto	EXIT_menu
+else
+	btfss	UP
+	goto	Cursor_UP_menu				
+	btfss	DOWN
+	goto	Cursor_DOWN_menu
+	btfss	ENTER
+	goto	ENTER_menu
+	btfss	EXIT
+	goto	EXIT_menu
+endif
 ;-----------------------------------------------------------------										
 	decfsz	temp_1						; Ни одна клавиша не нажата						
 	goto	Loop_Menu					; Цикл ожидания нажатия в главном меню	
@@ -269,9 +278,9 @@ Loop_Menu								; Вычисляем нажатую клавишу
 	goto	Loop_Menu
 	goto	Zastavka					; Вышел таймаут нахождения в меню, выходим в заставку	
 ;-----------------------------------------------------------------
-Cursor_UP								; Была нажата клавиша "Вверх"
+Cursor_UP_menu							; Была нажата клавиша "Вверх"
 
-if	USE_MOVING_CURSOR
+if	USE_MOVING_CURSOR	&	!USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
@@ -284,9 +293,9 @@ endif
 	movwf	index_menu
 	goto	Switch_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
-Cursor_DOWN								; Была нажата клавиша "Вниз"
+Cursor_DOWN_menu						; Была нажата клавиша "Вниз"
 
-if	USE_MOVING_CURSOR
+if	USE_MOVING_CURSOR	&	!USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
@@ -299,19 +308,22 @@ endif
 	clrf	index_menu					; Если да, делаем текущим первый пункт меню	
 	goto	Switch_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
-EXIT_Menu								; Была нажата клавиша "Выход"
+EXIT_menu								; Была нажата клавиша "Выход"
 
+if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
-
+else
+	call	Debounce_Delay	
+endif
 	goto	Zastavka					; Выходим в заставку
 ;-----------------------------------------------------------------
-ENTER_Menu								; Была нажата клавиша "Вход"
+ENTER_menu								; Была нажата клавиша "Вход"
 	clrf	index_submenu				; Очистим индекс пункта подменю	
 
-if	USE_MOVING_CURSOR & !USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
@@ -319,7 +331,7 @@ endif
 
 Switch_Submenu							; Поместим курсор на нужный подпункт нужного пункта
 
-if	USE_MOVING_CURSOR & USE_TOP_4_FIRST_AND_BOTTOM_4_LAST
+if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
 	movfw	index_submenu
 	btfss	STATUS,Z
 	goto	Check_2		
@@ -340,7 +352,7 @@ Check_2
 Skip_Check_2
 endif
 
-	call	CLR_DISP_delay				; Очистим дисплей перед самой перерисовкой подпунктов меню, чтобы уменьшить мерцание
+	call	CLR_Display_routine			; Очистим дисплей перед самой перерисовкой подпунктов меню, чтобы уменьшить моргание
 
 if	USE_MOVING_CURSOR
 	btfss	Press_UP
@@ -411,18 +423,22 @@ Correct_index_submenu					; Достигли последнего подпункта меню, следующим отобра
 Skip_Correct_index_submenu
 endif
 
-	call	Debounce_Delay				; Антидребезговая задержка, при нажатии кнопок Вверх/Вниз, первом входе в подпункт меню, выходе из действия подпункта меню
+	call	Debounce_Delay				; Процедура антидребезга, вызывается при первом входе в подпункт меню, при нажатии кнопок "Вверх", "Вниз", выходе из действия подпункта меню
 
+if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
+endif
 
 	movlw	EXIT_DELAY					; Заносим счетчик проходов опроса клавиш
 	movwf	menu_counter
 	clrf	temp_1
 	clrf	temp_2
 Loop_Submenu							; Мы зашли в пункт меню, ждем нажатия следующей кнопки
+
+if	USE_RBIE
 	btfsc	Press_UP
 	goto	Cursor_UP_submenu				
 	btfsc	Press_DOWN
@@ -431,6 +447,16 @@ Loop_Submenu							; Мы зашли в пункт меню, ждем нажатия следующей кнопки
 	goto	ENTER_submenu
 	btfsc	Press_EXIT
 	goto	EXIT_submenu
+else
+	btfss	UP
+	goto	Cursor_UP_submenu				
+	btfss	DOWN
+	goto	Cursor_DOWN_submenu
+	btfss	ENTER
+	goto	ENTER_submenu
+	btfss	EXIT
+	goto	EXIT_submenu
+endif
 ;-----------------------------------------------------------------
 	decfsz	temp_1						; Ни одна клавиша не нажата	
 	goto	Loop_Submenu				; Цикл ожидания нажатия в пункте меню
@@ -442,7 +468,7 @@ Loop_Submenu							; Мы зашли в пункт меню, ждем нажатия следующей кнопки
 ;-----------------------------------------------------------------
 Cursor_UP_submenu						; Была нажата клавиша "Вверх"
 
-if	USE_MOVING_CURSOR
+if	USE_MOVING_CURSOR	&	!USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
@@ -458,7 +484,7 @@ endif
 ;-----------------------------------------------------------------
 Cursor_DOWN_submenu						; Была нажата клавиша "Вниз"
 
-if	USE_MOVING_CURSOR
+if	USE_MOVING_CURSOR	&	!USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
@@ -476,7 +502,7 @@ EXIT_submenu							; Была нажата клавиша "Выход"
 	goto	Switch_Menu					; Выходим в меню
 ;-----------------------------------------------------------------
 ENTER_submenu							; Была нажата клавиша "Вход"
-	call	CLR_DISP_delay				; Очистим дисплей
+	call	CLR_Display_routine			; Очистим дисплей
 	goto	Switch_Action				; Делаем действие текущего подпункта меню
 End_Action
 ;-----------------------------------------------------------------
@@ -495,13 +521,10 @@ Out_Action_Complete
 	decfsz	temp_3
 	goto	$-2
 ;-----------------------------------------------------------------
-	goto	Switch_Submenu				; И идем отрисовывать подменю, курсор на том же подпункте
-
+	goto	Switch_Submenu				; И идем отрисовывать подпункт меню, курсор на том же подпункте, что и был
 ;===================================================================================================
-Zastavka_routine
-	movlw   CLR_DISP
-	call	Send_LCD_Command
-	call	Delay_4ms					; Обязательная задержка после очистки дисплея !!!
+Zastavka
+	call	CLR_Display_routine			; Очистим дисплей
 	clrf	symbol_pointer
 First_String
 	call	Table_Zastavka_First_String	
@@ -525,10 +548,9 @@ Next_String
 	goto    Next_String
 Out_Next_String
 	goto	Main	
-
 ;===================================================================================================
-Debounce_Delay
-	movlw	.2
+Debounce_Delay							; Подпрограмма антидребезговой задержки
+	movlw	.3							; Количество проходов подбирается экспериментальным путем
 	movwf	temp_2
 	clrf	temp_1
 Loop_Delay
@@ -542,6 +564,5 @@ Loop_Delay
 	decfsz	temp_2	
 	goto	Loop_Delay
 	return
-
 ;===================================================================================================
 	end

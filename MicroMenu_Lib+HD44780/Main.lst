@@ -1,4 +1,4 @@
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  1
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (include)
                       00017                 local   Table
                       00018                 movfw   target
                       00019                 addlw   low Table               ; Добавить 8 младших бит адреса таблицы к смещению
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  2
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -97,654 +97,654 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00051                                 addwf   PCL
                       00052                                 endm
                       00005 
-                      00006 #define UP                                              PORTB,4
-                      00007 #define DOWN                                    PORTB,5
-                      00008 #define ENTER                                   PORTB,6
-                      00009 #define EXIT                                    PORTB,7
-                      00010 
-                      00011 #define USE_CURSOR                              0                               ; Всегда рисовать курсор
-                             в конце 1-й строчки
-                      00012 #define USE_MOVING_CURSOR               1                               ; Использовать перемещаемый курс
+                      00006 #define USE_CURSOR                              0                               ; Всегда рисовать курсор
+                             в конце 1-й строки
+                      00007 #define USE_MOVING_CURSOR               1                               ; Использовать перемещаемый курс
                             ор (повышает удобство использования меню и размер прошивки)
-                      00013 #define USE_TOP_4_FIRST_AND_BOTTOM_4_LAST       1       ; Использовать отображение "первый пункт всегда 
-                            сверху" и "последний пункт всегда снизу"
-                      00014 
-                      00015         if      USE_MOVING_CURSOR
+                      00008 #define USE_TOP_LAST_CURSOR             1                               ; Использовать отображение "перв
+                            ый пункт всегда сверху" и "последний пункт всегда снизу" (повышает удобство использования меню и
+                      00009 #define USE_RBIE                                1                               ; Использовать прерывани
+                            е по изминению состояния PORTB для обработки кнопок (позволяет использовать сон)
+                      00010 
+                      00011 #define UP                                              PORTB,4
+                      00012 #define DOWN                                    PORTB,5
+                      00013 #define ENTER                                   PORTB,6
+                      00014 #define EXIT                                    PORTB,7
+                      00015 
                       00016 #define Press_UP                                flags,0
                       00017 #define Press_DOWN                              flags,1
                       00018 #define Press_EXIT                              flags,2
                       00019 #define Press_ENTER                             flags,3 
-                      00020         endif
-                      00021 
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  3
+                      00020 
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00022 #define EXIT_DELAY                              .20                             ; Количество опросов кно
+                      00021 #define EXIT_DELAY                              .20                             ; Количество опросов кно
                             пок, до выхода в предыдущий уровень (* 0,8 сек)
-                      00023 
-                      00024 #define ZASTAVKA_FIRST_STRING   "  MicroMenuLib"
-                      00025 #define ZASTAVKA_SECOND_STRING  "  ver 1.0 beta"
-                      00026 
-                      00027 #define NUM_OF_MAIN_MENU_PUNKTS .5                              ; Количество пунктов меню, до 10 
-                      00028 
-                      00029 #define MENU_NAME_1                             "1.Menu_1"
-                      00030 #define MENU_NAME_2                             "2.Menu_2"
-                      00031 #define MENU_NAME_3                             "3.Menu_3"
-                      00032 #define MENU_NAME_4                             "4.Menu_4"
-                      00033 #define MENU_NAME_5                             "5.Menu_5"      
-                      00034 
-                      00035 #define NUM_OF_SUBMENU_PUNKTS_1 .3                              ; Количество пунктов каждого подменю, до
-                             10
-                      00036 
-                      00037 #define MENU_SUBMENU_NAME_1_1   "1.1.Garage"
-                      00038 #define MENU_SUBMENU_NAME_1_2   "1.2.Doors"
-                      00039 #define MENU_SUBMENU_NAME_1_3   "1.3.House"
-                      00040 
-                      00041 #define NUM_OF_SUBMENU_PUNKTS_2 .3
-                      00042 
-                      00043 #define MENU_SUBMENU_NAME_2_1   "2.1.Garage"
-                      00044 #define MENU_SUBMENU_NAME_2_2   "2.2.Doors"
-                      00045 #define MENU_SUBMENU_NAME_2_3   "2.3.House"
-                      00046                                 
-                      00047 #define NUM_OF_SUBMENU_PUNKTS_3 .3
-                      00048 
-                      00049 #define MENU_SUBMENU_NAME_3_1   "3.1.Review"
-                      00050 #define MENU_SUBMENU_NAME_3_2   "3.2.Shut Off"
-                      00051 #define MENU_SUBMENU_NAME_3_3   "3.3.FAQ"
-                      00052 
-                      00053 #define NUM_OF_SUBMENU_PUNKTS_4 .3
-                      00054 
-                      00055 #define MENU_SUBMENU_NAME_4_1   "4.1.Review"
-                      00056 #define MENU_SUBMENU_NAME_4_2   "4.2.Shut Off"
-                      00057 #define MENU_SUBMENU_NAME_4_3   "4.3.FAQ"
-                      00058 
-                      00059 #define NUM_OF_SUBMENU_PUNKTS_5 .3
-                      00060 
-                      00061 #define MENU_SUBMENU_NAME_5_1   "5.1.Config"
-                      00062 #define MENU_SUBMENU_NAME_5_2   "5.2.Settings"
-                      00063 #define MENU_SUBMENU_NAME_5_3   "5.3.About"
-                      00064 
-                      00065 ;=======================================================================================================
+                      00022 
+                      00023 #define ZASTAVKA_FIRST_STRING   "  MicroMenuLib"
+                      00024 #define ZASTAVKA_SECOND_STRING  "  ver 1.0 beta"
+                      00025 
+                      00026 #define NUM_OF_MAIN_MENU_PUNKTS .5                              ; Количество пунктов меню, до 10 
+                      00027 
+                      00028 #define MENU_NAME_1                             "1.Menu_1"
+                      00029 #define MENU_NAME_2                             "2.Menu_2"
+                      00030 #define MENU_NAME_3                             "3.Menu_3"
+                      00031 #define MENU_NAME_4                             "4.Menu_4"
+                      00032 #define MENU_NAME_5                             "5.Menu_5"      
+                      00033 
+                      00034 #define NUM_OF_SUBMENU_PUNKTS_1 .3                              ; Количество подпунктов каждого пункта м
+                            еню, до 10
+                      00035 
+                      00036 #define MENU_SUBMENU_NAME_1_1   "1.1.Garage"
+                      00037 #define MENU_SUBMENU_NAME_1_2   "1.2.Doors"
+                      00038 #define MENU_SUBMENU_NAME_1_3   "1.3.House"
+                      00039 
+                      00040 #define NUM_OF_SUBMENU_PUNKTS_2 .3
+                      00041 
+                      00042 #define MENU_SUBMENU_NAME_2_1   "2.1.Garage"
+                      00043 #define MENU_SUBMENU_NAME_2_2   "2.2.Doors"
+                      00044 #define MENU_SUBMENU_NAME_2_3   "2.3.House"
+                      00045                                 
+                      00046 #define NUM_OF_SUBMENU_PUNKTS_3 .3
+                      00047 
+                      00048 #define MENU_SUBMENU_NAME_3_1   "3.1.Review"
+                      00049 #define MENU_SUBMENU_NAME_3_2   "3.2.Shut Off"
+                      00050 #define MENU_SUBMENU_NAME_3_3   "3.3.FAQ"
+                      00051 
+                      00052 #define NUM_OF_SUBMENU_PUNKTS_4 .3
+                      00053 
+                      00054 #define MENU_SUBMENU_NAME_4_1   "4.1.Review"
+                      00055 #define MENU_SUBMENU_NAME_4_2   "4.2.Shut Off"
+                      00056 #define MENU_SUBMENU_NAME_4_3   "4.3.FAQ"
+                      00057 
+                      00058 #define NUM_OF_SUBMENU_PUNKTS_5 .3
+                      00059 
+                      00060 #define MENU_SUBMENU_NAME_5_1   "5.1.Config"
+                      00061 #define MENU_SUBMENU_NAME_5_2   "5.2.Settings"
+                      00062 #define MENU_SUBMENU_NAME_5_3   "5.3.About"
+                      00063 
+                      00064 ;=======================================================================================================
                             =========
-                      00066 Create_Menu_Names       macro                           ; Макрос, создает имена всех пунктов меню
-                      00067                         local   a=1
-                      00068                                 while   a<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00069                                 Menu_#v(a)
-                      00070                                         mod_PCL symbol_pointer
-                      00071                                         dt              MENU_NAME_#v(a),0
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  4
+                      00065 Create_Menu_Names       macro                           ; Макрос, создает имена всех пунктов меню
+                      00066                         local   a=1
+                      00067                                 while   a<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00068                                 Menu_#v(a)
+                      00069                                         mod_PCL symbol_pointer
+                      00070                                         dt              MENU_NAME_#v(a),0
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00072                                         a+=1
-                      00073                                 endw
-                      00074                         endm
-                      00075 
-                      00076 ;=======================================================================================================
+                      00071                                         a+=1
+                      00072                                 endw
+                      00073                         endm
+                      00074 
+                      00075 ;=======================================================================================================
                             =========
-                      00077 retlw_num_of_submenu_punkts     macro           ; Макрос, возвращает количество пунктов нужного подменю
-                      00078                                 mod_PCL index_menu
-                      00079                         local   a=1
-                      00080                                 while   a<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00081                                         retlw   NUM_OF_SUBMENU_PUNKTS_#v(a)
-                      00082                                         a+=1
-                      00083                                 endw
-                      00084                         endm
-                      00085 
-                      00086 ;=======================================================================================================
+                      00076 retlw_num_of_submenu_punkts     macro           ; Макрос, возвращает количество пунктов нужного подменю
+                      00077                                 mod_PCL index_menu
+                      00078                         local   a=1
+                      00079                                 while   a<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00080                                         retlw   NUM_OF_SUBMENU_PUNKTS_#v(a)
+                      00081                                         a+=1
+                      00082                                 endw
+                      00083                         endm
+                      00084 
+                      00085 ;=======================================================================================================
                             =========
-                      00087 goto_Punkt_Menu macro                                   ; Макрос, создает переходы на все пункты меню
-                      00088                                 mod_PCL index_menu
-                      00089                         local   a=1
-                      00090                                 while   a<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00091                                         goto    Menu_#v(a)
-                      00092                                         a+=1
-                      00093                                 endw
-                      00094                         endm
-                      00095 
-                      00096 ;=======================================================================================================
+                      00086 goto_Punkt_Menu macro                                   ; Макрос, создает переходы на все пункты меню
+                      00087                                 mod_PCL index_menu
+                      00088                         local   a=1
+                      00089                                 while   a<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00090                                         goto    Menu_#v(a)
+                      00091                                         a+=1
+                      00092                                 endw
+                      00093                         endm
+                      00094 
+                      00095 ;=======================================================================================================
                             =========
-                      00097 goto_Punkt_Submenu      macro                           ; Макрос, создает переходы на все подпункты меню
-                      00098                                         mod_PCL index_menu                              
-                      00099                         local   c=1
-                      00100                                 while   c<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00101                                         goto    Menu_#v(c)_Table
-                      00102                                         c+=1
-                      00103                                 endw
-                      00104                         local   d=1
-                      00105 ;-------------------------------------------------------------------------------------------------------
+                      00096 goto_Punkt_Submenu      macro                           ; Макрос, создает переходы на все подпункты меню
+                      00097                                         mod_PCL index_menu                              
+                      00098                         local   c=1
+                      00099                                 while   c<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00100                                         goto    Menu_#v(c)_Table
+                      00101                                         c+=1
+                      00102                                 endw
+                      00103                         local   d=1
+                      00104 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00106 ; Переходы на подпункты 1 пункта меню
-                      00107 ;-------------------------------------------------------------------------------------------------------
+                      00105 ; Переходы на подпункты 1 пункта меню
+                      00106 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00108                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00109                                 local   a=1     
-                      00110                                 Menu_#v(d)_Table
-                      00111                                         mod_PCL index_submenu
-                      00112                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00113                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00114                                         a+=1
-                      00115                                 endw
-                      00116                                         d+=1
-                      00117                                 endif
-                      00118 ;-------------------------------------------------------------------------------------------------------
+                      00107                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00108                                 local   a=1     
+                      00109                                 Menu_#v(d)_Table
+                      00110                                         mod_PCL index_submenu
+                      00111                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00112                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00113                                         a+=1
+                      00114                                 endw
+                      00115                                         d+=1
+                      00116                                 endif
+                      00117 ;-------------------------------------------------------------------------------------------------------
                             ----
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  5
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00119 ; Переходы на подпункты 2 пункта меню
-                      00120 ;-------------------------------------------------------------------------------------------------------
+                      00118 ; Переходы на подпункты 2 пункта меню
+                      00119 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00121                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00122                                 local   a=1     
-                      00123                                 Menu_#v(d)_Table
-                      00124                                         mod_PCL index_submenu
-                      00125                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00126                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00127                                         a+=1
-                      00128                                 endw
-                      00129                                         d+=1
-                      00130                                 endif
-                      00131 ;-------------------------------------------------------------------------------------------------------
+                      00120                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00121                                 local   a=1     
+                      00122                                 Menu_#v(d)_Table
+                      00123                                         mod_PCL index_submenu
+                      00124                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00125                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00126                                         a+=1
+                      00127                                 endw
+                      00128                                         d+=1
+                      00129                                 endif
+                      00130 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00132 ; Переходы на подпункты 3 пункта меню
-                      00133 ;-------------------------------------------------------------------------------------------------------
+                      00131 ; Переходы на подпункты 3 пункта меню
+                      00132 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00134                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00135                                 local   a=1     
-                      00136                                 Menu_#v(d)_Table
-                      00137                                         mod_PCL index_submenu
-                      00138                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00139                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00140                                         a+=1
-                      00141                                 endw
-                      00142                                         d+=1
-                      00143                                 endif
-                      00144 ;-------------------------------------------------------------------------------------------------------
+                      00133                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00134                                 local   a=1     
+                      00135                                 Menu_#v(d)_Table
+                      00136                                         mod_PCL index_submenu
+                      00137                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00138                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00139                                         a+=1
+                      00140                                 endw
+                      00141                                         d+=1
+                      00142                                 endif
+                      00143 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00145 ; Переходы на подпункты 4 пункта меню
-                      00146 ;-------------------------------------------------------------------------------------------------------
+                      00144 ; Переходы на подпункты 4 пункта меню
+                      00145 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00147                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00148                                 local   a=1     
-                      00149                                 Menu_#v(d)_Table
-                      00150                                         mod_PCL index_submenu
-                      00151                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00152                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00153                                         a+=1
-                      00154                                 endw
-                      00155                                         d+=1
-                      00156                                 endif
-                      00157 ;-------------------------------------------------------------------------------------------------------
+                      00146                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00147                                 local   a=1     
+                      00148                                 Menu_#v(d)_Table
+                      00149                                         mod_PCL index_submenu
+                      00150                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00151                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00152                                         a+=1
+                      00153                                 endw
+                      00154                                         d+=1
+                      00155                                 endif
+                      00156 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00158 ; Переходы на подпункты 5 пункта меню
-                      00159 ;-------------------------------------------------------------------------------------------------------
+                      00157 ; Переходы на подпункты 5 пункта меню
+                      00158 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00160                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00161                                 local   a=1     
-                      00162                                 Menu_#v(d)_Table
-                      00163                                         mod_PCL index_submenu
-                      00164                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  6
+                      00159                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00160                                 local   a=1     
+                      00161                                 Menu_#v(d)_Table
+                      00162                                         mod_PCL index_submenu
+                      00163                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00165                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00166                                         a+=1
-                      00167                                 endw
-                      00168                                         d+=1
-                      00169                                 endif
-                      00170 ;-------------------------------------------------------------------------------------------------------
+                      00164                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00165                                         a+=1
+                      00166                                 endw
+                      00167                                         d+=1
+                      00168                                 endif
+                      00169 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00171 ; Переходы на подпункты 6 пункта меню
-                      00172 ;-------------------------------------------------------------------------------------------------------
+                      00170 ; Переходы на подпункты 6 пункта меню
+                      00171 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00173                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00174                                 local   a=1     
-                      00175                                 Menu_#v(d)_Table
-                      00176                                         mod_PCL index_submenu
-                      00177                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00178                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00179                                         a+=1
-                      00180                                 endw
-                      00181                                         d+=1
-                      00182                                 endif
-                      00183 ;-------------------------------------------------------------------------------------------------------
+                      00172                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00173                                 local   a=1     
+                      00174                                 Menu_#v(d)_Table
+                      00175                                         mod_PCL index_submenu
+                      00176                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00177                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00178                                         a+=1
+                      00179                                 endw
+                      00180                                         d+=1
+                      00181                                 endif
+                      00182 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00184 ; Переходы на подпункты 7 пункта меню
-                      00185 ;-------------------------------------------------------------------------------------------------------
+                      00183 ; Переходы на подпункты 7 пункта меню
+                      00184 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00186                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00187                                 local   a=1     
-                      00188                                 Menu_#v(d)_Table
-                      00189                                         mod_PCL index_submenu
-                      00190                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00191                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00192                                         a+=1
-                      00193                                 endw
-                      00194                                         d+=1
-                      00195                                 endif
-                      00196 ;-------------------------------------------------------------------------------------------------------
+                      00185                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00186                                 local   a=1     
+                      00187                                 Menu_#v(d)_Table
+                      00188                                         mod_PCL index_submenu
+                      00189                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00190                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00191                                         a+=1
+                      00192                                 endw
+                      00193                                         d+=1
+                      00194                                 endif
+                      00195 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00197 ; Переходы на подпункты 8 пункта меню
-                      00198 ;-------------------------------------------------------------------------------------------------------
+                      00196 ; Переходы на подпункты 8 пункта меню
+                      00197 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00199                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00200                                 local   a=1     
-                      00201                                 Menu_#v(d)_Table
-                      00202                                         mod_PCL index_submenu
-                      00203                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00204                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00205                                         a+=1
-                      00206                                 endw
-                      00207                                         d+=1
-                      00208                                 endif
-                      00209 ;-------------------------------------------------------------------------------------------------------
+                      00198                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00199                                 local   a=1     
+                      00200                                 Menu_#v(d)_Table
+                      00201                                         mod_PCL index_submenu
+                      00202                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00203                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00204                                         a+=1
+                      00205                                 endw
+                      00206                                         d+=1
+                      00207                                 endif
+                      00208 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00210 ; Переходы на подпункты 9 пункта меню
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  7
+                      00209 ; Переходы на подпункты 9 пункта меню
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00211 ;-------------------------------------------------------------------------------------------------------
+                      00210 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00212                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00213                                 local   a=1     
-                      00214                                 Menu_#v(d)_Table
-                      00215                                         mod_PCL index_submenu
-                      00216                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00217                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00218                                         a+=1
-                      00219                                 endw
-                      00220                                         d+=1
-                      00221                                 endif
-                      00222 ;-------------------------------------------------------------------------------------------------------
+                      00211                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00212                                 local   a=1     
+                      00213                                 Menu_#v(d)_Table
+                      00214                                         mod_PCL index_submenu
+                      00215                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00216                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00217                                         a+=1
+                      00218                                 endw
+                      00219                                         d+=1
+                      00220                                 endif
+                      00221 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00223 ; Переходы на подпункты 10 пункта меню
-                      00224 ;-------------------------------------------------------------------------------------------------------
+                      00222 ; Переходы на подпункты 10 пункта меню
+                      00223 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00225                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00226                                 local   a=1     
-                      00227                                 Menu_#v(d)_Table
-                      00228                                         mod_PCL index_submenu
-                      00229                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00230                                         goto    Menu_#v(d)_Submenu_#v(a)
-                      00231                                         a+=1
-                      00232                                 endw
-                      00233                                         d+=1
-                      00234                                 endif           
-                      00235 ;-------------------------------------------------------------------------------------------------------
+                      00224                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00225                                 local   a=1     
+                      00226                                 Menu_#v(d)_Table
+                      00227                                         mod_PCL index_submenu
+                      00228                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00229                                         goto    Menu_#v(d)_Submenu_#v(a)
+                      00230                                         a+=1
+                      00231                                 endw
+                      00232                                         d+=1
+                      00233                                 endif           
+                      00234 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00236                         endm
-                      00237 
-                      00238 ;=======================================================================================================
+                      00235                         endm
+                      00236 
+                      00237 ;=======================================================================================================
                             =========
-                      00239 goto_Punkt_Submenu_action       macro           ; Макрос, создает переходы на действия всех подпунктов м
+                      00238 goto_Punkt_Submenu_action       macro           ; Макрос, создает переходы на действия всех подпунктов м
                             еню
-                      00240                                         mod_PCL index_menu                              
-                      00241                         local   c=1
-                      00242                                 while   c<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00243                                         goto    Menu_#v(c)_Table_action
-                      00244                                         c+=1
-                      00245                                 endw
-                      00246                         local   d=1
-                      00247 ;-------------------------------------------------------------------------------------------------------
+                      00239                                         mod_PCL index_menu                              
+                      00240                         local   c=1
+                      00241                                 while   c<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00242                                         goto    Menu_#v(c)_Table_action
+                      00243                                         c+=1
+                      00244                                 endw
+                      00245                         local   d=1
+                      00246 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00248 ; Действия подпунктов 1 пункта меню
-                      00249 ;-------------------------------------------------------------------------------------------------------
+                      00247 ; Действия подпунктов 1 пункта меню
+                      00248 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00250                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00251                                 local   a=1     
-                      00252                                 Menu_#v(d)_Table_action
-                      00253                                         mod_PCL index_submenu
-                      00254                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00255                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  8
+                      00249                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00250                                 local   a=1     
+                      00251                                 Menu_#v(d)_Table_action
+                      00252                                         mod_PCL index_submenu
+                      00253                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00254                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00256                                         a+=1
-                      00257                                 endw
-                      00258                                         d+=1
-                      00259                                 endif
-                      00260 ;-------------------------------------------------------------------------------------------------------
+                      00255                                         a+=1
+                      00256                                 endw
+                      00257                                         d+=1
+                      00258                                 endif
+                      00259 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00261 ; Действия подпунктов 2 пункта меню
-                      00262 ;-------------------------------------------------------------------------------------------------------
+                      00260 ; Действия подпунктов 2 пункта меню
+                      00261 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00263                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00264                                 local   a=1     
-                      00265                                 Menu_#v(d)_Table_action
-                      00266                                         mod_PCL index_submenu
-                      00267                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00268                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00269                                         a+=1
-                      00270                                 endw
-                      00271                                         d+=1
-                      00272                                 endif
-                      00273 ;-------------------------------------------------------------------------------------------------------
+                      00262                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00263                                 local   a=1     
+                      00264                                 Menu_#v(d)_Table_action
+                      00265                                         mod_PCL index_submenu
+                      00266                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00267                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00268                                         a+=1
+                      00269                                 endw
+                      00270                                         d+=1
+                      00271                                 endif
+                      00272 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00274 ; Действия подпунктов 3 пункта меню
-                      00275 ;-------------------------------------------------------------------------------------------------------
+                      00273 ; Действия подпунктов 3 пункта меню
+                      00274 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00276                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00277                                 local   a=1     
-                      00278                                 Menu_#v(d)_Table_action
-                      00279                                         mod_PCL index_submenu
-                      00280                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00281                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00282                                         a+=1
-                      00283                                 endw
-                      00284                                         d+=1
-                      00285                                 endif
-                      00286 ;-------------------------------------------------------------------------------------------------------
+                      00275                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00276                                 local   a=1     
+                      00277                                 Menu_#v(d)_Table_action
+                      00278                                         mod_PCL index_submenu
+                      00279                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00280                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00281                                         a+=1
+                      00282                                 endw
+                      00283                                         d+=1
+                      00284                                 endif
+                      00285 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00287 ; Действия подпунктов 4 пункта меню
-                      00288 ;-------------------------------------------------------------------------------------------------------
+                      00286 ; Действия подпунктов 4 пункта меню
+                      00287 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00289                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00290                                 local   a=1     
-                      00291                                 Menu_#v(d)_Table_action
-                      00292                                         mod_PCL index_submenu
-                      00293                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00294                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00295                                         a+=1
-                      00296                                 endw
-                      00297                                         d+=1
-                      00298                                 endif
-                      00299 ;-------------------------------------------------------------------------------------------------------
+                      00288                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00289                                 local   a=1     
+                      00290                                 Menu_#v(d)_Table_action
+                      00291                                         mod_PCL index_submenu
+                      00292                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00293                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00294                                         a+=1
+                      00295                                 endw
+                      00296                                         d+=1
+                      00297                                 endif
+                      00298 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00300 ; Действия подпунктов 5 пункта меню
-                      00301 ;-------------------------------------------------------------------------------------------------------
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE  9
+                      00299 ; Действия подпунктов 5 пункта меню
+                      00300 ;-------------------------------------------------------------------------------------------------------
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                             ----
-                      00302                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00303                                 local   a=1     
-                      00304                                 Menu_#v(d)_Table_action
-                      00305                                         mod_PCL index_submenu
-                      00306                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00307                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00308                                         a+=1
-                      00309                                 endw
-                      00310                                         d+=1
-                      00311                                 endif
-                      00312 ;-------------------------------------------------------------------------------------------------------
+                      00301                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00302                                 local   a=1     
+                      00303                                 Menu_#v(d)_Table_action
+                      00304                                         mod_PCL index_submenu
+                      00305                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00306                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00307                                         a+=1
+                      00308                                 endw
+                      00309                                         d+=1
+                      00310                                 endif
+                      00311 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00313 ; Действия подпунктов 6 пункта меню
-                      00314 ;-------------------------------------------------------------------------------------------------------
+                      00312 ; Действия подпунктов 6 пункта меню
+                      00313 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00315                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00316                                 local   a=1     
-                      00317                                 Menu_#v(d)_Table_action
-                      00318                                         mod_PCL index_submenu
-                      00319                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00320                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00321                                         a+=1
-                      00322                                 endw
-                      00323                                         d+=1
-                      00324                                 endif
-                      00325 ;-------------------------------------------------------------------------------------------------------
+                      00314                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00315                                 local   a=1     
+                      00316                                 Menu_#v(d)_Table_action
+                      00317                                         mod_PCL index_submenu
+                      00318                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00319                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00320                                         a+=1
+                      00321                                 endw
+                      00322                                         d+=1
+                      00323                                 endif
+                      00324 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00326 ; Действия подпунктов 7 пункта меню
-                      00327 ;-------------------------------------------------------------------------------------------------------
+                      00325 ; Действия подпунктов 7 пункта меню
+                      00326 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00328                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00329                                 local   a=1     
-                      00330                                 Menu_#v(d)_Table_action
-                      00331                                         mod_PCL index_submenu
-                      00332                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00333                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00334                                         a+=1
-                      00335                                 endw
-                      00336                                         d+=1
-                      00337                                 endif
-                      00338 ;-------------------------------------------------------------------------------------------------------
+                      00327                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00328                                 local   a=1     
+                      00329                                 Menu_#v(d)_Table_action
+                      00330                                         mod_PCL index_submenu
+                      00331                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00332                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00333                                         a+=1
+                      00334                                 endw
+                      00335                                         d+=1
+                      00336                                 endif
+                      00337 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00339 ; Действия подпунктов 8 пункта меню
-                      00340 ;-------------------------------------------------------------------------------------------------------
+                      00338 ; Действия подпунктов 8 пункта меню
+                      00339 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00341                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00342                                 local   a=1     
-                      00343                                 Menu_#v(d)_Table_action
-                      00344                                         mod_PCL index_submenu
-                      00345                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00346                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00347                                         a+=1
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 10
+                      00340                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00341                                 local   a=1     
+                      00342                                 Menu_#v(d)_Table_action
+                      00343                                         mod_PCL index_submenu
+                      00344                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00345                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00346                                         a+=1
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00348                                 endw
-                      00349                                         d+=1
-                      00350                                 endif
-                      00351 ;-------------------------------------------------------------------------------------------------------
+                      00347                                 endw
+                      00348                                         d+=1
+                      00349                                 endif
+                      00350 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00352 ; Действия подпунктов 9 пункта меню
-                      00353 ;-------------------------------------------------------------------------------------------------------
+                      00351 ; Действия подпунктов 9 пункта меню
+                      00352 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00354                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00355                                 local   a=1     
-                      00356                                 Menu_#v(d)_Table_action
-                      00357                                         mod_PCL index_submenu
-                      00358                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00359                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00360                                         a+=1
-                      00361                                 endw
-                      00362                                         d+=1
-                      00363                                 endif
-                      00364 ;-------------------------------------------------------------------------------------------------------
+                      00353                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00354                                 local   a=1     
+                      00355                                 Menu_#v(d)_Table_action
+                      00356                                         mod_PCL index_submenu
+                      00357                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00358                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00359                                         a+=1
+                      00360                                 endw
+                      00361                                         d+=1
+                      00362                                 endif
+                      00363 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00365 ; Действия подпунктов 10 пункта меню
-                      00366 ;-------------------------------------------------------------------------------------------------------
+                      00364 ; Действия подпунктов 10 пункта меню
+                      00365 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00367                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00368                                 local   a=1     
-                      00369                                 Menu_#v(d)_Table_action
-                      00370                                         mod_PCL index_submenu
-                      00371                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00372                                         goto    Menu_#v(d)_Submenu_#v(a)_action
-                      00373                                         a+=1
-                      00374                                 endw
-                      00375                                         d+=1
-                      00376                                 endif
-                      00377 ;-------------------------------------------------------------------------------------------------------
+                      00366                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00367                                 local   a=1     
+                      00368                                 Menu_#v(d)_Table_action
+                      00369                                         mod_PCL index_submenu
+                      00370                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00371                                         goto    Menu_#v(d)_Submenu_#v(a)_action
+                      00372                                         a+=1
+                      00373                                 endw
+                      00374                                         d+=1
+                      00375                                 endif
+                      00376 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00378                         endm
-                      00379 
-                      00380 ;===================================================================================================
-                      00381 Create_Submenu_Names    macro                           ; Макрос, создает имена всех подпунктов меню
-                      00382                                 local   d=1
-                      00383 ;-------------------------------------------------------------------------------------------------------
+                      00377                         endm
+                      00378 
+                      00379 ;===================================================================================================
+                      00380 Create_Submenu_Names    macro                           ; Макрос, создает имена всех подпунктов меню
+                      00381                                 local   d=1
+                      00382 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00384 ; Подпункты 1 пункта меню
-                      00385 ;-------------------------------------------------------------------------------------------------------
+                      00383 ; Подпункты 1 пункта меню
+                      00384 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00386                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00387                                 local   a=1     
-                      00388                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00389                                         Menu_#v(d)_Submenu_#v(a)
-                      00390                                                 mod_PCL symbol_pointer
-                      00391                                                 dt              MENU_SUBMENU_NAME_1_#v(a),0
-                      00392                                         a+=1
-                      00393                                 endw
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 11
+                      00385                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00386                                 local   a=1     
+                      00387                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00388                                         Menu_#v(d)_Submenu_#v(a)
+                      00389                                                 mod_PCL symbol_pointer
+                      00390                                                 dt              MENU_SUBMENU_NAME_1_#v(a),0
+                      00391                                         a+=1
+                      00392                                 endw
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00394                                         d+=1
-                      00395                                 endif
-                      00396 ;-------------------------------------------------------------------------------------------------------
+                      00393                                         d+=1
+                      00394                                 endif
+                      00395 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00397 ; Подпункты 2 пункта меню
-                      00398 ;-------------------------------------------------------------------------------------------------------
+                      00396 ; Подпункты 2 пункта меню
+                      00397 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00399                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00400                                 local   a=1     
-                      00401                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00402                                         Menu_#v(d)_Submenu_#v(a)
-                      00403                                                 mod_PCL symbol_pointer
-                      00404                                                 dt              MENU_SUBMENU_NAME_2_#v(a),0
-                      00405                                         a+=1
-                      00406                                 endw
-                      00407                                         d+=1
-                      00408                                 endif
-                      00409 ;-------------------------------------------------------------------------------------------------------
+                      00398                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00399                                 local   a=1     
+                      00400                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00401                                         Menu_#v(d)_Submenu_#v(a)
+                      00402                                                 mod_PCL symbol_pointer
+                      00403                                                 dt              MENU_SUBMENU_NAME_2_#v(a),0
+                      00404                                         a+=1
+                      00405                                 endw
+                      00406                                         d+=1
+                      00407                                 endif
+                      00408 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00410 ; Подпункты 3 пункта меню
-                      00411 ;-------------------------------------------------------------------------------------------------------
+                      00409 ; Подпункты 3 пункта меню
+                      00410 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00412                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00413                                 local   a=1     
-                      00414                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00415                                         Menu_#v(d)_Submenu_#v(a)
-                      00416                                                 mod_PCL symbol_pointer
-                      00417                                                 dt              MENU_SUBMENU_NAME_3_#v(a),0
-                      00418                                         a+=1
-                      00419                                 endw
-                      00420                                         d+=1
-                      00421                                 endif
-                      00422 ;-------------------------------------------------------------------------------------------------------
+                      00411                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00412                                 local   a=1     
+                      00413                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00414                                         Menu_#v(d)_Submenu_#v(a)
+                      00415                                                 mod_PCL symbol_pointer
+                      00416                                                 dt              MENU_SUBMENU_NAME_3_#v(a),0
+                      00417                                         a+=1
+                      00418                                 endw
+                      00419                                         d+=1
+                      00420                                 endif
+                      00421 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00423 ; Подпункты 4 пункта меню
-                      00424 ;-------------------------------------------------------------------------------------------------------
+                      00422 ; Подпункты 4 пункта меню
+                      00423 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00425                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00426                                 local   a=1     
-                      00427                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00428                                         Menu_#v(d)_Submenu_#v(a)
-                      00429                                                 mod_PCL symbol_pointer
-                      00430                                                 dt              MENU_SUBMENU_NAME_4_#v(a),0
-                      00431                                         a+=1
-                      00432                                 endw
-                      00433                                         d+=1
-                      00434                                 endif
-                      00435 ;-------------------------------------------------------------------------------------------------------
+                      00424                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00425                                 local   a=1     
+                      00426                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00427                                         Menu_#v(d)_Submenu_#v(a)
+                      00428                                                 mod_PCL symbol_pointer
+                      00429                                                 dt              MENU_SUBMENU_NAME_4_#v(a),0
+                      00430                                         a+=1
+                      00431                                 endw
+                      00432                                         d+=1
+                      00433                                 endif
+                      00434 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00436 ; Подпункты 5 пункта меню
-                      00437 ;-------------------------------------------------------------------------------------------------------
+                      00435 ; Подпункты 5 пункта меню
+                      00436 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00438                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 12
+                      00437                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 12
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00439                                 local   a=1     
-                      00440                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00441                                         Menu_#v(d)_Submenu_#v(a)
-                      00442                                                 mod_PCL symbol_pointer
-                      00443                                                 dt              MENU_SUBMENU_NAME_5_#v(a),0
-                      00444                                         a+=1
-                      00445                                 endw
-                      00446                                         d+=1
-                      00447                                 endif
-                      00448 ;-------------------------------------------------------------------------------------------------------
+                      00438                                 local   a=1     
+                      00439                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00440                                         Menu_#v(d)_Submenu_#v(a)
+                      00441                                                 mod_PCL symbol_pointer
+                      00442                                                 dt              MENU_SUBMENU_NAME_5_#v(a),0
+                      00443                                         a+=1
+                      00444                                 endw
+                      00445                                         d+=1
+                      00446                                 endif
+                      00447 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00449 ; Подпункты 6 пункта меню
-                      00450 ;-------------------------------------------------------------------------------------------------------
+                      00448 ; Подпункты 6 пункта меню
+                      00449 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00451                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00452                                 local   a=1     
-                      00453                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00454                                         Menu_#v(d)_Submenu_#v(a)
-                      00455                                                 mod_PCL symbol_pointer
-                      00456                                                 dt              MENU_SUBMENU_NAME_6_#v(a),0
-                      00457                                         a+=1
-                      00458                                 endw
-                      00459                                         d+=1
-                      00460                                 endif
-                      00461 ;-------------------------------------------------------------------------------------------------------
+                      00450                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00451                                 local   a=1     
+                      00452                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00453                                         Menu_#v(d)_Submenu_#v(a)
+                      00454                                                 mod_PCL symbol_pointer
+                      00455                                                 dt              MENU_SUBMENU_NAME_6_#v(a),0
+                      00456                                         a+=1
+                      00457                                 endw
+                      00458                                         d+=1
+                      00459                                 endif
+                      00460 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00462 ; Подпункты 7 пункта меню
-                      00463 ;-------------------------------------------------------------------------------------------------------
+                      00461 ; Подпункты 7 пункта меню
+                      00462 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00464                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00465                                 local   a=1     
-                      00466                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00467                                         Menu_#v(d)_Submenu_#v(a)
-                      00468                                                 mod_PCL symbol_pointer
-                      00469                                                 dt              MENU_SUBMENU_NAME_7_#v(a),0
-                      00470                                         a+=1
-                      00471                                 endw
-                      00472                                         d+=1
-                      00473                                 endif
-                      00474 ;-------------------------------------------------------------------------------------------------------
+                      00463                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00464                                 local   a=1     
+                      00465                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00466                                         Menu_#v(d)_Submenu_#v(a)
+                      00467                                                 mod_PCL symbol_pointer
+                      00468                                                 dt              MENU_SUBMENU_NAME_7_#v(a),0
+                      00469                                         a+=1
+                      00470                                 endw
+                      00471                                         d+=1
+                      00472                                 endif
+                      00473 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00475 ; Подпункты 8 пункта меню
-                      00476 ;-------------------------------------------------------------------------------------------------------
+                      00474 ; Подпункты 8 пункта меню
+                      00475 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00477                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00478                                 local   a=1     
-                      00479                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00480                                         Menu_#v(d)_Submenu_#v(a)
-                      00481                                                 mod_PCL symbol_pointer
-                      00482                                                 dt              MENU_SUBMENU_NAME_8_#v(a),0
-                      00483                                         a+=1
-                      00484                                 endw
-                      00485                                         d+=1
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 13
+                      00476                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00477                                 local   a=1     
+                      00478                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00479                                         Menu_#v(d)_Submenu_#v(a)
+                      00480                                                 mod_PCL symbol_pointer
+                      00481                                                 dt              MENU_SUBMENU_NAME_8_#v(a),0
+                      00482                                         a+=1
+                      00483                                 endw
+                      00484                                         d+=1
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 13
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00486                                 endif
-                      00487 ;-------------------------------------------------------------------------------------------------------
+                      00485                                 endif
+                      00486 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00488 ; Подпункты 9 пункта меню
-                      00489 ;-------------------------------------------------------------------------------------------------------
+                      00487 ; Подпункты 9 пункта меню
+                      00488 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00490                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00491                                 local   a=1     
-                      00492                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00493                                                 mod_PCL symbol_pointer
-                      00494                                                 dt              MENU_SUBMENU_NAME_9_#v(a),0
-                      00495                                         a+=1
-                      00496                                 endw
-                      00497                                         d+=1
-                      00498                                 endif
-                      00499 ;-------------------------------------------------------------------------------------------------------
+                      00489                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00490                                 local   a=1     
+                      00491                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00492                                                 mod_PCL symbol_pointer
+                      00493                                                 dt              MENU_SUBMENU_NAME_9_#v(a),0
+                      00494                                         a+=1
+                      00495                                 endw
+                      00496                                         d+=1
+                      00497                                 endif
+                      00498 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00500 ; Подпункты 10 пункта меню
-                      00501 ;-------------------------------------------------------------------------------------------------------
+                      00499 ; Подпункты 10 пункта меню
+                      00500 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00502                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00503                                 local   a=1     
-                      00504                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
-                      00505                                         Menu_#v(d)_Submenu_#v(a)
-                      00506                                                 mod_PCL symbol_pointer
-                      00507                                                 dt              MENU_SUBMENU_NAME_10_#v(a),0
-                      00508                                         a+=1
-                      00509                                 endw
-                      00510                                         d+=1
-                      00511                                 endif
-                      00512 ;-------------------------------------------------------------------------------------------------------
+                      00501                                 if              d<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00502                                 local   a=1     
+                      00503                                 while   a<NUM_OF_SUBMENU_PUNKTS_#v(d)+1
+                      00504                                         Menu_#v(d)_Submenu_#v(a)
+                      00505                                                 mod_PCL symbol_pointer
+                      00506                                                 dt              MENU_SUBMENU_NAME_10_#v(a),0
+                      00507                                         a+=1
+                      00508                                 endw
+                      00509                                         d+=1
+                      00510                                 endif
+                      00511 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00513                         endm
+                      00512                         endm
                       00005 
                       00006 Main_udata      udata_shr
 0000                  00007 w_temp          res     1
@@ -760,12 +760,12 @@ Warning[205]: Found directive in column 1. (global)
                       00016 
   0000                00017         global  flags,offset
                       00018 
-  0000                00019         global  End_Interrupt_Heandler,Zastavka,Main
+  0000                00019         global  End_Interrupt_Heandler,Main
   0000                00020         extern  LCD_Line_Init,LCD_Init
-  0000                00021         extern  Menu_heandler,Zastavka_routine
+  0000                00021         extern  Menu_heandler,Zastavka
                       00022 ;==============================================================================================
                       00023 RESET_VECTOR    code    0h
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 14
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 14
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -775,75 +775,89 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00025 ;==============================================================================================
                       00026 ISR                             code    4h                              ; Вектор прерывания
 0004                  00027 Interrupt_Heandler
-                      00028         push                                                            ; Сохраним контекст     
+                      00028         push                                                            ; Сохраним контекст
 0004   00??               M                 movwf   w_temp
 0005   0E03               M                 swapf   STATUS,w
 0006   00??               M                 movwf   status_temp
-0007   100B           00029         bcf             INTCON,RBIF                                     ; Сбросим флаг вызваного прерыва
+                      00029 
+Warning[205]: Found directive in column 1. (if)
+                      00030 if      USE_RBIE
+0007   100B           00031         bcf             INTCON,RBIF                                     ; Сбросим флаг вызваного прерыва
                             ния
-0008   0806           00030         movfw   PORTB                                           
-0009   380F           00031         iorlw   b'00001111'                                     ; Установим незначущие разряды
-000A   3E01           00032         addlw   .1
-000B   1903           00033         btfsc   STATUS,Z
-000C   2???           00034         goto    End_Interrupt_Heandler          ; Если ни одна кнопка не нажата, пропустим обработку наж
+0008   0806           00032         movfw   PORTB                                           
+0009   380F           00033         iorlw   b'00001111'                                     ; Установим незначущие разряды
+000A   3E01           00034         addlw   .1
+000B   1903           00035         btfsc   STATUS,Z
+000C   2???           00036         goto    End_Interrupt_Heandler          ; Если ни одна кнопка не нажата, пропустим обработку наж
                             атия
-000D   118B           00035         bcf             INTCON,RBIE                                     ; Запретим все дальнейшие прерыв
+000D   118B           00037         bcf             INTCON,RBIE                                     ; Запретим все дальнейшие прерыв
                             ания от кнопок, до обработки этого нажатия
-000E   1E06           00036         btfss   UP
-000F   1400           00037         bsf             Press_UP                
-0010   1E86           00038         btfss   DOWN
-0011   1480           00039         bsf             Press_DOWN
-0012   1F06           00040         btfss   ENTER
-0013   1580           00041         bsf             Press_ENTER
-0014   1F86           00042         btfss   EXIT
-0015   1500           00043         bsf             Press_EXIT
-0016                  00044 End_Interrupt_Heandler
-                      00045         pop                                                                     ; Восстановим контекст  
+000E   1E06           00038         btfss   UP
+000F   1400           00039         bsf             Press_UP                
+0010   1E86           00040         btfss   DOWN
+0011   1480           00041         bsf             Press_DOWN
+0012   1F06           00042         btfss   ENTER
+0013   1580           00043         bsf             Press_ENTER
+0014   1F86           00044         btfss   EXIT
+0015   1500           00045         bsf             Press_EXIT
+Warning[205]: Found directive in column 1. (endif)
+                      00046 endif
+                      00047 
+0016                  00048 End_Interrupt_Heandler
+                      00049         pop                                                                     ; Восстановим контекст  
 0016   0E??               M                 swapf   status_temp,w
 0017   0083               M                 movwf   STATUS
 0018   0E??               M                 swapf   w_temp,f
 0019   0E??               M                 swapf   w_temp,w
-001A   0009           00046         retfie
-                      00047 
-                      00048 ;-------------------------------------------------------------------------------------------------------
+001A   0009           00050         retfie
+                      00051 
+                      00052 ;-------------------------------------------------------------------------------------------------------
                             ------------
-001B                  00049 Init
-001B   1683           00050         banksel OPTION_REG
-001C   3000           00051         movlw   b'00000000'                                     ; Enable pull-ups resistors on PortB
+001B                  00053 Init
+001B   1683           00054         banksel OPTION_REG
+001C   3000           00055         movlw   b'00000000'                                     ; Enable pull-ups resistors on PortB
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-001D   0081           00052         movwf   OPTION_REG
-001E   2???           00053         call    LCD_Line_Init                           ; Инициализация линий управления и шины данных д
+001D   0081           00056         movwf   OPTION_REG
+001E   2???           00057         call    LCD_Line_Init                           ; Инициализация линий управления и шины данных д
                             ля работы с дисплеем
-001F   1283           00054         banksel TMR0
-0020   2???           00055         call    LCD_Init                                        ; Инициалзация самого дисплея
-0021   01??           00056         clrf    flags
-                      00057 
-0022   3088           00058         movlw   (1<<RBIE)|(1<<GIE)
-Message[305]: Using default destination of 1 (file).
-0023   048B           00059         iorwf   INTCON
-                      00060 
-0024                  00061 Zastavka                                                                
-0024   2???           00062         goto    Zastavka_routine                        ; Выведем на экран заставку
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 15
+001F   1283           00058         banksel TMR0
+0020   2???           00059         call    LCD_Init                                        ; Инициалзация самого дисплея
+0021   01??           00060         clrf    flags
+Warning[205]: Found directive in column 1. (if)
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 15
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0025                  00063 Main
-                      00064 
-0025   0063           00065         sleep
-0026   0000           00066         nop
-                      00067 
-0027   08??           00068         movfw   flags                                           
-0028   390F           00069         andlw   b'00001111'                                     ; Занулим незначущие разряды
-0029   1903           00070         btfsc   STATUS,Z
-002A   2???           00071         goto    Main                                            ; Если ни одна кнопка не нажата, просто 
+                      00061 if      USE_RBIE
+0022   3088           00062         movlw   (1<<RBIE)|(1<<GIE)
+Message[305]: Using default destination of 1 (file).
+0023   048B           00063         iorwf   INTCON
+Warning[205]: Found directive in column 1. (endif)
+                      00064 endif
+0024   2???           00065         goto    Zastavka                                        ; Выведем на экран заставку
+0025                  00066 Main
+Warning[205]: Found directive in column 1. (if)
+                      00067 if      USE_RBIE
+0025   0063           00068         sleep
+0026   0000           00069         nop
+0027   08??           00070         movfw   flags                                           
+0028   390F           00071         andlw   b'00001111'                                     ; Занулим незначущие разряды
+0029   1903           00072         btfsc   STATUS,Z
+Warning[205]: Found directive in column 1. (else)
+                      00073 else
+                      00074         movfw   PORTB                                           
+                      00075         iorlw   b'00001111'                                     ; Установим незначущие разряды
+                      00076         addlw   .1
+                      00077         btfsc   STATUS,Z
+                      00078 endif
+002A   2???           00079         goto    Main                                            ; Если ни одна кнопка не нажата, просто 
                             зациклимся
-002B   2???           00072         goto    Menu_heandler                           ; Иначе входим в обработчик меню
-                      00073 
-3FF1                  00074         end
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 16
+002B   2???           00080         goto    Menu_heandler                           ; Иначе входим в обработчик меню
+                      00081 
+3FF1                  00082         end
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 16
 
 
 SYMBOL TABLE
@@ -902,7 +916,7 @@ Menu_heandler                     00000000
 NOT_PD                            00000003
 NOT_RBPU                          00000007
 NOT_TO                            00000004
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 17
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 17
 
 
 SYMBOL TABLE
@@ -961,7 +975,7 @@ TRISA3                            00000003
 TRISA4                            00000004
 TRISB                             00000086
 TRISB0                            00000000
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 18
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 18
 
 
 SYMBOL TABLE
@@ -977,8 +991,9 @@ TRISB7                            00000007
 UP                                PORTB,4
 USE_CURSOR                        0
 USE_MOVING_CURSOR                 1
+USE_RBIE                          1
 USE_SHORT_MOD_PCL                 1
-USE_TOP_4_FIRST_AND_BOTTOM_4_LAS  1
+USE_TOP_LAST_CURSOR               1
 W                                 00000000
 WR                                00000001
 WREN                              00000002
@@ -986,8 +1001,7 @@ WRERR                             00000003
 Z                                 00000002
 ZASTAVKA_FIRST_STRING             "  MicroMenuLib"
 ZASTAVKA_SECOND_STRING            "  ver 1.0 beta"
-Zastavka                          00000024
-Zastavka_routine                  00000000
+Zastavka                          00000000
 _CONFIG                           00002007
 _CP_OFF                           00003FFF
 _CP_ON                            0000000F
@@ -1020,7 +1034,7 @@ mod_PCL
 offset                            00000003
 pop                               
 push                              
-MPASM  5.51                          MAIN.ASM   5-27-2017  21:06:50         PAGE 19
+MPASM  5.51                          MAIN.ASM   5-28-2017  23:50:07         PAGE 19
 
 
 SYMBOL TABLE
@@ -1031,7 +1045,7 @@ status_temp                       00000001
 w_temp                            00000000
 
 Errors   :     0
-Warnings :     3 reported,     0 suppressed
+Warnings :     9 reported,     0 suppressed
 Messages :     3 reported,     0 suppressed
 
 

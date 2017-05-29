@@ -1,4 +1,4 @@
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  1
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (include)
                       00037 
                       00038         if      (Use_4_bit_mode && Use_One_Port && !Use_High_Nible && Only_Write)
                       00039 E                               equ             4
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  2
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Warning[205]: Found directive in column 1. (global)
 Message[305]: Using default destination of 1 (file).
 0005   0B??           00018         decfsz  temp_1
 0006   2???           00019         goto    $-1
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  3
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0015   08??           00069         movfw   symbol
 0016   0086           00070         movwf   LCD_DATA
 0017   2???           00071         call    Strob
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  4
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ Message[305]: Using default destination of 1 (file).
 002B   0486           00110         iorwf   LCD_DATA
 002C   2???           00111         call    Strob   
                       00112 
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  5
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00152 ; ВНИМАНИЕ !!! Hitachi LM032L (находиться в составе PICDEM 2 PLUS) имеет особенность в порядке следовани
                             я команд при инициализации
                       00153 ; Этот порядок ни в коем случае нельза нарушать !!!
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  6
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -326,7 +326,7 @@ Message[305]: Using default destination of 1 (file).
 0046   0008           00173         return
                       00174 
                       00175         end
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  7
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  7
 
 
 SYMBOL TABLE
@@ -385,7 +385,7 @@ PSA                               00000003
 RA0                               00000000
 RA1                               00000001
 RA2                               00000002
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  8
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  8
 
 
 SYMBOL TABLE
@@ -444,7 +444,7 @@ WRERR                             00000003
 Z                                 00000002
 _CONFIG                           00002007
 _CP_OFF                           00003FFF
-MPASM  5.51                   HD44780_LIB.ASM   5-27-2017  21:06:51         PAGE  9
+MPASM  5.51                   HD44780_LIB.ASM   5-28-2017  23:50:08         PAGE  9
 
 
 SYMBOL TABLE

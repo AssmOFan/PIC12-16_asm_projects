@@ -3,21 +3,20 @@
 include	hardware_profile.inc
 include	Macro.h	
 
+#define	USE_CURSOR				0				; ¬сегда рисовать курсор в конце 1-й строки
+#define	USE_MOVING_CURSOR		1				; »спользовать перемещаемый курсор (повышает удобство использовани€ меню и размер прошивки)
+#define	USE_TOP_LAST_CURSOR		1				; »спользовать отображение "первый пункт всегда сверху" и "последний пункт всегда снизу" (повышает удобство использовани€ меню и размер прошивки)
+#define	USE_RBIE				1				; »спользовать прерывание по изминению состо€ни€ PORTB дл€ обработки кнопок (позвол€ет использовать сон)
+
 #define	UP						PORTB,4
 #define	DOWN					PORTB,5
 #define	ENTER					PORTB,6
 #define	EXIT					PORTB,7
 
-#define	USE_CURSOR				0				; ¬сегда рисовать курсор в конце 1-й строчки
-#define	USE_MOVING_CURSOR		1				; »спользовать перемещаемый курсор (повышает удобство использовани€ меню и размер прошивки)
-#define	USE_TOP_4_FIRST_AND_BOTTOM_4_LAST	1	; »спользовать отображение "первый пункт всегда сверху" и "последний пункт всегда снизу"
-
-	if	USE_MOVING_CURSOR
 #define	Press_UP				flags,0
 #define	Press_DOWN				flags,1
 #define	Press_EXIT				flags,2
 #define	Press_ENTER				flags,3	
-	endif
 
 #define	EXIT_DELAY				.20				;  оличество опросов кнопок, до выхода в предыдущий уровень (* 0,8 сек)
 
@@ -32,7 +31,7 @@ include	Macro.h
 #define	MENU_NAME_4				"4.Menu_4"
 #define	MENU_NAME_5				"5.Menu_5"	
 
-#define	NUM_OF_SUBMENU_PUNKTS_1	.3				;  оличество пунктов каждого подменю, до 10
+#define	NUM_OF_SUBMENU_PUNKTS_1	.3				;  оличество подпунктов каждого пункта меню, до 10
 
 #define	MENU_SUBMENU_NAME_1_1	"1.1.Garage"
 #define	MENU_SUBMENU_NAME_1_2	"1.2.Doors"
