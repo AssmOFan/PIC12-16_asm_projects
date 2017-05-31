@@ -49,6 +49,27 @@ Switch_Action							; Выполним действие, на котором находится курсор
 ;===================================================================================================
 	Create_Submenu_Names				; Макрос, создает имена всех подпунктов меню
 ;===================================================================================================
+if	USE_MENU_ACTION
+Menu_Action
+	goto_Menu_action
+;===================================================================================================
+Menu_1_action							; Выполняем действие 1 пункта меню
+;	nop
+	goto	End_Menu_Action
+Menu_2_action							; Выполняем действие 2 пункта меню
+;	nop
+	goto	End_Menu_Action
+Menu_3_action							; Выполняем действие 3 пункта меню
+;	nop
+	goto	End_Menu_Action
+Menu_4_action							; Выполняем действие 4 пункта меню
+;	nop
+	goto	End_Menu_Action
+Menu_5_action							; Выполняем действие 5 пункта меню
+;	nop
+	goto	End_Menu_Action
+endif
+;===================================================================================================
 Menu_1_Submenu_1_action					; Выполняем действие 1 подпункта 1 пункта
 ;	nop
 	goto	End_Action
@@ -240,7 +261,7 @@ endif
 if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
-	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
+	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания от кнопок
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
 endif
 
@@ -321,6 +342,25 @@ endif
 	goto	Zastavka					; Выходим в заставку
 ;-----------------------------------------------------------------
 ENTER_menu								; Была нажата клавиша "Вход"
+
+if	USE_MENU_ACTION		
+	movfw	index_menu					; Берем текущий пункт меню
+	movwf	temp_1						; Заносим в счетчик
+	incf	temp_1						; Учитываем, что нумерация начинается с 0
+	movlw	actions_menu_flags			; Берем флаги действий пунктов меню
+	movwf	temp_2						; И заносим в переменную
+Loop_1
+	decfsz	temp_1
+	goto	Rotate_action_menu_flags
+	btfsc	STATUS,C					; Флаг действия текущего пункта меню выдавлен в бит переноса, анализируем его
+	goto	Menu_Action					; У текущего пункта меню есть действие, выполняем его
+	goto	End_Menu_Action
+Rotate_action_menu_flags
+	rrf		temp_2						; Перебор флагов действий всех пунктов меню
+	goto	Loop_1	
+End_Menu_Action
+endif
+
 	clrf	index_submenu				; Очистим индекс пункта подменю	
 
 if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
