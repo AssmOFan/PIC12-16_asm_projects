@@ -1,0 +1,51 @@
+Warning[205] D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 1 : Found directive in column 1. (IF)
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 1 : Symbol not previously defined (USE_MENU_ACTION)
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 37 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 39 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 39 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 40 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 42 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 42 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 43 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 45 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 45 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 47 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 49 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 49 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 50 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 52 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 52 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 53 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 55 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 55 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 57 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 59 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 59 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 60 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 62 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 62 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 63 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 65 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 65 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 67 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 69 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 69 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 70 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 72 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 72 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 73 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 75 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 75 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 77 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 79 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 79 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 80 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 82 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 82 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 83 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 85 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 85 : Executable code and data must be defined in an appropriate section
+Error[150]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 86 : Labels must be defined in a code or data section when making an object file
+Error[113]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 88 : Symbol not previously defined (END_ACTION)
+Error[152]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 88 : Executable code and data must be defined in an appropriate section
+Error[129]   D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\MENU_ACTION.ASM 89 : Expected (END)

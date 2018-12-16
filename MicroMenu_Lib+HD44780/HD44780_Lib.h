@@ -1,12 +1,9 @@
-include	hardware_profile.inc
+	include	hardware_profile.inc
 
-y				equ		1				; YES
-n				equ		0				; NO
-
-Use_4_bit_mode	equ		y				; YES/NO
-Use_High_Nible	equ		n				; YES/NO
-Use_One_Port	equ		n				; YES/NO
-Only_Write		equ		y				; YES/NO
+Use_4_bit_mode	equ		1				; YES/NO
+Use_High_Nible	equ		0				; YES/NO
+Use_One_Port	equ		0				; YES/NO
+Only_Write		equ		1				; YES/NO
 
 LCD_DATA		equ		PORTB			; Описываем порт линий данных
 LCD_DATA_TRIS	equ		TRISB

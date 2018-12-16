@@ -1,0 +1,188 @@
+MPASM  5.51                   MENU_ACTION.ASM   12-16-2018  15:05:16         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (IF)
+Error[113]  : Symbol not previously defined (USE_MENU_ACTION)
+                      00001 IF      USE_MENU_ACTION
+                      00002 MENU_ACTION
+                      00003         GOTO_MENU_ACTION
+                      00004 ;===================================================================================================
+                      00005 MENU_1_ACTION                                                   ; Выполняем действие 1 пункта меню
+                      00006 ;       nop
+                      00007         CALL    CLR_DISPLAY_ROUTINE                     ; Очистим дисплей перед самой перерисовкой пункт
+                            ов меню, чтобы уменьшить моргание
+                      00008         CLRF    SYMBOL_POINTER                          ; Рисуем подтверждение действия
+                      00009 STRING_ACTION_COMPLETE_
+                      00010         CALL    TABLE_ACTION_COMPLETE   
+                      00011         ANDLW   0FFH
+                      00012         BTFSC   STATUS,Z
+                      00013         GOTO    OUT_ACTION_COMPLETE_
+                      00014         CALL    SEND_LCD_SYMBOL
+                      00015         INCF    SYMBOL_POINTER  
+                      00016         GOTO    STRING_ACTION_COMPLETE_
+                      00017 OUT_ACTION_COMPLETE_
+                      00018         CLRF    TEMP_3                                          ; Задержка, чтобы успеть прочесть уведом
+                            ление о выполнении действи
+                      00019         CALL    DEBOUNCE_DELAY
+                      00020         DECFSZ  TEMP_3
+                      00021         GOTO    $-2
+                      00022         GOTO    END_MENU_ACTION
+                      00023 MENU_2_ACTION                                                   ; Выполняем действие 2 пункта меню
+                      00024 ;       nop
+                      00025         GOTO    END_MENU_ACTION
+                      00026 MENU_3_ACTION                                                   ; Выполняем действие 3 пункта меню
+                      00027 ;       nop
+                      00028         GOTO    END_MENU_ACTION
+                      00029 MENU_4_ACTION                                                   ; Выполняем действие 4 пункта меню
+                      00030 ;       nop
+                      00031         GOTO    END_MENU_ACTION
+                      00032 MENU_5_ACTION                                                   ; Выполняем действие 5 пункта меню
+                      00033 ;       nop
+                      00034         GOTO    END_MENU_ACTION
+                      00035 ENDIF
+                      00036 ;===================================================================================================
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00037 MENU_1_SUBMENU_1_ACTION                                 ; Выполняем действие 1 подпункта 1 пункта
+                      00038 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00039         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00040 MENU_1_SUBMENU_2_ACTION                                 ; Выполняем действие 2 подпункта 1 пункта
+                      00041 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00042         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+MPASM  5.51                   MENU_ACTION.ASM   12-16-2018  15:05:16         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0000                  00043 MENU_1_SUBMENU_3_ACTION                                 ; Выполняем действие 3 подпункта 1 пункта
+                      00044 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00045         GOTO    END_ACTION
+                      00046 ;---------------------------------------------------------------------------------------------------
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00047 MENU_2_SUBMENU_1_ACTION                                 ; Выполняем действие 1 подпункта 2 пункта
+                      00048 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00049         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00050 MENU_2_SUBMENU_2_ACTION                                 ; Выполняем действие 2 подпункта 2 пункта
+                      00051 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00052         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00053 MENU_2_SUBMENU_3_ACTION                                 ; Выполняем действие 3 подпункта 2 пункта
+                      00054 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00055         GOTO    END_ACTION
+                      00056 ;---------------------------------------------------------------------------------------------------
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00057 MENU_3_SUBMENU_1_ACTION                                 ; Выполняем действие 1 подпункта 3 пункта
+                      00058 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00059         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00060 MENU_3_SUBMENU_2_ACTION                                 ; Выполняем действие 2 подпункта 3 пункта
+                      00061 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00062         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00063 MENU_3_SUBMENU_3_ACTION                                 ; Выполняем действие 3 подпункта 3 пункта
+                      00064 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00065         GOTO    END_ACTION
+                      00066 ;---------------------------------------------------------------------------------------------------
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00067 MENU_4_SUBMENU_1_ACTION                                 ; Выполняем действие 1 подпункта 4 пункта
+                      00068 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00069         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00070 MENU_4_SUBMENU_2_ACTION                                 ; Выполняем действие 2 подпункта 4 пункта
+                      00071 ;       nop
+MPASM  5.51                   MENU_ACTION.ASM   12-16-2018  15:05:16         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00072         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00073 MENU_4_SUBMENU_3_ACTION                                 ; Выполняем действие 3 подпункта 4 пункта
+                      00074 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00075         GOTO    END_ACTION                                                              
+                      00076 ;---------------------------------------------------------------------------------------------------
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00077 MENU_5_SUBMENU_1_ACTION                                 ; Выполняем действие 1 подпункта 5 пункта
+                      00078 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00079         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00080 MENU_5_SUBMENU_2_ACTION                                 ; Выполняем действие 2 подпункта 5 пункта
+                      00081 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00082         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00083 MENU_5_SUBMENU_3_ACTION                                 ; Выполняем действие 3 подпункта 5 пункта
+                      00084 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00085         GOTO    END_ACTION
+Error[150]  : Labels must be defined in a code or data section when making an object file
+0000                  00086 MENU_5_SUBMENU_4_ACTION                                 ; Выполняем действие 4 подпункта 5 пункта
+                      00087 ;       nop
+Error[113]  : Symbol not previously defined (END_ACTION)
+Error[152]  : Executable code and data must be defined in an appropriate section
+0000                  00088         GOTO    END_ACTION
+Error[129]  : Expected (END)
+MPASM  5.51                   MENU_ACTION.ASM   12-16-2018  15:05:16         PAGE  4
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+MENU_1_SUBMENU_1_ACTION           00000000
+MENU_1_SUBMENU_2_ACTION           00000000
+MENU_1_SUBMENU_3_ACTION           00000000
+MENU_2_SUBMENU_1_ACTION           00000000
+MENU_2_SUBMENU_2_ACTION           00000000
+MENU_2_SUBMENU_3_ACTION           00000000
+MENU_3_SUBMENU_1_ACTION           00000000
+MENU_3_SUBMENU_2_ACTION           00000000
+MENU_3_SUBMENU_3_ACTION           00000000
+MENU_4_SUBMENU_1_ACTION           00000000
+MENU_4_SUBMENU_2_ACTION           00000000
+MENU_4_SUBMENU_3_ACTION           00000000
+MENU_5_SUBMENU_1_ACTION           00000000
+MENU_5_SUBMENU_2_ACTION           00000000
+MENU_5_SUBMENU_3_ACTION           00000000
+MENU_5_SUBMENU_4_ACTION           00000000
+__16F84                           00000001
+
+Errors   :    50
+Warnings :     1 reported,     0 suppressed
+Messages :     0 reported,     0 suppressed
+
+

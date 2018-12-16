@@ -1,5 +1,3 @@
-Warning[205] D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\HD44780_LIB.H 1 : Found directive in column 1. (INCLUDE)
-Warning[205] D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\HD44780_LIB.ASM 8 : Found directive in column 1. (GLOBAL)
 Message[305] D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\HD44780_LIB.ASM 18 : Using default destination of 1 (file).
 Message[305] D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\HD44780_LIB.ASM 89 : Using default destination of 1 (file).
 Message[302] D:\DOCS\GIT\PIC12-16_ASM_PROJECTS\MICROMENU_LIB+HD44780\HD44780_LIB.ASM 89 : Register in operand not in bank 0.  Ensure that bank bits are correct.

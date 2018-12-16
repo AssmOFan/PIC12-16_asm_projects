@@ -1,5 +1,5 @@
 MPLINK 4.49, Linker
-Linker Map File - Created Sun Dec 16 10:46:12 2018
+Linker Map File - Created Sun Dec 16 15:27:04 2018
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
@@ -7,12 +7,12 @@ Linker Map File - Created Sun Dec 16 10:46:12 2018
              RESET_VECTOR       code   0x000000    program   0x000002
                    .cinit    romdata   0x000001    program   0x000004
                       ISR       code   0x000004    program   0x000050
-                MICROMENU       code   0x00002c    program   0x000602
-             LCD_LIB_CODE       code   0x00032d    program   0x00008e
+                MICROMENU       code   0x00002c    program   0x000700
+             LCD_LIB_CODE       code   0x0003ac    program   0x00008e
       .config_2007_MAIN.O       code   0x002007    program   0x000002
-      MICROMENU_LIB_UDATA      udata   0x00000c       data   0x000007
-               MAIN_UDATA      udata   0x000013       data   0x000005
-            LCD_LIB_UDATA      udata   0x000018       data   0x000003
+      MICROMENU_LIB_UDATA      udata   0x00000c       data   0x000008
+               MAIN_UDATA      udata   0x000014       data   0x000005
+            LCD_LIB_UDATA      udata   0x000019       data   0x000003
 
 
 
@@ -20,166 +20,193 @@ Linker Map File - Created Sun Dec 16 10:46:12 2018
                                Start         End      
                            ---------   ---------      
                             0x000000    0x000002      
-                            0x000004    0x000373      
+                            0x000004    0x0003f2      
                             0x002007    0x002007      
-            884 out of 1093 program addresses used, program memory utilization is 80%
+            1011 out of 1093 program addresses used, program memory utilization is 92%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                  CHECK_1   0x000240    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  CHECK_2   0x00029f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      CLR_DISPLAY_ROUTINE   0x000221    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-       CORRECT_INDEX_MENU   0x000255    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-     CORRECT_INDEX_MENU_2   0x000262    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-    CORRECT_INDEX_SUBMENU   0x0002bb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  CORRECT_INDEX_SUBMENU_2   0x0002c9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         CURSOR_DOWN_MENU   0x000288    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      CURSOR_DOWN_SUBMENU   0x0002f1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           CURSOR_UP_MENU   0x000282    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-        CURSOR_UP_SUBMENU   0x0002ea    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           DEBOUNCE_DELAY   0x000320    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                DELAY_4MS   0x00036c    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-      DRAW_KURSOR_ROUTINE   0x00031c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-               END_ACTION   0x0002fb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  CHECK_1   0x0002b8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  CHECK_2   0x000324    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      CLR_DISPLAY_ROUTINE   0x000295    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+       CORRECT_INDEX_MENU   0x0002cd    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+     CORRECT_INDEX_MENU_2   0x0002da    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+    CORRECT_INDEX_SUBMENU   0x00033e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  CORRECT_INDEX_SUBMENU_2   0x00034c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         CURSOR_DOWN_MENU   0x000300    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      CURSOR_DOWN_SUBMENU   0x000374    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           CURSOR_UP_MENU   0x0002fa    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+        CURSOR_UP_SUBMENU   0x00036d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           DEBOUNCE_DELAY   0x00039f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                DELAY_4MS   0x0003eb    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+      DRAW_CURSOR_ROUTINE   0x000299    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+               END_ACTION   0x00037e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
    END_INTERRUPT_HEANDLER   0x000016    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-               ENTER_MENU   0x000293    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            ENTER_SUBMENU   0x0002f9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                EXIT_MENU   0x00028e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             EXIT_SUBMENU   0x0002f7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             FIRST_STRING   0x00030a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          END_MENU_ACTION   0x000317    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+               ENTER_MENU   0x00030b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            ENTER_SUBMENU   0x00037c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                EXIT_MENU   0x000306    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             EXIT_SUBMENU   0x00037a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             FIRST_STRING   0x00038d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                      INIT   0x00001b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
        INTERRUPT_HEANDLER   0x000004    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-                 LCD_INIT   0x00034c    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-            LCD_LINE_INIT   0x000347    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-               LOOP_DELAY   0x000323    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                LOOP_MENU   0x000273    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             LOOP_SUBMENU   0x0002db    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 LCD_INIT   0x0003cb    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+            LCD_LINE_INIT   0x0003c6    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                   LOOP_1   0x000310    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+               LOOP_DELAY   0x0003a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                LOOP_MENU   0x0002eb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             LOOP_SUBMENU   0x00035e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                      MAIN   0x000025    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-                   MENU_1   0x000109    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_1_SUBMENU_1_ACTION   0x000212    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_1_SUBMENU_2_ACTION   0x000213    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_1_SUBMENU_3_ACTION   0x000214    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_1_TABLE   0x00009a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_1_TABLE_ACTION   0x0000d8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_2   0x00011a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_2_SUBMENU_1   0x00015e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_2_SUBMENU_1_ACTION   0x000215    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_2_SUBMENU_2_ACTION   0x000216    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_2_SUBMENU_3_ACTION   0x000217    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_2_TABLE   0x0000a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_2_TABLE_ACTION   0x0000e0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_3   0x00012b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_3_SUBMENU_1   0x000172    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_3_SUBMENU_1_ACTION   0x000218    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_3_SUBMENU_2   0x000186    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_3_SUBMENU_2_ACTION   0x000219    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_3_SUBMENU_3_ACTION   0x00021a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_3_TABLE   0x0000ab    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_3_TABLE_ACTION   0x0000e9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_4   0x00013c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_4_SUBMENU_1   0x00019a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_4_SUBMENU_1_ACTION   0x00021b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_4_SUBMENU_2   0x0001ae    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_4_SUBMENU_2_ACTION   0x00021c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_4_SUBMENU_3   0x0001c2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_4_SUBMENU_3_ACTION   0x00021d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_4_TABLE   0x0000b5    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_4_TABLE_ACTION   0x0000f3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_5   0x00014d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_5_SUBMENU_1   0x0001d6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_5_SUBMENU_1_ACTION   0x00021e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_5_SUBMENU_2   0x0001ea    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_5_SUBMENU_2_ACTION   0x00021f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_5_SUBMENU_3   0x0001fe    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_5_SUBMENU_3_ACTION   0x000220    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_5_TABLE   0x0000c0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_5_TABLE_ACTION   0x0000fe    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            MENU_HEANDLER   0x000238    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-              NEXT_STRING   0x000314    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_1   0x000121    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_1_ACTION   0x000271    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_1_SUBMENU_1_ACTION   0x000284    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_1_SUBMENU_2_ACTION   0x000285    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_1_SUBMENU_3_ACTION   0x000286    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+             MENU_1_TABLE   0x00009d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_1_TABLE_ACTION   0x0000e6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_2   0x000132    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_2_ACTION   0x00027f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_2_SUBMENU_1   0x000187    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_2_SUBMENU_1_ACTION   0x000287    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_2_SUBMENU_2_ACTION   0x000288    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_2_SUBMENU_3_ACTION   0x000289    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+             MENU_2_TABLE   0x0000a5    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_2_TABLE_ACTION   0x0000ee    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_3   0x000143    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_3_ACTION   0x000280    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_3_SUBMENU_1   0x00019b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_3_SUBMENU_1_ACTION   0x00028a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_3_SUBMENU_2   0x0001af    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_3_SUBMENU_2_ACTION   0x00028b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_3_SUBMENU_3_ACTION   0x00028c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+             MENU_3_TABLE   0x0000ae    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_3_TABLE_ACTION   0x0000f7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_4   0x000154    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_4_ACTION   0x000281    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_4_SUBMENU_1   0x0001c3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_4_SUBMENU_1_ACTION   0x00028d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_4_SUBMENU_2   0x0001d7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_4_SUBMENU_2_ACTION   0x00028e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_4_SUBMENU_3   0x0001eb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_4_SUBMENU_3_ACTION   0x00028f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+             MENU_4_TABLE   0x0000b8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_4_TABLE_ACTION   0x000101    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_5   0x000165    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_5_ACTION   0x000282    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_5_SUBMENU_1   0x0001ff    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_5_SUBMENU_1_ACTION   0x000290    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_5_SUBMENU_2   0x000213    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_5_SUBMENU_2_ACTION   0x000291    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_5_SUBMENU_3   0x000227    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_5_SUBMENU_3_ACTION   0x000292    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_5_SUBMENU_4   0x00023b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_5_SUBMENU_4_ACTION   0x000293    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+             MENU_5_TABLE   0x0000c3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_5_TABLE_ACTION   0x00010c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_6   0x000176    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_6_ACTION   0x000283    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         MENU_6_SUBMENU_1   0x00024f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  MENU_6_SUBMENU_1_ACTION   0x000294    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+             MENU_6_TABLE   0x0000cf    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_6_TABLE_ACTION   0x000118    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              MENU_ACTION   0x000263    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_HEANDLER   0x0002b0    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              NEXT_STRING   0x000397    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
      NUM_OF_SUBMENU_TABLE   0x000073    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      OUT_ACTION_COMPLETE   0x000303    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         OUT_FIRST_STRING   0x000311    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          OUT_NEXT_STRING   0x00031b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            PRESSING_DOWN   0x00025a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          PRESSING_DOWN_2   0x0002c1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-    SECOND_STRING_ROUTINE   0x000225    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         SEND_LCD_COMMAND   0x00033d    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-          SEND_LCD_SYMBOL   0x000335    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-             SKIP_CHECK_1   0x000246    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             SKIP_CHECK_2   0x0002a8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_MENU_2   0x000267    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_MENU_3   0x00026a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_SUBMENU_2   0x0002cf    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_SUBMENU_3   0x0002d2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-   STRING_ACTION_COMPLETE   0x0002fc    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-              STRING_MENU   0x000229    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           STRING_SUBMENU   0x000231    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                    STROB   0x00032d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-            SWITCH_ACTION   0x0000cb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-              SWITCH_MENU   0x000239    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      SWITCH_MENU_ROUTINE   0x000228    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-        SWITCH_MENU_TABLE   0x000080    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           SWITCH_SUBMENU   0x000298    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-   SWITCH_SUBMENU_ROUTINE   0x000230    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-     SWITCH_SUBMENU_TABLE   0x00008d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      OUT_ACTION_COMPLETE   0x000386    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+     OUT_ACTION_COMPLETE_   0x00027a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+         OUT_FIRST_STRING   0x000394    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          OUT_NEXT_STRING   0x00039e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            PRESSING_DOWN   0x0002d2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          PRESSING_DOWN_2   0x000344    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+ ROTATE_ACTION_MENU_FLAGS   0x000315    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+    SECOND_STRING_ROUTINE   0x00029d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         SEND_LCD_COMMAND   0x0003bc    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+          SEND_LCD_SYMBOL   0x0003b4    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+             SKIP_CHECK_1   0x0002be    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             SKIP_CHECK_2   0x00032b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_MENU_2   0x0002df    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_MENU_3   0x0002e2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_SUBMENU_2   0x000352    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_SUBMENU_3   0x000355    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+   STRING_ACTION_COMPLETE   0x00037f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  STRING_ACTION_COMPLETE_   0x000273    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+              STRING_MENU   0x0002a1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           STRING_SUBMENU   0x0002a9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                    STROB   0x0003ac    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+            SWITCH_ACTION   0x0000d8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              SWITCH_MENU   0x0002b1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      SWITCH_MENU_ROUTINE   0x0002a0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+        SWITCH_MENU_TABLE   0x000081    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           SWITCH_SUBMENU   0x00031d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+   SWITCH_SUBMENU_ROUTINE   0x0002a8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+     SWITCH_SUBMENU_TABLE   0x00008f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
     TABLE_ACTION_COMPLETE   0x00002c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
 TABLE_ZASTAVKA_FIRST_STRING   0x000045    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
 TABLE_ZASTAVKA_SECOND_STRING   0x00005c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 ZASTAVKA   0x000308    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _10TABLE   0x0000a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _11TABLE   0x0000aa    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _12TABLE   0x0000b3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _13TABLE   0x0000bd    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _14TABLE   0x0000c8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _16TABLE   0x0000d3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 ZASTAVKA   0x00038b    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _10TABLE   0x0000a5    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _11TABLE   0x0000ad    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _12TABLE   0x0000b6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _13TABLE   0x0000c0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _14TABLE   0x0000cb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _15TABLE   0x0000d7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                  _17TABLE   0x0000e0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _18TABLE   0x0000e8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _19TABLE   0x0000f1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _18TABLE   0x0000ee    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _19TABLE   0x0000f6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                   _1TABLE   0x000034    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _20TABLE   0x0000fb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _21TABLE   0x000106    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _23TABLE   0x000111    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _24TABLE   0x000122    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _25TABLE   0x000133    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _26TABLE   0x000144    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _27TABLE   0x000155    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _29TABLE   0x000166    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _20TABLE   0x0000ff    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _21TABLE   0x000109    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _22TABLE   0x000114    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _23TABLE   0x000120    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _25TABLE   0x000129    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _26TABLE   0x00013a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _27TABLE   0x00014b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _28TABLE   0x00015c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _29TABLE   0x00016d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                   _2TABLE   0x00004d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _30TABLE   0x00017a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _31TABLE   0x00018e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _32TABLE   0x0001a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _33TABLE   0x0001b6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _34TABLE   0x0001ca    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _35TABLE   0x0001de    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _36TABLE   0x0001f2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _37TABLE   0x000206    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _30TABLE   0x00017e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _32TABLE   0x00018f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _33TABLE   0x0001a3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _34TABLE   0x0001b7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _35TABLE   0x0001cb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _36TABLE   0x0001df    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _37TABLE   0x0001f3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _38TABLE   0x000207    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _39TABLE   0x00021b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                   _3TABLE   0x000064    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _40TABLE   0x00022f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _41TABLE   0x000243    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _42TABLE   0x000257    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _44TABLE   0x00026b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
                   _5TABLE   0x00007b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  _7TABLE   0x000088    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  _9TABLE   0x000095    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-       _LCD_LIB_CODE_0006   0x000333    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-       _LCD_LIB_CODE_0043   0x000370    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-       _LCD_LIB_CODE_0045   0x000372    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-          _MICROMENU_02DA   0x000306    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          _MICROMENU_02FD   0x000329    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                    FLAGS   0x000015       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+                  _7TABLE   0x000089    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  _9TABLE   0x000097    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+       _LCD_LIB_CODE_0006   0x0003b2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+       _LCD_LIB_CODE_0043   0x0003ef    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+       _LCD_LIB_CODE_0045   0x0003f1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+          _MICROMENU_0251   0x00027d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+          _MICROMENU_035D   0x000389    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          _MICROMENU_037C   0x0003a8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                    FLAGS   0x000016       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
                INDEX_MENU   0x00000c       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
             INDEX_SUBMENU   0x00000d       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-               KNOWN_ZERO   0x000017       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-             MENU_COUNTER   0x00000f       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   OFFSET   0x000016       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-              STATUS_TEMP   0x000014       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-                   SYMBOL   0x00001a       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-           SYMBOL_POINTER   0x00000e       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   TEMP_1   0x000018       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-                   TEMP_1   0x000010       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   TEMP_2   0x000019       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-                   TEMP_2   0x000011       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   TEMP_3   0x000012       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   W_TEMP   0x000013       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+               KNOWN_ZERO   0x000018       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+             MENU_COUNTER   0x000010       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           NUM_OF_SUBMENU   0x00000e       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   OFFSET   0x000017       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+              STATUS_TEMP   0x000015       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+                   SYMBOL   0x00001b       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+           SYMBOL_POINTER   0x00000f       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   TEMP_1   0x000019       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                   TEMP_1   0x000011       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   TEMP_2   0x00001a       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                   TEMP_2   0x000012       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   TEMP_3   0x000013       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   W_TEMP   0x000014       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
 
 
 
@@ -198,144 +225,171 @@ TABLE_ZASTAVKA_SECOND_STRING   0x00005c    program     static D:\Docs\Git\PIC12-
                   _3TABLE   0x000064    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
      NUM_OF_SUBMENU_TABLE   0x000073    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                   _5TABLE   0x00007b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-        SWITCH_MENU_TABLE   0x000080    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  _7TABLE   0x000088    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-     SWITCH_SUBMENU_TABLE   0x00008d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  _9TABLE   0x000095    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_1_TABLE   0x00009a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _10TABLE   0x0000a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_2_TABLE   0x0000a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _11TABLE   0x0000aa    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_3_TABLE   0x0000ab    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _12TABLE   0x0000b3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_4_TABLE   0x0000b5    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _13TABLE   0x0000bd    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_5_TABLE   0x0000c0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _14TABLE   0x0000c8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            SWITCH_ACTION   0x0000cb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _16TABLE   0x0000d3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_1_TABLE_ACTION   0x0000d8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+        SWITCH_MENU_TABLE   0x000081    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  _7TABLE   0x000089    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+     SWITCH_SUBMENU_TABLE   0x00008f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  _9TABLE   0x000097    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_1_TABLE   0x00009d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_2_TABLE   0x0000a5    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _10TABLE   0x0000a5    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _11TABLE   0x0000ad    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_3_TABLE   0x0000ae    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _12TABLE   0x0000b6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_4_TABLE   0x0000b8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _13TABLE   0x0000c0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_5_TABLE   0x0000c3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _14TABLE   0x0000cb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_6_TABLE   0x0000cf    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _15TABLE   0x0000d7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            SWITCH_ACTION   0x0000d8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
                  _17TABLE   0x0000e0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_2_TABLE_ACTION   0x0000e0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _18TABLE   0x0000e8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_3_TABLE_ACTION   0x0000e9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _19TABLE   0x0000f1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_4_TABLE_ACTION   0x0000f3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _20TABLE   0x0000fb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      MENU_5_TABLE_ACTION   0x0000fe    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _21TABLE   0x000106    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_1   0x000109    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _23TABLE   0x000111    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_2   0x00011a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _24TABLE   0x000122    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_3   0x00012b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _25TABLE   0x000133    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_4   0x00013c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _26TABLE   0x000144    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   MENU_5   0x00014d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _27TABLE   0x000155    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_2_SUBMENU_1   0x00015e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _29TABLE   0x000166    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_3_SUBMENU_1   0x000172    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _30TABLE   0x00017a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_3_SUBMENU_2   0x000186    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _31TABLE   0x00018e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_4_SUBMENU_1   0x00019a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _32TABLE   0x0001a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_4_SUBMENU_2   0x0001ae    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _33TABLE   0x0001b6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_4_SUBMENU_3   0x0001c2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _34TABLE   0x0001ca    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_5_SUBMENU_1   0x0001d6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _35TABLE   0x0001de    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_5_SUBMENU_2   0x0001ea    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _36TABLE   0x0001f2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         MENU_5_SUBMENU_3   0x0001fe    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 _37TABLE   0x000206    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_1_SUBMENU_1_ACTION   0x000212    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_1_SUBMENU_2_ACTION   0x000213    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_1_SUBMENU_3_ACTION   0x000214    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_2_SUBMENU_1_ACTION   0x000215    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_2_SUBMENU_2_ACTION   0x000216    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_2_SUBMENU_3_ACTION   0x000217    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_3_SUBMENU_1_ACTION   0x000218    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_3_SUBMENU_2_ACTION   0x000219    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_3_SUBMENU_3_ACTION   0x00021a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_4_SUBMENU_1_ACTION   0x00021b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_4_SUBMENU_2_ACTION   0x00021c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_4_SUBMENU_3_ACTION   0x00021d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_5_SUBMENU_1_ACTION   0x00021e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_5_SUBMENU_2_ACTION   0x00021f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  MENU_5_SUBMENU_3_ACTION   0x000220    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      CLR_DISPLAY_ROUTINE   0x000221    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-    SECOND_STRING_ROUTINE   0x000225    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      SWITCH_MENU_ROUTINE   0x000228    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-              STRING_MENU   0x000229    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-   SWITCH_SUBMENU_ROUTINE   0x000230    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           STRING_SUBMENU   0x000231    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            MENU_HEANDLER   0x000238    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-              SWITCH_MENU   0x000239    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  CHECK_1   0x000240    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             SKIP_CHECK_1   0x000246    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-       CORRECT_INDEX_MENU   0x000255    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            PRESSING_DOWN   0x00025a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-     CORRECT_INDEX_MENU_2   0x000262    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_MENU_2   0x000267    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_MENU_3   0x00026a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                LOOP_MENU   0x000273    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           CURSOR_UP_MENU   0x000282    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         CURSOR_DOWN_MENU   0x000288    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                EXIT_MENU   0x00028e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-               ENTER_MENU   0x000293    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           SWITCH_SUBMENU   0x000298    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                  CHECK_2   0x00029f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             SKIP_CHECK_2   0x0002a8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-    CORRECT_INDEX_SUBMENU   0x0002bb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          PRESSING_DOWN_2   0x0002c1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-  CORRECT_INDEX_SUBMENU_2   0x0002c9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_SUBMENU_2   0x0002cf    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-SKIP_CORRECT_INDEX_SUBMENU_3   0x0002d2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             LOOP_SUBMENU   0x0002db    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-        CURSOR_UP_SUBMENU   0x0002ea    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      CURSOR_DOWN_SUBMENU   0x0002f1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             EXIT_SUBMENU   0x0002f7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-            ENTER_SUBMENU   0x0002f9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-               END_ACTION   0x0002fb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-   STRING_ACTION_COMPLETE   0x0002fc    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      OUT_ACTION_COMPLETE   0x000303    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          _MICROMENU_02DA   0x000306    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                 ZASTAVKA   0x000308    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             FIRST_STRING   0x00030a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-         OUT_FIRST_STRING   0x000311    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-              NEXT_STRING   0x000314    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          OUT_NEXT_STRING   0x00031b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-      DRAW_KURSOR_ROUTINE   0x00031c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           DEBOUNCE_DELAY   0x000320    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-               LOOP_DELAY   0x000323    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-          _MICROMENU_02FD   0x000329    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                    STROB   0x00032d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-       _LCD_LIB_CODE_0006   0x000333    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-          SEND_LCD_SYMBOL   0x000335    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-         SEND_LCD_COMMAND   0x00033d    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-            LCD_LINE_INIT   0x000347    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-                 LCD_INIT   0x00034c    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-                DELAY_4MS   0x00036c    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-       _LCD_LIB_CODE_0043   0x000370    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-       _LCD_LIB_CODE_0045   0x000372    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+      MENU_1_TABLE_ACTION   0x0000e6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _18TABLE   0x0000ee    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_2_TABLE_ACTION   0x0000ee    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _19TABLE   0x0000f6    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_3_TABLE_ACTION   0x0000f7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _20TABLE   0x0000ff    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_4_TABLE_ACTION   0x000101    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _21TABLE   0x000109    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_5_TABLE_ACTION   0x00010c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _22TABLE   0x000114    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      MENU_6_TABLE_ACTION   0x000118    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _23TABLE   0x000120    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_1   0x000121    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _25TABLE   0x000129    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_2   0x000132    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _26TABLE   0x00013a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_3   0x000143    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _27TABLE   0x00014b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_4   0x000154    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _28TABLE   0x00015c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_5   0x000165    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _29TABLE   0x00016d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   MENU_6   0x000176    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _30TABLE   0x00017e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_2_SUBMENU_1   0x000187    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _32TABLE   0x00018f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_3_SUBMENU_1   0x00019b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _33TABLE   0x0001a3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_3_SUBMENU_2   0x0001af    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _34TABLE   0x0001b7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_4_SUBMENU_1   0x0001c3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _35TABLE   0x0001cb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_4_SUBMENU_2   0x0001d7    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _36TABLE   0x0001df    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_4_SUBMENU_3   0x0001eb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _37TABLE   0x0001f3    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_5_SUBMENU_1   0x0001ff    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _38TABLE   0x000207    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_5_SUBMENU_2   0x000213    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _39TABLE   0x00021b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_5_SUBMENU_3   0x000227    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _40TABLE   0x00022f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_5_SUBMENU_4   0x00023b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _41TABLE   0x000243    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         MENU_6_SUBMENU_1   0x00024f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 _42TABLE   0x000257    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              MENU_ACTION   0x000263    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+                 _44TABLE   0x00026b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_1_ACTION   0x000271    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  STRING_ACTION_COMPLETE_   0x000273    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+     OUT_ACTION_COMPLETE_   0x00027a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+          _MICROMENU_0251   0x00027d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_2_ACTION   0x00027f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_3_ACTION   0x000280    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_4_ACTION   0x000281    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_5_ACTION   0x000282    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+            MENU_6_ACTION   0x000283    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_1_SUBMENU_1_ACTION   0x000284    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_1_SUBMENU_2_ACTION   0x000285    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_1_SUBMENU_3_ACTION   0x000286    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_2_SUBMENU_1_ACTION   0x000287    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_2_SUBMENU_2_ACTION   0x000288    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_2_SUBMENU_3_ACTION   0x000289    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_3_SUBMENU_1_ACTION   0x00028a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_3_SUBMENU_2_ACTION   0x00028b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_3_SUBMENU_3_ACTION   0x00028c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_4_SUBMENU_1_ACTION   0x00028d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_4_SUBMENU_2_ACTION   0x00028e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_4_SUBMENU_3_ACTION   0x00028f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_5_SUBMENU_1_ACTION   0x000290    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_5_SUBMENU_2_ACTION   0x000291    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_5_SUBMENU_3_ACTION   0x000292    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_5_SUBMENU_4_ACTION   0x000293    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+  MENU_6_SUBMENU_1_ACTION   0x000294    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MENU_ACTION.ASM
+      CLR_DISPLAY_ROUTINE   0x000295    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      DRAW_CURSOR_ROUTINE   0x000299    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+    SECOND_STRING_ROUTINE   0x00029d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      SWITCH_MENU_ROUTINE   0x0002a0    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              STRING_MENU   0x0002a1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+   SWITCH_SUBMENU_ROUTINE   0x0002a8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           STRING_SUBMENU   0x0002a9    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            MENU_HEANDLER   0x0002b0    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              SWITCH_MENU   0x0002b1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  CHECK_1   0x0002b8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             SKIP_CHECK_1   0x0002be    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+       CORRECT_INDEX_MENU   0x0002cd    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            PRESSING_DOWN   0x0002d2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+     CORRECT_INDEX_MENU_2   0x0002da    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_MENU_2   0x0002df    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_MENU_3   0x0002e2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                LOOP_MENU   0x0002eb    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           CURSOR_UP_MENU   0x0002fa    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         CURSOR_DOWN_MENU   0x000300    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                EXIT_MENU   0x000306    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+               ENTER_MENU   0x00030b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   LOOP_1   0x000310    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+ ROTATE_ACTION_MENU_FLAGS   0x000315    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          END_MENU_ACTION   0x000317    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           SWITCH_SUBMENU   0x00031d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                  CHECK_2   0x000324    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             SKIP_CHECK_2   0x00032b    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+    CORRECT_INDEX_SUBMENU   0x00033e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          PRESSING_DOWN_2   0x000344    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+  CORRECT_INDEX_SUBMENU_2   0x00034c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_SUBMENU_2   0x000352    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+SKIP_CORRECT_INDEX_SUBMENU_3   0x000355    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             LOOP_SUBMENU   0x00035e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+        CURSOR_UP_SUBMENU   0x00036d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      CURSOR_DOWN_SUBMENU   0x000374    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             EXIT_SUBMENU   0x00037a    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+            ENTER_SUBMENU   0x00037c    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+               END_ACTION   0x00037e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+   STRING_ACTION_COMPLETE   0x00037f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+      OUT_ACTION_COMPLETE   0x000386    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          _MICROMENU_035D   0x000389    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                 ZASTAVKA   0x00038b    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             FIRST_STRING   0x00038d    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+         OUT_FIRST_STRING   0x000394    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+              NEXT_STRING   0x000397    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          OUT_NEXT_STRING   0x00039e    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           DEBOUNCE_DELAY   0x00039f    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+               LOOP_DELAY   0x0003a2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+          _MICROMENU_037C   0x0003a8    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                    STROB   0x0003ac    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+       _LCD_LIB_CODE_0006   0x0003b2    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+          SEND_LCD_SYMBOL   0x0003b4    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+         SEND_LCD_COMMAND   0x0003bc    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+            LCD_LINE_INIT   0x0003c6    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                 LCD_INIT   0x0003cb    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                DELAY_4MS   0x0003eb    program     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+       _LCD_LIB_CODE_0043   0x0003ef    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+       _LCD_LIB_CODE_0045   0x0003f1    program     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
                INDEX_MENU   0x00000c       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
             INDEX_SUBMENU   0x00000d       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-           SYMBOL_POINTER   0x00000e       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-             MENU_COUNTER   0x00000f       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   TEMP_1   0x000010       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   TEMP_2   0x000011       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   TEMP_3   0x000012       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
-                   W_TEMP   0x000013       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-              STATUS_TEMP   0x000014       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-                    FLAGS   0x000015       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-                   OFFSET   0x000016       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-               KNOWN_ZERO   0x000017       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
-                   TEMP_1   0x000018       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-                   TEMP_2   0x000019       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
-                   SYMBOL   0x00001a       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+           NUM_OF_SUBMENU   0x00000e       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+           SYMBOL_POINTER   0x00000f       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+             MENU_COUNTER   0x000010       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   TEMP_1   0x000011       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   TEMP_2   0x000012       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   TEMP_3   0x000013       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\MicroMenu_Lib.asm
+                   W_TEMP   0x000014       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+              STATUS_TEMP   0x000015       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+                    FLAGS   0x000016       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+                   OFFSET   0x000017       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+               KNOWN_ZERO   0x000018       data     extern D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\Main.asm
+                   TEMP_1   0x000019       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                   TEMP_2   0x00001a       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
+                   SYMBOL   0x00001b       data     static D:\Docs\Git\PIC12-16_asm_projects\MicroMenu_Lib+HD44780\HD44780_Lib.asm
 
 

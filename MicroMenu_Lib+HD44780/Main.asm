@@ -11,7 +11,7 @@ offset		res	1
 
 	if	USE_SHORT_MOD_PCL
 known_zero	res	1
-global	known_zero
+	global	known_zero
 	endif
 
 	global	flags,offset
@@ -27,7 +27,7 @@ ISR				code	4h				; Вектор прерывания
 Interrupt_Heandler
 	push								; Сохраним контекст
 
-if	USE_RBIE
+	if	USE_RBIE
 	bcf		INTCON,RBIF					; Сбросим флаг вызваного прерывания
 	movfw	PORTB						
 	iorlw	b'00001111'					; Установим незначущие разряды
@@ -43,7 +43,7 @@ if	USE_RBIE
 	bsf		Press_ENTER
 	btfss	EXIT
 	bsf		Press_EXIT
-endif
+	endif
 
 End_Interrupt_Heandler
 	pop									; Восстановим контекст	
@@ -58,24 +58,27 @@ Init
 	banksel TMR0
 	call	LCD_Init					; Инициалзация самого дисплея
 	clrf	flags
-if	USE_RBIE
+	
+	if	USE_RBIE
 	movlw	(1<<RBIE)|(1<<GIE)
 	iorwf	INTCON
-endif
+	endif
 	goto	Zastavka					; Выведем на экран заставку
 Main
-if	USE_RBIE
+	if	USE_RBIE
 	sleep
 	nop
 	movfw	flags						
 	andlw	b'00001111'					; Занулим незначущие разряды
 	btfsc	STATUS,Z
-else
+	
+	else
 	movfw	PORTB						
 	iorlw	b'00001111'					; Установим незначущие разряды
 	addlw	.1
 	btfsc	STATUS,Z
-endif
+	endif
+
 	goto	Main						; Если ни одна кнопка не нажата, просто зациклимся
 	goto	Menu_heandler				; Иначе входим в обработчик меню
 

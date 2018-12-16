@@ -5,7 +5,7 @@ temp_1	res	1
 temp_2	res	1
 symbol	res	1							; Holds value to send to LCD module
 
-global	Send_LCD_Symbol,Send_LCD_Command,LCD_Line_Init,LCD_Init,Delay_4ms
+	global	Send_LCD_Symbol,Send_LCD_Command,LCD_Line_Init,LCD_Init,Delay_4ms
 
 LCD_Lib_code	code
 

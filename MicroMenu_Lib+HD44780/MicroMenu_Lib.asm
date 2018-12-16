@@ -2,19 +2,19 @@
 	include	HD44780_Lib.h
 
 MicroMenu_Lib_udata	udata_shr
-index_menu		res	1
-index_submenu	res	1
-symbol_pointer	res	1
-menu_counter	res	1
+index_menu		res	1					; Индекс текущего пункта меню
+index_submenu	res	1					; Индекс текущего пункта подменю
+num_of_submenu	res	1					; Количество пунктов в текущем меню
+symbol_pointer	res	1					; Указатель на выводимый символ
+menu_counter	res	1					; Счетчик опросов кнопок в меню
 temp_1			res	1
 temp_2			res	1
 temp_3			res	1
-;num_of_submenu	res	1
 
-extern	flags,offset
+	extern	flags,offset
 
 	if	USE_SHORT_MOD_PCL				; Если используется "укороченная" версия макроса модификации PCL
-extern	known_zero
+	extern	known_zero
 	endif
 
 	global	Menu_heandler,Zastavka
@@ -50,76 +50,7 @@ Switch_Action							; Выполним действие, на котором находится курсор
 ;===================================================================================================
 	Create_Submenu_Names				; Макрос, создает имена всех подпунктов меню
 ;===================================================================================================
-if	USE_MENU_ACTION
-Menu_Action
-	goto_Menu_action
-;===================================================================================================
-Menu_1_action							; Выполняем действие 1 пункта меню
-;	nop
-	goto	End_Menu_Action
-Menu_2_action							; Выполняем действие 2 пункта меню
-;	nop
-	goto	End_Menu_Action
-Menu_3_action							; Выполняем действие 3 пункта меню
-;	nop
-	goto	End_Menu_Action
-Menu_4_action							; Выполняем действие 4 пункта меню
-;	nop
-	goto	End_Menu_Action
-Menu_5_action							; Выполняем действие 5 пункта меню
-;	nop
-	goto	End_Menu_Action
-endif
-;===================================================================================================
-Menu_1_Submenu_1_action					; Выполняем действие 1 подпункта 1 пункта
-;	nop
-	goto	End_Action
-Menu_1_Submenu_2_action					; Выполняем действие 2 подпункта 1 пункта
-;	nop
-	goto	End_Action
-Menu_1_Submenu_3_action					; Выполняем действие 3 подпункта 1 пункта
-;	nop
-	goto	End_Action
-;---------------------------------------------------------------------------------------------------
-Menu_2_Submenu_1_action					; Выполняем действие 1 подпункта 2 пункта
-;	nop
-	goto	End_Action
-Menu_2_Submenu_2_action					; Выполняем действие 2 подпункта 2 пункта
-;	nop
-	goto	End_Action
-Menu_2_Submenu_3_action					; Выполняем действие 3 подпункта 2 пункта
-;	nop
-	goto	End_Action
-;---------------------------------------------------------------------------------------------------
-Menu_3_Submenu_1_action					; Выполняем действие 1 подпункта 3 пункта
-;	nop
-	goto	End_Action
-Menu_3_Submenu_2_action					; Выполняем действие 2 подпункта 3 пункта
-;	nop
-	goto	End_Action
-Menu_3_Submenu_3_action					; Выполняем действие 3 подпункта 3 пункта
-;	nop
-	goto	End_Action
-;---------------------------------------------------------------------------------------------------
-Menu_4_Submenu_1_action					; Выполняем действие 1 подпункта 4 пункта
-;	nop
-	goto	End_Action
-Menu_4_Submenu_2_action					; Выполняем действие 2 подпункта 4 пункта
-;	nop
-	goto	End_Action
-Menu_4_Submenu_3_action					; Выполняем действие 3 подпункта 4 пункта
-;	nop
-	goto	End_Action								
-;---------------------------------------------------------------------------------------------------
-Menu_5_Submenu_1_action					; Выполняем действие 1 подпункта 5 пункта
-;	nop
-	goto	End_Action
-Menu_5_Submenu_2_action					; Выполняем действие 2 подпункта 5 пункта
-;	nop
-	goto	End_Action
-Menu_5_Submenu_3_action					; Выполняем действие 3 подпункта 5 пункта
-;	nop
-	goto	End_Action			
+include	Menu_Action.asm
 ;===================================================================================================
 CLR_Display_routine						; Подпрограмма очистки дисплея
 	movlw   CLR_DISP
@@ -127,10 +58,16 @@ CLR_Display_routine						; Подпрограмма очистки дисплея
 	call	Delay_4ms					; Обязательная задержка после очистки дисплея !!!
 	return
 ;===================================================================================================
+Draw_Cursor_Routine						; Процедура рисования курсора. В w лежит адрес
+	call	Send_LCD_Command
+	movlw	'<'							; Нарисуем там курсор
+	call	Send_LCD_Symbol
+	return
+;===================================================================================================
 Second_String_routine					; Подпрограмма перевода указателя на 2-ю строку	
-if	USE_STATIC_CURSOR
-	Draw_Kursor	LAST_SYMBOL_FIRST_LINE	; Сперва нарисум курсор в конце 1-й строчки
-endif
+	if	USE_STATIC_CURSOR
+	Draw_Cursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строки
+	endif
 	movlw	SECOND_LINE					; Переводим указатель на 2-ю строку	
 	call	Send_LCD_Command
 	return								; И приступаем к отрисовке следующего пункта меню
@@ -145,7 +82,7 @@ String_Menu
 	call    Send_LCD_Symbol
 	incf	symbol_pointer	
 	goto    String_Menu
-;----------------------------------------------------------------------------------------------------------------------------
+;---------------------------------------------------------------------------------------------------
 Switch_Submenu_routine					; Подпрограмма вывода названия подпункта меню на дисплей
 	clrf	symbol_pointer
 String_Submenu
@@ -159,46 +96,41 @@ String_Submenu
 ;===================================================================================================
 Menu_heandler							; Обработчик меню
 	clrf	index_menu					; Была нажатая какая-то кнопка, очистим индекс пункта меню					
-
-if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
+	if	USE_MOVING_CURSOR & !USE_TOP_LAST_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
-endif
+	endif
 ;----------------------------------------------------------------------------------------------------------------------------
 Switch_Menu								; Поместим курсор на нужный пункт меню							
-
-if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
+	if	USE_MOVING_CURSOR & USE_TOP_LAST_CURSOR
 	movfw	index_menu
-	btfss	STATUS,Z
-	goto	Check_1		
+	bnz		Check_1
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
 	goto	Skip_Check_1
 Check_1
 	sublw	NUM_OF_MAIN_MENU_PUNKTS-1	; Сравниваем с количеством пунктов меню
-	btfss	STATUS,Z	
-	goto	Skip_Check_1	
+	bnz		Skip_Check_1	
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
 Skip_Check_1
-endif
+	endif
 
 	call	CLR_Display_routine			; Очистим дисплей перед самой перерисовкой пунктов меню, чтобы уменьшить моргание
-
-if	USE_MOVING_CURSOR
-	btfss	Press_UP
-	goto	Pressing_DOWN			
+	
+	if	USE_MOVING_CURSOR
+	btfss	Press_UP					; Чтобы двигать курсор, надо знать, какая кнопка была нажата
+	goto	Pressing_DOWN				; Была нажата кнопка UP		
 	call	Switch_Menu_routine			; Рисуем текущий пункт меню	
-	Draw_Kursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строчки
+	Draw_Cursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строчки
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_menu					; Берем следующий пункт
 	movfw	index_menu	
 	sublw	NUM_OF_MAIN_MENU_PUNKTS		; Сравниваем с количеством пунктов меню
-	btfsc	STATUS,Z
-	goto	Correct_index_menu			
+	bz		Correct_index_menu			
 	call	Switch_Menu_routine			; Рисуем пункт меню под текущим 
 	decf	index_menu					; Не забудем вернуть назад текущий пункт меню	
 	goto	Skip_Correct_index_menu_3
@@ -208,8 +140,7 @@ Correct_index_menu						; Достигли последнего пункта меню, следующим отображаем 
 	movlw	NUM_OF_MAIN_MENU_PUNKTS-1
 	movwf	index_menu	
 	goto	Skip_Correct_index_menu_3
-
-Pressing_DOWN
+Pressing_DOWN							; Была нажата кнопка DOWN	
 	decf	index_menu					; Берем предыдущий пункт меню
 	btfsc	index_menu,.7				; Проверяем на "<0"	простой проверкой 7 бита, максимальное количество пунктов меню ограничено 64
 	goto	Correct_index_menu_2
@@ -226,17 +157,16 @@ Correct_index_menu_2
 	clrf	index_menu
 Skip_Correct_index_menu_2
 	call	Switch_Menu_routine			; Рисуем текущий пункт меню под предыдущим 
-	Draw_Kursor	LAST_SYMBOL_SECOND_LINE	; Нарисум курсор в конце 2-й строчки
+	Draw_Cursor	LAST_SYMBOL_SECOND_LINE	; Нарисум курсор в конце 2-й строчки
 Skip_Correct_index_menu_3
-
-else
+	
+	else
 	call	Switch_Menu_routine			; Рисуем текущий пункт меню
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_menu					; Берем следующий пункт
 	movfw	index_menu	
 	sublw	NUM_OF_MAIN_MENU_PUNKTS		; Сравниваем с количеством пунктов меню
-	btfsc	STATUS,Z
-	goto	Correct_index_menu			
+	bz		Correct_index_menu			
 	call	Switch_Menu_routine			; Рисуем пункт меню под текущим 
 	decf	index_menu					; Не забудем вернуть назад текущий пункт меню	
 	goto	Skip_Correct_index_menu
@@ -246,24 +176,22 @@ Correct_index_menu						; Достигли последнего пункта меню, следующим отображаем 
 	movlw	NUM_OF_MAIN_MENU_PUNKTS-1
 	movwf	index_menu	
 Skip_Correct_index_menu
-endif
+	endif
 
 	call	Debounce_Delay				; Процедура антидребезга, вызывается при первом входе в меню, при нажатии кнопок "Вверх", "Вниз", выходе из подпункта меню
-
-if	USE_RBIE
+	if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания от кнопок
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
-endif
+	endif
 
 	movlw	EXIT_DELAY					; Заносим счетчик проходов опроса клавиш
 	movwf	menu_counter
 	clrf	temp_1
 	clrf	temp_2
 Loop_Menu								; Вычисляем нажатую клавишу
-
-if	USE_RBIE
+	if	USE_RBIE
 	btfsc	Press_UP
 	goto	Cursor_UP_menu				
 	btfsc	Press_DOWN
@@ -272,7 +200,8 @@ if	USE_RBIE
 	goto	ENTER_menu
 	btfsc	Press_EXIT
 	goto	EXIT_menu
-else
+	
+	else
 	btfss	UP
 	goto	Cursor_UP_menu				
 	btfss	DOWN
@@ -281,7 +210,7 @@ else
 	goto	ENTER_menu
 	btfss	EXIT
 	goto	EXIT_menu
-endif
+	endif
 ;-----------------------------------------------------------------										
 	decfsz	temp_1						; Ни одна клавиша не нажата						
 	goto	Loop_Menu					; Цикл ожидания нажатия в главном меню	
@@ -292,12 +221,11 @@ endif
 	goto	Zastavka					; Вышел таймаут нахождения в меню, выходим в заставку	
 ;-----------------------------------------------------------------
 Cursor_UP_menu							; Была нажата клавиша "Вверх"
-
-if	USE_MOVING_CURSOR	&	!USE_RBIE
+	if	USE_MOVING_CURSOR & !USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
-endif
+	endif
 
 	decf	index_menu					; Берем предыдущий пункт меню
 	btfss	index_menu,.7				; Проверяем на "<0"	простой проверкой 7 бита, максимальное количество пунктов меню ограничено 64
@@ -307,12 +235,11 @@ endif
 	goto	Switch_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
 Cursor_DOWN_menu						; Была нажата клавиша "Вниз"
-
-if	USE_MOVING_CURSOR	&	!USE_RBIE
+	if	USE_MOVING_CURSOR & !USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
-endif
+	endif
 
 	incf	index_menu					; Берем следущий пункт меню
 	movfw	index_menu
@@ -322,20 +249,20 @@ endif
 	goto	Switch_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
 EXIT_menu								; Была нажата клавиша "Выход"
-
-if	USE_RBIE
+	if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
-else
+	
+	else
 	call	Debounce_Delay	
-endif
+	endif
+
 	goto	Zastavka					; Выходим в заставку
 ;-----------------------------------------------------------------
 ENTER_menu								; Была нажата клавиша "Вход", заходим в текущий пункт меню
-
-if	USE_MENU_ACTION		
+	if	USE_MENU_ACTION		
 	movfw	index_menu					; Берем текущий пункт меню
 	movwf	temp_1						; Заносим в счетчик
 	incf	temp_1						; Учитываем, что нумерация начинается с 0
@@ -344,74 +271,66 @@ if	USE_MENU_ACTION
 Loop_1
 	decfsz	temp_1
 	goto	Rotate_action_menu_flags
-	btfsc	STATUS,C					; Флаг действия текущего пункта меню выдавлен в бит переноса, анализируем его
-	goto	Menu_Action					; У текущего пункта меню есть действие, выполняем его
+	bc		Menu_Action					; Флаг действия текущего пункта меню выдавлен в бит переноса, анализируем его. Если у текущего пункта меню есть действие, выполняем его
 	goto	End_Menu_Action
 Rotate_action_menu_flags
 	rrf		temp_2						; Перебор флагов действий всех пунктов меню
 	goto	Loop_1	
 End_Menu_Action
-endif
+	endif
 
-	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
+	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом пункте меню
+	movwf	num_of_submenu				; 1 раз занесем в перемунную, чтобы каждый раз не вызывать эту процедуру	
 	sublw	.0
-	bz		Switch_Menu					; Если 0, сразу на выход без прорисовки чего либо	
+	bz		Switch_Menu					; Если 0, сразу на выход без прорисовки чего либо
 	clrf	index_submenu				; Очистим индекс пункта подменю	
 
-if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
+	if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
-endif
-
+	endif
+;-----------------------------------------------------------------
 Switch_Submenu							; Поместим курсор на нужный подпункт нужного пункта
-
-if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
+	if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
 	movfw	index_submenu
-	btfss	STATUS,Z
-	goto	Check_2		
+	bnz		Check_2
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
 	goto	Skip_Check_2
 Check_2
-	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
-	movwf	temp_1	
-	decf	temp_1,	w					; Учитываем, что индекс подпункта начинается с 0
+	decf	num_of_submenu,w			; Получаем количество подпунктов в этом меню, учитываем, что индекс подпункта начинается с 0
 	subwf	index_submenu,w				; Сравниваем с количеством подпунктов меню
-	btfss	STATUS,Z	
-	goto	Skip_Check_2	
+	bnz		Skip_Check_2
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
 Skip_Check_2
-endif
+	endif
 
 	call	CLR_Display_routine			; Очистим дисплей перед самой перерисовкой подпунктов меню, чтобы уменьшить моргание
 
-if	USE_MOVING_CURSOR
+	if	USE_MOVING_CURSOR
 	btfss	Press_UP
 	goto	Pressing_DOWN_2			
 	call	Switch_Submenu_routine		; Рисуем текущий подпункт меню
-
-	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
+	movfw	num_of_submenu				; Получаем количество подпунктов в этом меню
 	sublw	.1
 	bz		Skip_Correct_index_submenu_3; Если 1, пропускаем прорисовку 2-й строки
-
-	Draw_Kursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строчки
+	Draw_Cursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строчки
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_submenu				; Берем следующий пункт
-	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню			
+	movfw	num_of_submenu				; Получаем количество подпунктов в этом меню
 	subwf	index_submenu,w				; Сравниваем с количеством подпунктов меню
-	btfsc	STATUS,Z
-	goto	Correct_index_submenu			
+	bz		Correct_index_submenu
 	call	Switch_Submenu_routine		; Рисуем подпункт меню под текущим 
 	decf	index_submenu				; Не забудем вернуть назад текущий пункт меню	
 	goto	Skip_Correct_index_submenu_3
 Correct_index_submenu					; Достигли последнего подпункта меню, следующим отображаем 1 подпункт
 	clrf	index_submenu
 	call	Switch_Submenu_routine
-	call	Num_of_Submenu_Table
+	movfw	num_of_submenu				; Получаем количество подпунктов в этом меню
 	movwf	index_submenu
 	decf	index_submenu				; Учитываем, что индекс подпункта начинается с 0	
 	goto	Skip_Correct_index_submenu_3
@@ -426,7 +345,7 @@ Pressing_DOWN_2
 	movfw	index_submenu	
 	goto	Skip_Correct_index_submenu_2
 Correct_index_submenu_2
-	call	Num_of_Submenu_Table		; Стало "<0", возвращаем количество пунктов в даном подменю	
+	movfw	num_of_submenu				; Стало "<0", возвращаем количество пунктов в даном подменю	
 	movwf	index_submenu				; Сделаем текущим последний пункт подменю
 	decf	index_submenu				; Учитываем, что индекс пункта подменю на 1 меньше его порядкового номера
 	call	Switch_Submenu_routine		; Рисуем предыдущий пункт меню
@@ -434,50 +353,46 @@ Correct_index_submenu_2
 	clrf	index_submenu
 Skip_Correct_index_submenu_2
 	call	Switch_Submenu_routine		; Рисуем текущий пункт меню под предыдущим 
-	Draw_Kursor	LAST_SYMBOL_SECOND_LINE	; Нарисум курсор в конце 2-й строчки
+	Draw_Cursor	LAST_SYMBOL_SECOND_LINE	; Нарисум курсор в конце 2-й строчки
 Skip_Correct_index_submenu_3
 
-else
+	else
 	call	Switch_Submenu_routine		; Рисуем текущий подпункт меню
 
-	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
+	movfw	num_of_submenu				; Получаем количество подпунктов в этом меню
 	sublw	.1
 	bz		Skip_Correct_index_submenu	; Если 1, пропускаем прорисовку 2-й строки
-
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_submenu
-	call	Num_of_Submenu_Table			
+	movfw	num_of_submenu	
 	subwf	index_submenu,w				; Сравниваем с количеством подпунктов меню
-	btfsc	STATUS,Z
-	goto	Correct_index_submenu
+	bz		Correct_index_submenu
 	call	Switch_Submenu_routine		; Рисуем подпункт меню под текущим 
 	decf	index_submenu				; Не забудем вернуть назад текущий подпункт меню
 	goto	Skip_Correct_index_submenu	
 Correct_index_submenu					; Достигли последнего подпункта меню, следующим отображаем 1 подпункт
 	clrf	index_submenu	
 	call	Switch_Submenu_routine
-	call	Num_of_Submenu_Table
+	movfw	num_of_submenu
 	movwf	index_submenu	
 	decf	index_submenu				; Учитываем, что индекс подпункта начинается с 0
 Skip_Correct_index_submenu
-endif
+	endif
 
 	call	Debounce_Delay				; Процедура антидребезга, вызывается при первом входе в подпункт меню, при нажатии кнопок "Вверх", "Вниз", выходе из действия подпункта меню
-
-if	USE_RBIE
+	if	USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags	
 	bcf		INTCON,RBIF					; Сбросим флаг возможно вызваного прерывания
 	bsf		INTCON,RBIE					; И разрешим прерывания от кнопок
-endif
+	endif
 
 	movlw	EXIT_DELAY					; Заносим счетчик проходов опроса клавиш
 	movwf	menu_counter
 	clrf	temp_1
 	clrf	temp_2
 Loop_Submenu							; Мы зашли в пункт меню, ждем нажатия следующей кнопки
-
-if	USE_RBIE
+	if	USE_RBIE
 	btfsc	Press_UP
 	goto	Cursor_UP_submenu				
 	btfsc	Press_DOWN
@@ -486,7 +401,8 @@ if	USE_RBIE
 	goto	ENTER_submenu
 	btfsc	Press_EXIT
 	goto	EXIT_submenu
-else
+	
+	else
 	btfss	UP
 	goto	Cursor_UP_submenu				
 	btfss	DOWN
@@ -495,7 +411,7 @@ else
 	goto	ENTER_submenu
 	btfss	EXIT
 	goto	EXIT_submenu
-endif
+	endif
 ;-----------------------------------------------------------------
 	decfsz	temp_1						; Ни одна клавиша не нажата	
 	goto	Loop_Submenu				; Цикл ожидания нажатия в пункте меню
@@ -506,31 +422,29 @@ endif
 	goto	Switch_Menu					; Вышел таймаут нахождения в подменю, выходим в предыдущий пункт меню
 ;-----------------------------------------------------------------
 Cursor_UP_submenu						; Была нажата клавиша "Вверх"
-
-if	USE_MOVING_CURSOR	&	!USE_RBIE
+	if	USE_MOVING_CURSOR & !USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
-endif
+	endif
 
 	decf	index_submenu				; Берем предыдущий пункт подменю
 	btfss	index_submenu,.7			; Проверяем на "<0"	простой проверкой 7 бита, максимальное количество подпунктов меню ограничено 64
 	goto	Switch_Submenu	
-	call	Num_of_Submenu_Table		; Стало "<0", возвращаем количество пунктов в даном подменю	
+	movfw	num_of_submenu				; Стало "<0", возвращаем количество пунктов в даном подменю	
 	movwf	index_submenu				; Сделаем текущим последний пункт подменю
 	decf	index_submenu				; Учитываем, что индекс пункта подменю на 1 меньше его порядкового номера
 	goto	Switch_Submenu				; Отрисовываем новый текущий подпункт меню	
 ;-----------------------------------------------------------------
 Cursor_DOWN_submenu						; Была нажата клавиша "Вниз"
-
-if	USE_MOVING_CURSOR	&	!USE_RBIE
+	if	USE_MOVING_CURSOR & !USE_RBIE
 	movlw	b'11110000'					; Сбросим признак нажатия для всех кнопок					
 	andwf	flags						
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
-endif
+	endif
 
 	incf	index_submenu				; Берем следущий пункт подменю
-	call	Num_of_Submenu_Table		; Возвращаем количество пунктов в даном подменю	
+	movfw	num_of_submenu				; Возвращаем количество пунктов в даном подменю	
 	subwf	index_submenu,w				; Достигли последнего ?	
 	btfsc	STATUS,Z
 	clrf	index_submenu				; Если да, делаем текущим первый подпункт меню		
@@ -587,12 +501,6 @@ Next_String
 	goto    Next_String
 Out_Next_String
 	goto	Main
-;===================================================================================================
-Draw_Kursor_Routine						; Процедура рисования курсора. В w лежит адрес
-	call	Send_LCD_Command
-	movlw	'<'							; Нарисуем там курсор
-	call	Send_LCD_Symbol
-	return
 ;===================================================================================================
 Debounce_Delay							; Подпрограмма антидребезговой задержки
 	movlw	.3							; Количество проходов подбирается экспериментальным путем

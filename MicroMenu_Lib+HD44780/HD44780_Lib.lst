@@ -1,12 +1,11 @@
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  1
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00001         INCLUDE HD44780_LIB.H                           ; подключаем LCD header 
-Warning[205]: Found directive in column 1. (INCLUDE)
-                      00001 INCLUDE HARDWARE_PROFILE.INC
+                      00001         INCLUDE HARDWARE_PROFILE.INC
                       00001         INCLUDE P16F84.INC
                       00001         LIST
                       00002 
@@ -19,83 +18,80 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00206         LIST
                       00002         LIST P=16F84
                       00002 
-  00000001            00003 Y                               EQU             1                               ; YES
-  00000000            00004 N                               EQU             0                               ; NO
-                      00005 
-  00000001            00006 USE_4_BIT_MODE  EQU             Y                               ; YES/NO
-  00000000            00007 USE_HIGH_NIBLE  EQU             N                               ; YES/NO
-  00000000            00008 USE_ONE_PORT    EQU             N                               ; YES/NO
-  00000001            00009 ONLY_WRITE              EQU             Y                               ; YES/NO
+  00000001            00003 USE_4_BIT_MODE  EQU             1                               ; YES/NO
+  00000000            00004 USE_HIGH_NIBLE  EQU             0                               ; YES/NO
+  00000000            00005 USE_ONE_PORT    EQU             0                               ; YES/NO
+  00000001            00006 ONLY_WRITE              EQU             1                               ; YES/NO
+                      00007 
+  00000006            00008 LCD_DATA                EQU             PORTB                   ; Описываем порт линий данных
+  00000086            00009 LCD_DATA_TRIS   EQU             TRISB
                       00010 
-  00000006            00011 LCD_DATA                EQU             PORTB                   ; Описываем порт линий данных
-  00000086            00012 LCD_DATA_TRIS   EQU             TRISB
-                      00013 
-                      00014         IF      (USE_4_BIT_MODE && USE_ONE_PORT); ; Если используем один порт для данных и линий управле
+                      00011         IF      (USE_4_BIT_MODE && USE_ONE_PORT); ; Если используем один порт для данных и линий управле
                             ниЯ
+                      00012 
+                      00013 LCD_CNTL                EQU             LCD_DATA                ; то так и опишем
+                      00014 LCD_CNTL_TRIS   EQU             LCD_DATA_TRIS
                       00015 
-                      00016 LCD_CNTL                EQU             LCD_DATA                ; то так и опишем
-                      00017 LCD_CNTL_TRIS   EQU             LCD_DATA_TRIS
-                      00018 
-                      00019         ELSE
-                      00020 
-  00000005            00021 LCD_CNTL                EQU             PORTA                   ; Иначе зададим любой другой
-  00000085            00022 LCD_CNTL_TRIS   EQU             TRISA
-                      00023         ENDIF
-                      00024         
-                      00025         IF      (USE_4_BIT_MODE && USE_ONE_PORT && USE_HIGH_NIBLE && ONLY_WRITE)
-                      00026 E                               EQU             2
-                      00027 RS                              EQU             3
-                      00028 CNTL_TRIS_MASK  EQU             B'11110011'             ; Маска настройки линий управлениЯ
-                      00029         ENDIF
-                      00030 
-                      00031         IF      (USE_4_BIT_MODE && USE_ONE_PORT && USE_HIGH_NIBLE && !ONLY_WRITE)
-                      00032 E                               EQU             1
-                      00033 RW                              EQU             2
-                      00034 RS                              EQU             3
-                      00035 CNTL_TRIS_MASK  EQU             B'11110001'             ; Маска настройки линий управлениЯ
-                      00036         ENDIF   
-                      00037 
-                      00038         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && ONLY_WRITE)
-                      00039 E                               EQU             4
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  2
+                      00016         ELSE
+                      00017 
+  00000005            00018 LCD_CNTL                EQU             PORTA                   ; Иначе зададим любой другой
+  00000085            00019 LCD_CNTL_TRIS   EQU             TRISA
+                      00020         ENDIF
+                      00021         
+                      00022         IF      (USE_4_BIT_MODE && USE_ONE_PORT && USE_HIGH_NIBLE && ONLY_WRITE)
+                      00023 E                               EQU             2
+                      00024 RS                              EQU             3
+                      00025 CNTL_TRIS_MASK  EQU             B'11110011'             ; Маска настройки линий управлениЯ
+                      00026         ENDIF
+                      00027 
+                      00028         IF      (USE_4_BIT_MODE && USE_ONE_PORT && USE_HIGH_NIBLE && !ONLY_WRITE)
+                      00029 E                               EQU             1
+                      00030 RW                              EQU             2
+                      00031 RS                              EQU             3
+                      00032 CNTL_TRIS_MASK  EQU             B'11110001'             ; Маска настройки линий управлениЯ
+                      00033         ENDIF   
+                      00034 
+                      00035         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && ONLY_WRITE)
+                      00036 E                               EQU             4
+                      00037 RS                              EQU             5
+                      00038 CNTL_TRIS_MASK  EQU             B'11001111'             ; Маска настройки линий управлениЯ
+                      00039         ENDIF   
+                      00040 
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00040 RS                              EQU             5
-                      00041 CNTL_TRIS_MASK  EQU             B'11001111'             ; Маска настройки линий управлениЯ
-                      00042         ENDIF   
-                      00043 
-                      00044         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && !ONLY_WRITE)
-                      00045 E                               EQU             4
-                      00046 RW                              EQU             5
-                      00047 RS                              EQU             6
-                      00048 CNTL_TRIS_MASK  EQU             B'10001111'             ; Маска настройки линий управлениЯ
-                      00049 
-                      00050         ELSE    ; Иначе присваиваем контрольным линиям любой другой порт и вибираем линии их по своему у
+                      00041         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && !ONLY_WRITE)
+                      00042 E                               EQU             4
+                      00043 RW                              EQU             5
+                      00044 RS                              EQU             6
+                      00045 CNTL_TRIS_MASK  EQU             B'10001111'             ; Маска настройки линий управлениЯ
+                      00046 
+                      00047         ELSE    ; Иначе присваиваем контрольным линиям любой другой порт и вибираем линии их по своему у
                             смотрению
-                      00051         
-  00000001            00052 E                               EQU             1
-  00000003            00053 RS                              EQU             3
-  000000F5            00054 CNTL_TRIS_MASK  EQU             B'11110101'             ; Маска настройки линий управления
-                      00055         ENDIF
-                      00056 
-  0000000C            00057 DISP_ON                 EQU             B'00001100'             ; Display on
-  0000000E            00058 DISP_ON_C               EQU             B'00001110'             ; Display on, Cursor on
-  0000000F            00059 DISP_ON_B               EQU             B'00001111'             ; Display on, Cursor on, Blink cursor
-  00000008            00060 DISP_OFF                EQU             B'00001000'             ; Display off
-  00000001            00061 CLR_DISP                EQU             B'00000001'             ; Clear the Display
-  00000006            00062 ENTRY_INC               EQU             B'00000110'             ; автоинкремент адреса, нет сдвига 
-  00000007            00063 ENTRY_INC_S             EQU             B'00000111'             ; автоинкремент адреса, есть сдвиг
-  00000004            00064 ENTRY_DEC               EQU             B'00000100'             ; автоинкремент адреса, нет сдвига 
-  00000005            00065 ENTRY_DEC_S             EQU             B'00000101'             ;
-  00000080            00066 DD_RAM_ADDR             EQU             B'10000000'             ; Least Significant 7-bit are for addres
+                      00048         
+  00000001            00049 E                               EQU             1
+  00000003            00050 RS                              EQU             3
+  000000F5            00051 CNTL_TRIS_MASK  EQU             B'11110101'             ; Маска настройки линий управления
+                      00052         ENDIF
+                      00053 
+  0000000C            00054 DISP_ON                 EQU             B'00001100'             ; Display on
+  0000000E            00055 DISP_ON_C               EQU             B'00001110'             ; Display on, Cursor on
+  0000000F            00056 DISP_ON_B               EQU             B'00001111'             ; Display on, Cursor on, Blink cursor
+  00000008            00057 DISP_OFF                EQU             B'00001000'             ; Display off
+  00000001            00058 CLR_DISP                EQU             B'00000001'             ; Clear the Display
+  00000006            00059 ENTRY_INC               EQU             B'00000110'             ; автоинкремент адреса, нет сдвига 
+  00000007            00060 ENTRY_INC_S             EQU             B'00000111'             ; автоинкремент адреса, есть сдвиг
+  00000004            00061 ENTRY_DEC               EQU             B'00000100'             ; автоинкремент адреса, нет сдвига 
+  00000005            00062 ENTRY_DEC_S             EQU             B'00000101'             ;
+  00000080            00063 DD_RAM_ADDR             EQU             B'10000000'             ; Least Significant 7-bit are for addres
                             s
-  00000080            00067 DD_RAM_UL               EQU             B'10000000'             ; Upper Left coner of the Display
-  000000C0            00068 SECOND_LINE             EQU             B'11000000'             ; Move cursor to second line
-  0000008F            00069 LAST_SYMBOL_FIRST_LINE  EQU     B'10001111'     ; Установим курсор на последний символ 1-й строки
-  000000CF            00070 LAST_SYMBOL_SECOND_LINE EQU     B'11001111'     ; Установим курсор на последний символ 2-й строки       
+  00000080            00064 DD_RAM_UL               EQU             B'10000000'             ; Upper Left coner of the Display
+  000000C0            00065 SECOND_LINE             EQU             B'11000000'             ; Move cursor to second line
+  0000008F            00066 LAST_SYMBOL_FIRST_LINE  EQU     B'10001111'     ; Установим курсор на последний символ 1-й строки
+  000000CF            00067 LAST_SYMBOL_SECOND_LINE EQU     B'11001111'     ; Установим курсор на последний символ 2-й строки       
                                                             
                       00002                                 
                       00003 LCD_LIB_UDATA   UDATA_SHR
@@ -104,8 +100,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0002                  00006 SYMBOL  RES     1                                                       ; Holds value to send to LCD mod
                             ule
                       00007 
-Warning[205]: Found directive in column 1. (GLOBAL)
-  0000                00008 GLOBAL  SEND_LCD_SYMBOL,SEND_LCD_COMMAND,LCD_LINE_INIT,LCD_INIT,DELAY_4MS
+  0000                00008         GLOBAL  SEND_LCD_SYMBOL,SEND_LCD_COMMAND,LCD_LINE_INIT,LCD_INIT,DELAY_4MS
                       00009 
                       00010 LCD_LIB_CODE    CODE
                       00011 
@@ -116,17 +111,17 @@ Warning[205]: Found directive in column 1. (GLOBAL)
 0003   301E           00016         MOVLW   .30                                                     
 0004   00??           00017         MOVWF   TEMP_1          
 Message[305]: Using default destination of 1 (file).
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0005   0B??           00018         DECFSZ  TEMP_1
 0006   2???           00019         GOTO    $-1
 0007   0008           00020         RETURN
                       00021 
 0008                  00022 SEND_LCD_SYMBOL
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00023         IF      (!USE_4_BIT_MODE)       
                       00024         MOVWF   LCD_DATA
                       00025         CALL    STROB
@@ -175,17 +170,17 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0013   0086           00067         MOVWF   LCD_DATA
 0014   2???           00068         CALL    STROB
 0015   08??           00069         MOVFW   SYMBOL
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0016   0086           00070         MOVWF   LCD_DATA
 0017   2???           00071         CALL    STROB
                       00072         ENDIF
                       00073 
 0018   1585           00074         BSF     LCD_CNTL,RS                                     ; Теперь выводим не команды а символы на
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                              дисплей, поэтому поднимаем RS
 0019   0008           00075         RETURN
                       00076 
@@ -234,17 +229,17 @@ Message[305]: Using default destination of 1 (file).
                             к надо (DL=1)
 Message[305]: Using default destination of 1 (file).
 002B   0486           00110         IORWF   LCD_DATA
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 002C   2???           00111         CALL    STROB   
                       00112 
                       00113         ELSE
                       00114         MOVLW   B'00110000'                                     ; При инициализации сперва выставим 8-bi
                             t шину, так надо (DL=1)
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00115         IORWF   LCD_DATA
                       00116         CALL    STROB
                       00117         CALL    DELAY_4MS                                       ; Обязательная задержка !!!
@@ -293,17 +288,17 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00151 ; Тепрь шлем все команды 1 байтом, команда Send_LCD_Symbol при необходимости сама разьобет на ниблы и от
                             правит в порт LCD_DATA
                       00152 ; ВНИМАНИЕ !!! Hitachi LM032L (находиться в составе PICDEM 2 PLUS) имеет особенность в порядке следовани
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  6
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                             я команд при инициализации
                       00153 ; Этот порядок ни в коем случае нельза нарушать !!!
                       00154 
 0036   300C           00155         MOVLW   DISP_ON                                         ; Обязательно сперва включаем дисплей
 0037   2???           00156         CALL    SEND_LCD_SYMBOL
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0038   3006           00157         MOVLW   ENTRY_INC                                       ; Автоинкремент адреса, нет сдвига
 0039   2???           00158         CALL    SEND_LCD_SYMBOL
 003A   3001           00159         MOVLW   CLR_DISP                                        ; В конце очищаем дисплей и устанавливае
@@ -328,7 +323,7 @@ Message[305]: Using default destination of 1 (file).
 0046   0008           00173         RETURN
                       00174 
                       00175         END
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  7
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  7
 
 
 SYMBOL TABLE
@@ -373,7 +368,6 @@ LCD_DATA                          00000006
 LCD_DATA_TRIS                     00000086
 LCD_INIT                          0000001F
 LCD_LINE_INIT                     0000001A
-N                                 00000000
 NOT_PD                            00000003
 NOT_RBPU                          00000007
 NOT_TO                            00000004
@@ -387,13 +381,13 @@ PS0                               00000000
 PS1                               00000001
 PS2                               00000002
 PSA                               00000003
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  8
+RA0                               00000000
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  8
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-RA0                               00000000
 RA1                               00000001
 RA2                               00000002
 RA3                               00000003
@@ -446,16 +440,15 @@ USE_4_BIT_MODE                    00000001
 USE_HIGH_NIBLE                    00000000
 USE_ONE_PORT                      00000000
 W                                 00000000
-MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  10:46:08         PAGE  9
+WR                                00000001
+MPASM  5.51                   HD44780_LIB.ASM   12-16-2018  15:27:01         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-WR                                00000001
 WREN                              00000002
 WRERR                             00000003
-Y                                 00000001
 Z                                 00000002
 _CONFIG                           00002007
 _CP_OFF                           00003FFF
@@ -484,7 +477,7 @@ _XT_OSC                           00003FFD
 __16F84                           00000001
 
 Errors   :     0
-Warnings :     2 reported,     0 suppressed
+Warnings :     0 reported,     0 suppressed
 Messages :    10 reported,     0 suppressed
 
 
