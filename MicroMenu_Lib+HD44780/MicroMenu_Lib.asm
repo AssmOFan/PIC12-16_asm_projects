@@ -9,6 +9,7 @@ menu_counter	res	1
 temp_1			res	1
 temp_2			res	1
 temp_3			res	1
+;num_of_submenu	res	1
 
 extern	flags,offset
 
@@ -128,10 +129,7 @@ CLR_Display_routine						; Подпрограмма очистки дисплея
 ;===================================================================================================
 Second_String_routine					; Подпрограмма перевода указателя на 2-ю строку	
 if	USE_STATIC_CURSOR
-	movlw	b'10001111'					; Установим курсор на последний символ 1-й строки
-	call	Send_LCD_Command
-	movlw	'<'							; И нарисуем там указатель текущего пункта меню
-	call	Send_LCD_Symbol
+	Draw_Kursor	LAST_SYMBOL_FIRST_LINE	; Сперва нарисум курсор в конце 1-й строчки
 endif
 	movlw	SECOND_LINE					; Переводим указатель на 2-ю строку	
 	call	Send_LCD_Command
@@ -167,7 +165,7 @@ if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
 	andwf	flags						
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
 endif
-
+;----------------------------------------------------------------------------------------------------------------------------
 Switch_Menu								; Поместим курсор на нужный пункт меню							
 
 if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
@@ -194,10 +192,7 @@ if	USE_MOVING_CURSOR
 	btfss	Press_UP
 	goto	Pressing_DOWN			
 	call	Switch_Menu_routine			; Рисуем текущий пункт меню	
-	movlw	b'10001111'					; Установим курсор на последний символ 1-й строки	
-	call	Send_LCD_Command
-	movlw	'<'							; И нарисуем там указатель текущего пункта меню
-	call	Send_LCD_Symbol
+	Draw_Kursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строчки
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_menu					; Берем следующий пункт
 	movfw	index_menu	
@@ -231,10 +226,7 @@ Correct_index_menu_2
 	clrf	index_menu
 Skip_Correct_index_menu_2
 	call	Switch_Menu_routine			; Рисуем текущий пункт меню под предыдущим 
-	movlw	b'11001111'					; Установим курсор на последний символ 2-й строки
-	call	Send_LCD_Command
-	movlw	'<'							; И нарисуем там указатель текущего пункта меню
-	call	Send_LCD_Symbol
+	Draw_Kursor	LAST_SYMBOL_SECOND_LINE	; Нарисум курсор в конце 2-й строчки
 Skip_Correct_index_menu_3
 
 else
@@ -341,7 +333,7 @@ else
 endif
 	goto	Zastavka					; Выходим в заставку
 ;-----------------------------------------------------------------
-ENTER_menu								; Была нажата клавиша "Вход"
+ENTER_menu								; Была нажата клавиша "Вход", заходим в текущий пункт меню
 
 if	USE_MENU_ACTION		
 	movfw	index_menu					; Берем текущий пункт меню
@@ -361,6 +353,9 @@ Rotate_action_menu_flags
 End_Menu_Action
 endif
 
+	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
+	sublw	.0
+	bz		Switch_Menu					; Если 0, сразу на выход без прорисовки чего либо	
 	clrf	index_submenu				; Очистим индекс пункта подменю	
 
 if	USE_MOVING_CURSOR	&	!USE_TOP_LAST_CURSOR
@@ -380,7 +375,7 @@ if	USE_MOVING_CURSOR	&	USE_TOP_LAST_CURSOR
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
 	goto	Skip_Check_2
 Check_2
-	call	Num_of_Submenu_Table			
+	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
 	movwf	temp_1	
 	decf	temp_1,	w					; Учитываем, что индекс подпункта начинается с 0
 	subwf	index_submenu,w				; Сравниваем с количеством подпунктов меню
@@ -397,14 +392,16 @@ endif
 if	USE_MOVING_CURSOR
 	btfss	Press_UP
 	goto	Pressing_DOWN_2			
-	call	Switch_Submenu_routine		; Рисуем текущий подпункт меню	
-	movlw	b'10001111'					; Установим курсор на последний символ 1-й строки	
-	call	Send_LCD_Command
-	movlw	'<'							; И нарисуем там указатель текущего пункта меню
-	call	Send_LCD_Symbol
+	call	Switch_Submenu_routine		; Рисуем текущий подпункт меню
+
+	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
+	sublw	.1
+	bz		Skip_Correct_index_submenu_3; Если 1, пропускаем прорисовку 2-й строки
+
+	Draw_Kursor	LAST_SYMBOL_FIRST_LINE	; Нарисум курсор в конце 1-й строчки
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_submenu				; Берем следующий пункт
-	call	Num_of_Submenu_Table			
+	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню			
 	subwf	index_submenu,w				; Сравниваем с количеством подпунктов меню
 	btfsc	STATUS,Z
 	goto	Correct_index_submenu			
@@ -437,14 +434,16 @@ Correct_index_submenu_2
 	clrf	index_submenu
 Skip_Correct_index_submenu_2
 	call	Switch_Submenu_routine		; Рисуем текущий пункт меню под предыдущим 
-	movlw	b'11001111'					; Установим курсор на последний символ 2-й строки
-	call	Send_LCD_Command
-	movlw	'<'							; И нарисуем там указатель текущего пункта меню
-	call	Send_LCD_Symbol
+	Draw_Kursor	LAST_SYMBOL_SECOND_LINE	; Нарисум курсор в конце 2-й строчки
 Skip_Correct_index_submenu_3
 
 else
-	call	Switch_Submenu_routine		; Рисуем текущий подпункт меню	
+	call	Switch_Submenu_routine		; Рисуем текущий подпункт меню
+
+	call	Num_of_Submenu_Table		; Получаем количество подпунктов в этом меню
+	sublw	.1
+	bz		Skip_Correct_index_submenu	; Если 1, пропускаем прорисовку 2-й строки
+
 	call	Second_String_routine		; Указатель на 2 строку
 	incf	index_submenu
 	call	Num_of_Submenu_Table			
@@ -587,7 +586,13 @@ Next_String
 	incf	symbol_pointer	
 	goto    Next_String
 Out_Next_String
-	goto	Main	
+	goto	Main
+;===================================================================================================
+Draw_Kursor_Routine						; Процедура рисования курсора. В w лежит адрес
+	call	Send_LCD_Command
+	movlw	'<'							; Нарисуем там курсор
+	call	Send_LCD_Symbol
+	return
 ;===================================================================================================
 Debounce_Delay							; Подпрограмма антидребезговой задержки
 	movlw	.3							; Количество проходов подбирается экспериментальным путем

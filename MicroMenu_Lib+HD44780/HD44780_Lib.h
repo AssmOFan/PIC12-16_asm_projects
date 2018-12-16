@@ -66,4 +66,5 @@ ENTRY_DEC_S		EQU		b'00000101'		;
 DD_RAM_ADDR		EQU		b'10000000'		; Least Significant 7-bit are for address
 DD_RAM_UL		EQU		b'10000000'		; Upper Left coner of the Display
 SECOND_LINE		EQU		b'11000000'		; Move cursor to second line
-					
+LAST_SYMBOL_FIRST_LINE	EQU	b'10001111'	; Установим курсор на последний символ 1-й строки
+LAST_SYMBOL_SECOND_LINE	EQU	b'11001111'	; Установим курсор на последний символ 2-й строки					

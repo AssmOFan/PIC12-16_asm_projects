@@ -4,7 +4,8 @@
 ; Ќа основе этих данных и выводитс€ информаци€ на дисплей/совершаютс€ действи€
 
 include	hardware_profile.inc
-include	Macro.h	
+include	Macro.h
+include	HD44780_Lib.h
 
 #define	USE_STATIC_CURSOR		0				; ¬сегда рисовать курсор в конце 1-й строки
 #define	USE_MOVING_CURSOR		1				; »спользовать перемещаемый курсор (повышает удобство использовани€ меню и размер прошивки)
@@ -23,9 +24,9 @@ endif
 
 #define	Press_UP				flags,0
 #define	Press_DOWN				flags,1
-#define	Press_EXIT				flags,2
-#define	Press_ENTER				flags,3	
-
+#define	Press_ENTER				flags,2
+#define	Press_EXIT				flags,3
+	
 #define	EXIT_DELAY				.20				;  оличество опросов кнопок, до автовыхода в предыдущий уровень (* 0,8 сек)
 
 #define	ZASTAVKA_FIRST_STRING	"  MicroMenuLib"
@@ -41,19 +42,19 @@ endif
 #define	MENU_NAME_4				"4.Menu_4"
 #define	MENU_NAME_5				"5.Menu_5"	
 
-#define	NUM_OF_SUBMENU_PUNKTS_1	.3				;  оличество подпунктов каждого пункта меню (в теории до 64, но больше 8 не провер€лось, пам€ти в контроллере не хватило)
+#define	NUM_OF_SUBMENU_PUNKTS_1	.0				;  оличество подпунктов каждого пункта меню (в теории до 64, но больше 8 не провер€лось, пам€ти в контроллере не хватило)
 												; Ќе забываем оформить обработчик дл€ каждого действи€ !!!
 #define	MENU_SUBMENU_NAME_1_1	"1.1.SubMenu"
 #define	MENU_SUBMENU_NAME_1_2	"1.2.SubMenu"
 #define	MENU_SUBMENU_NAME_1_3	"1.3.SubMenu"
 
-#define	NUM_OF_SUBMENU_PUNKTS_2	.3
+#define	NUM_OF_SUBMENU_PUNKTS_2	.1
 
 #define	MENU_SUBMENU_NAME_2_1	"2.1.SubMenu"
 #define	MENU_SUBMENU_NAME_2_2	"2.2.SubMenu"
 #define	MENU_SUBMENU_NAME_2_3	"2.3.SubMenu"
 				
-#define	NUM_OF_SUBMENU_PUNKTS_3	.3
+#define	NUM_OF_SUBMENU_PUNKTS_3	.2
 
 #define	MENU_SUBMENU_NAME_3_1	"3.1.SubMenu"
 #define	MENU_SUBMENU_NAME_3_2	"3.2.SubMenu"
@@ -263,3 +264,9 @@ goto_Menu_action	macro		; ћакрос, создает переходы на действи€ всех пунктов меню
 					endw
 					endm
 endif
+;================================================================================================================
+Draw_Kursor	macro	LAST_SYMBOL
+			movlw	LAST_SYMBOL
+			call	Draw_Kursor_Routine
+			endm
+						
