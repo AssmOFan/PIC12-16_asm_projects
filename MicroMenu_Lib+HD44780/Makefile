@@ -1,6 +1,6 @@
 # MPLAB IDE generated this makefile for use with GNU make.
 # Project: MicroMenu_Lib.mcp
-# Date: Thu May 18 18:31:37 2017
+# Date: Thu Dec 20 19:59:01 2018
 
 AS = MPASMWIN.exe
 CC = 
@@ -9,17 +9,17 @@ AR = mplib.exe
 RM = rm
 
 MicroMenu_Lib.cof : Main.o HD44780_Lib.o MicroMenu_Lib.o
-	$(CC) /p16F84 "Main.o" "HD44780_Lib.o" "MicroMenu_Lib.o" /z__MPLAB_BUILD=1 /o"MicroMenu_Lib.cof" /M"MicroMenu_Lib.map" /W
+	$(CC) /p16F84A "Main.o" "HD44780_Lib.o" "MicroMenu_Lib.o" /z__MPLAB_BUILD=1 /m"MicroMenu_Lib.map" /w /o"MicroMenu_Lib.cof"
 
-Main.o : Main.asm hardware_profile.inc C:/Program\ Files/Microchip/MPASM\ Suite/p16f84.inc Macro.h HD44780_Lib.h hardware_profile.inc C:/Program\ Files/Microchip/MPASM\ Suite/p16f84.inc MicroMenu_Lib.h hardware_profile.inc C:/Program\ Files/Microchip/MPASM\ Suite/p16f84.inc
-	$(AS) /q /p16F84 "Main.asm" /l"Main.lst" /e"Main.err" /o"Main.o"
+Main.o : Main.asm HARDWARE_PROFILE.INC P16F84.INC MICROMENU_LIB.H HARDWARE_PROFILE.INC P16F84.INC MACRO.H
+	$(AS) /q /p16F84A "Main.asm" /l"Main.lst" /e"Main.err" /o"Main.o" /c-
 
-HD44780_Lib.o : HD44780_Lib.asm HD44780_Lib.h hardware_profile.inc C:/Program\ Files/Microchip/MPASM\ Suite/p16f84.inc
-	$(AS) /q /p16F84 "HD44780_Lib.asm" /l"HD44780_Lib.lst" /e"HD44780_Lib.err" /o"HD44780_Lib.o"
+HD44780_Lib.o : HD44780_Lib.asm HD44780_LIB.H HARDWARE_PROFILE.INC P16F84.INC
+	$(AS) /q /p16F84A "HD44780_Lib.asm" /l"HD44780_Lib.lst" /e"HD44780_Lib.err" /o"HD44780_Lib.o" /c-
 
-MicroMenu_Lib.o : MicroMenu_Lib.asm MicroMenu_Lib.h hardware_profile.inc C:/Program\ Files/Microchip/MPASM\ Suite/p16f84.inc HD44780_Lib.h hardware_profile.inc C:/Program\ Files/Microchip/MPASM\ Suite/p16f84.inc
-	$(AS) /q /p16F84 "MicroMenu_Lib.asm" /l"MicroMenu_Lib.lst" /e"MicroMenu_Lib.err" /o"MicroMenu_Lib.o"
+MicroMenu_Lib.o : MicroMenu_Lib.asm MICROMENU_LIB.H HARDWARE_PROFILE.INC P16F84.INC MACRO.H HD44780_LIB.H HARDWARE_PROFILE.INC P16F84.INC MENU_ACTIONS.ASM
+	$(AS) /q /p16F84A "MicroMenu_Lib.asm" /l"MicroMenu_Lib.lst" /e"MicroMenu_Lib.err" /o"MicroMenu_Lib.o" /c-
 
 clean : 
-	$(CC) "Main.o" "Main.err" "Main.lst" "HD44780_Lib.o" "HD44780_Lib.err" "HD44780_Lib.lst" "MicroMenu_Lib.o" "MicroMenu_Lib.err" "MicroMenu_Lib.lst" "MicroMenu_Lib.cof" "MicroMenu_Lib.hex"
+	$(CC) "Main.o" "Main.err" "Main.lst" "HD44780_Lib.o" "HD44780_Lib.err" "HD44780_Lib.lst" "MicroMenu_Lib.o" "MicroMenu_Lib.err" "MicroMenu_Lib.lst" "MicroMenu_Lib.cof" "MicroMenu_Lib.hex" "MicroMenu_Lib.map"
 

@@ -66,4 +66,30 @@ ENTRY_DEC_S		EQU		b'00000101'		;
 DD_RAM_ADDR		EQU		b'10000000'		; Least Significant 7-bit are for address
 DD_RAM_UL		EQU		b'10000000'		; Upper Left coner of the Display
 SECOND_LINE		EQU		b'11000000'		; Move cursor to second line
-					
+LAST_SYMBOL_FIRST_LINE	EQU	b'10001111'	; Установим курсор на последний символ 1-й строки
+LAST_SYMBOL_SECOND_LINE	EQU	b'11001111'	; Установим курсор на последний символ 2-й строки
+
+Print_LCD_String_macro	macro	LABEL
+						local	Print_LCD_String,End_LCD_String	
+						clrf	symbol_pointer
+					Print_LCD_String
+						call	LABEL
+						andlw   0FFh
+						btfsc   STATUS,Z
+						goto	End_LCD_String		
+						call    Send_LCD_Symbol
+						incf	symbol_pointer	
+						goto    Print_LCD_String
+					End_LCD_String	
+						endm
+;================================================================================================================
+Draw_Cursor	macro	SYMBOL
+			movlw	SYMBOL
+			call	Draw_Cursor_Routine
+			endm
+;================================================================================================================
+Second_Line_macro	macro
+					movlw	SECOND_LINE	
+					call	Send_LCD_Command
+					endm
+;================================================================================================================

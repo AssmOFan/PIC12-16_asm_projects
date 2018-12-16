@@ -5,7 +5,7 @@ temp_1	res	1
 temp_2	res	1
 symbol	res	1							; Holds value to send to LCD module
 
-global	Send_LCD_Symbol,Send_LCD_Command,LCD_Line_Init,LCD_Init,Delay_4ms
+global	Send_LCD_Symbol,Send_LCD_Command,LCD_Line_Init,LCD_Init,Delay_4ms,CLR_Display_routine	
 
 LCD_Lib_code	code
 
@@ -162,6 +162,12 @@ LCD_Init
 	bsf     LCD_CNTL,RS					; Теперь выводим не команды а символы на дисплей, поэтому поднимаем RS
 	return
 ;========== END Initilize the LCD Display Module =========================================================
+CLR_Display_routine						; Подпрограмма очистки дисплея
+	movlw   CLR_DISP
+	call	Send_LCD_Command
+	call	Delay_4ms					; Обязательная задержка после очистки дисплея !!!
+	return
+;===================================================================================================
 Delay_4ms
 	movlw	.5
 	movwf	temp_2
@@ -171,5 +177,5 @@ Delay_4ms
 	decfsz	temp_2
 	goto	$-3
 	return
-
+;===================================================================================================
 	end

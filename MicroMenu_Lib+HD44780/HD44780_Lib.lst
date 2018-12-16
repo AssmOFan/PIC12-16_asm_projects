@@ -1,4 +1,4 @@
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  1
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -7,7 +7,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00001         INCLUDE HD44780_LIB.H                           ; подключаем LCD header 
 Warning[205]: Found directive in column 1. (INCLUDE)
                       00001 INCLUDE HARDWARE_PROFILE.INC
-                      00001         INCLUDE P16F84.INC
+                      00001         #INCLUDE P16F84.INC
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -17,7 +17,7 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00007 ;==========================================================================
                       00008 
                       00206         LIST
-                      00002         LIST P=16F84
+                      00002 ;       list p=16f84
                       00002 
   00000001            00003 Y                               EQU             1                               ; YES
   00000000            00004 N                               EQU             0                               ; NO
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00037 
                       00038         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && ONLY_WRITE)
                       00039 E                               EQU             4
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  2
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -94,7 +94,42 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             s
   00000080            00067 DD_RAM_UL               EQU             B'10000000'             ; Upper Left coner of the Display
   000000C0            00068 SECOND_LINE             EQU             B'11000000'             ; Move cursor to second line
-                      00069                                         
+  0000008F            00069 LAST_SYMBOL_FIRST_LINE  EQU     B'10001111'     ; Установим курсор на последний символ 1-й строки
+  000000CF            00070 LAST_SYMBOL_SECOND_LINE EQU     B'11001111'     ; Установим курсор на последний символ 2-й строки
+                      00071 
+                      00072 PRINT_LCD_STRING_MACRO  MACRO   LABEL
+                      00073                                                 LOCAL   PRINT_LCD_STRING,END_LCD_STRING 
+                      00074                                                 CLRF    SYMBOL_POINTER
+                      00075                                         PRINT_LCD_STRING
+                      00076                                                 CALL    LABEL
+                      00077                                                 ANDLW   0FFH
+                      00078                                                 BTFSC   STATUS,Z
+                      00079                                                 GOTO    END_LCD_STRING          
+                      00080                                                 CALL    SEND_LCD_SYMBOL
+                      00081                                                 INCF    SYMBOL_POINTER  
+                      00082                                                 GOTO    PRINT_LCD_STRING
+                      00083                                         END_LCD_STRING  
+                      00084                                                 ENDM
+                      00085 ;=======================================================================================================
+                            =========
+                      00086 DRAW_CURSOR     MACRO   SYMBOL
+                      00087                         MOVLW   SYMBOL
+                      00088                         CALL    DRAW_CURSOR_ROUTINE
+                      00089                         ENDM
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00090 ;=======================================================================================================
+                            =========
+                      00091 SECOND_LINE_MACRO       MACRO
+                      00092                                         MOVLW   SECOND_LINE     
+                      00093                                         CALL    SEND_LCD_COMMAND
+                      00094                                         ENDM
+                      00095 ;=======================================================================================================
+                            =========
                       00002                                 
                       00003 LCD_LIB_UDATA   UDATA_SHR
 0000                  00004 TEMP_1  RES     1
@@ -103,7 +138,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             ule
                       00007 
 Warning[205]: Found directive in column 1. (GLOBAL)
-  0000                00008 GLOBAL  SEND_LCD_SYMBOL,SEND_LCD_COMMAND,LCD_LINE_INIT,LCD_INIT,DELAY_4MS
+  0000                00008 GLOBAL  SEND_LCD_SYMBOL,SEND_LCD_COMMAND,LCD_LINE_INIT,LCD_INIT,DELAY_4MS,CLR_DISPLAY_ROUTINE   
                       00009 
                       00010 LCD_LIB_CODE    CODE
                       00011 
@@ -116,12 +151,6 @@ Warning[205]: Found directive in column 1. (GLOBAL)
 Message[305]: Using default destination of 1 (file).
 0005   0B??           00018         DECFSZ  TEMP_1
 0006   2???           00019         GOTO    $-1
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0007   0008           00020         RETURN
                       00021 
 0008                  00022 SEND_LCD_SYMBOL
@@ -146,6 +175,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 000C   08??           00041         MOVFW   SYMBOL
 000D   0086           00042         MOVWF   LCD_DATA
 000E   2???           00043         CALL    STROB
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00044         ENDIF
                       00045 
 000F   0008           00046         RETURN
@@ -175,12 +210,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0015   08??           00069         MOVFW   SYMBOL
 0016   0086           00070         MOVWF   LCD_DATA
 0017   2???           00071         CALL    STROB
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00072         ENDIF
                       00073 
 0018   1585           00074         BSF     LCD_CNTL,RS                                     ; Теперь выводим не команды а символы на
@@ -205,6 +234,12 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 001B   0586           00089         ANDWF   LCD_DATA_TRIS
 001C   30F5           00090         MOVLW   CNTL_TRIS_MASK                          ; RS and E as outputs, if RW not used - as input
 Message[305]: Using default destination of 1 (file).
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 001D   0585           00091         ANDWF   LCD_CNTL_TRIS
 001E   0008           00092         RETURN                                           
@@ -234,12 +269,6 @@ Message[305]: Using default destination of 1 (file).
 002B   0486           00110         IORWF   LCD_DATA
 002C   2???           00111         CALL    STROB   
                       00112 
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00113         ELSE
                       00114         MOVLW   B'00110000'                                     ; При инициализации сперва выставим 8-bi
                             t шину, так надо (DL=1)
@@ -264,6 +293,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             полубайт
 002E   0086           00130         MOVWF   LCD_DATA
 002F   2???           00131         CALL    STROB
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0030   3002           00132         MOVLW   B'00000010'                                     ; Опять старший полубайт, потому что мы 
                             перед этим переключились на 4-х битную шину и его надо переслать опять
 0031   0086           00133         MOVWF   LCD_DATA
@@ -293,12 +328,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00152 ; ВНИМАНИЕ !!! Hitachi LM032L (находиться в составе PICDEM 2 PLUS) имеет особенность в порядке следовани
                             я команд при инициализации
                       00153 ; Этот порядок ни в коем случае нельза нарушать !!!
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  6
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00154 
 0036   300C           00155         MOVLW   DISP_ON                                         ; Обязательно сперва включаем дисплей
 0037   2???           00156         CALL    SEND_LCD_SYMBOL
@@ -313,20 +342,33 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 003E   0008           00163         RETURN
                       00164 ;========== END Initilize the LCD Display Module =======================================================
                             ==
-003F                  00165 DELAY_4MS
-003F   3005           00166         MOVLW   .5
-0040   00??           00167         MOVWF   TEMP_2
-0041   01??           00168         CLRF    TEMP_1          
+003F                  00165 CLR_DISPLAY_ROUTINE                                             ; Подпрограмма очистки дисплея
+003F   3001           00166         MOVLW   CLR_DISP
+0040   2???           00167         CALL    SEND_LCD_COMMAND
+0041   2???           00168         CALL    DELAY_4MS                                       ; Обязательная задержка после очистки ди
+                            сплея !!!
+0042   0008           00169         RETURN
+                      00170 ;===================================================================================================
+0043                  00171 DELAY_4MS
+0043   3005           00172         MOVLW   .5
+0044   00??           00173         MOVWF   TEMP_2
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+0045   01??           00174         CLRF    TEMP_1          
 Message[305]: Using default destination of 1 (file).
-0042   0B??           00169         DECFSZ  TEMP_1
-0043   2???           00170         GOTO    $-1
+0046   0B??           00175         DECFSZ  TEMP_1
+0047   2???           00176         GOTO    $-1
 Message[305]: Using default destination of 1 (file).
-0044   0B??           00171         DECFSZ  TEMP_2
-0045   2???           00172         GOTO    $-3
-0046   0008           00173         RETURN
-                      00174 
-                      00175         END
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  7
+0048   0B??           00177         DECFSZ  TEMP_2
+0049   2???           00178         GOTO    $-3
+004A   0008           00179         RETURN
+                      00180 ;===================================================================================================
+                      00181         END
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  8
 
 
 SYMBOL TABLE
@@ -334,15 +376,17 @@ SYMBOL TABLE
 
 C                                 00000000
 CLR_DISP                          00000001
+CLR_DISPLAY_ROUTINE               0000003F
 CNTL_TRIS_MASK                    000000F5
 DC                                00000001
 DD_RAM_ADDR                       00000080
 DD_RAM_UL                         00000080
-DELAY_4MS                         0000003F
+DELAY_4MS                         00000043
 DISP_OFF                          00000008
 DISP_ON                           0000000C
 DISP_ON_B                         0000000F
 DISP_ON_C                         0000000E
+DRAW_CURSOR                       
 E                                 00000001
 EEADR                             00000009
 EECON1                            00000088
@@ -363,6 +407,8 @@ INTE                              00000004
 INTEDG                            00000006
 INTF                              00000001
 IRP                               00000007
+LAST_SYMBOL_FIRST_LINE            0000008F
+LAST_SYMBOL_SECOND_LINE           000000CF
 LCD_CNTL                          00000005
 LCD_CNTL_TRIS                     00000085
 LCD_DATA                          00000006
@@ -379,18 +425,19 @@ PCL                               00000002
 PCLATH                            0000000A
 PORTA                             00000005
 PORTB                             00000006
+PRINT_LCD_STRING_MACRO            
 PS0                               00000000
-PS1                               00000001
-PS2                               00000002
-PSA                               00000003
-RA0                               00000000
-RA1                               00000001
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  8
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PS1                               00000001
+PS2                               00000002
+PSA                               00000003
+RA0                               00000000
+RA1                               00000001
 RA2                               00000002
 RA3                               00000003
 RA4                               00000004
@@ -409,6 +456,7 @@ RP0                               00000005
 RP1                               00000006
 RS                                00000003
 SECOND_LINE                       000000C0
+SECOND_LINE_MACRO                 
 SEND_LCD_COMMAND                  00000010
 SEND_LCD_SYMBOL                   00000008
 STATUS                            00000003
@@ -438,18 +486,18 @@ TRISB4                            00000004
 TRISB5                            00000005
 TRISB6                            00000006
 TRISB7                            00000007
+MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:45:29         PAGE 10
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 USE_4_BIT_MODE                    00000001
 USE_HIGH_NIBLE                    00000000
 USE_ONE_PORT                      00000000
 W                                 00000000
 WR                                00000001
 WREN                              00000002
-MPASM  5.51                   HD44780_LIB.ASM   12-15-2018  10:35:26         PAGE  9
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 WRERR                             00000003
 Y                                 00000001
 Z                                 00000002
@@ -466,8 +514,8 @@ _IDLOC1                           00002001
 _IDLOC2                           00002002
 _IDLOC3                           00002003
 _LCD_LIB_CODE_0006                00000006
-_LCD_LIB_CODE_0043                00000043
-_LCD_LIB_CODE_0045                00000045
+_LCD_LIB_CODE_0047                00000047
+_LCD_LIB_CODE_0049                00000049
 _LP_OSC                           00003FFC
 _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FF7

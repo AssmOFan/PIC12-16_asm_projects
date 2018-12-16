@@ -1,11 +1,11 @@
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  1
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
                       00001         INCLUDE HARDWARE_PROFILE.INC
-                      00001         INCLUDE P16F84.INC
+                      00001         #INCLUDE P16F84.INC
                       00001         LIST
                       00002 
                       00003 ;==========================================================================
@@ -15,19 +15,15 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00007 ;==========================================================================
                       00008 
                       00206         LIST
-                      00002         LIST P=16F84
+                      00002 ;       list p=16f84
 2007   3FF1           00002         __CONFIG        _CP_OFF & _WDT_OFF & _PWRTE_ON & _XT_OSC
                       00003 
                       00004         INCLUDE MICROMENU_LIB.H
                       00001 ; Микроменю на базе двухстрочного индикатора HD44780 и четырехпозиционного джойстика (крестовины кнопок)
-                      00002 ; Библиотека построена на основе "индексов". Меню имеет 2 уровня вложености (вход в пункт меню + вход в 
-                            подпункт меню)
-                      00003 ; При навигации по меню изменяются номера ("индексы") текущего пункта меню и текущего подпункта меню
-                      00004 ; На основе этих данных и выводится информация на дисплей/совершаются действия
-                      00005 
+                      00002 
 Warning[205]: Found directive in column 1. (INCLUDE)
-                      00006 INCLUDE HARDWARE_PROFILE.INC
-                      00003         INCLUDE P16F84.INC
+                      00003 INCLUDE HARDWARE_PROFILE.INC
+                      00003         #INCLUDE P16F84.INC
                       00207         LIST
                       00208 
                       00209 ;==========================================================================
@@ -38,91 +34,108 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00214 
 Message[310]: Superseding current maximum RAM and RAM map.
                       00412         LIST
-                      00004         LIST P=16F84
+                      00004 ;       list p=16f84
 Warning[205]: Found directive in column 1. (INCLUDE)
-                      00007 INCLUDE MACRO.H 
-                      00001 
-                      00002 #DEFINE USE_SHORT_MOD_PCL       1       ; Использовать "укороченную" версию макроса модификации PCL, поз
+                      00004 INCLUDE MACRO.H 
+                      00001 #DEFINE USE_SHORT_MOD_PCL       1       ; Использовать "укороченную" версию макроса модификации PCL, поз
                             воляет экономить 1 слово памяти на каждом вызове макроса ценой 1 лишней ячейки ОЗУ
-                      00003 
-                      00004 PUSH    MACRO
-                      00005                 MOVWF   W_TEMP
-                      00006                 SWAPF   STATUS,W
-                      00007                 MOVWF   STATUS_TEMP
-                      00008                 ENDM
-                      00009 
-                      00010 POP             MACRO
-                      00011                 SWAPF   STATUS_TEMP,W
-                      00012                 MOVWF   STATUS
-                      00013                 SWAPF   W_TEMP,F
-                      00014                 SWAPF   W_TEMP,W
-                      00015                 ENDM
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  2
+                      00002 
+                      00003 PUSH    MACRO
+                      00004                 MOVWF   W_TEMP
+                      00005                 SWAPF   STATUS,W
+                      00006                 MOVWF   STATUS_TEMP
+                      00007                 ENDM
+                      00008 
+                      00009 POP             MACRO
+                      00010                 SWAPF   STATUS_TEMP,W
+                      00011                 MOVWF   STATUS
+                      00012                 SWAPF   W_TEMP,F
+                      00013                 SWAPF   W_TEMP,W
+                      00014                 ENDM
+                      00015 
+                      00016 CLR_RAM_MACRO   MACRO
+                      00017                                 MOVLW   4FH             ; end of RAM
+                      00018                                 MOVWF   FSR
+                      00019                         CLR_RAM 
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00016 
-                      00017 MOD_PCL MACRO   TARGET                  ; Макрос, позволяет размещать таблицы на границах страниц
-                      00018                 LOCAL   TABLE
-                      00019                 MOVFW   TARGET
-                      00020                 ADDLW   LOW TABLE               ; Добавить 8 младших бит адреса таблицы к смещению
-                      00021                 MOVWF   OFFSET                  ; Сохранить младшие 8 бит требуемого адреса
-                      00022         IF      USE_SHORT_MOD_PCL
-                      00023                 RLF             KNOWN_ZERO,W    ; так сохраняют бит переполнения от сложения 
-                      00024                 ADDLW   HIGH TABLE              ; Загрузить 5 старших бит адреса
-                      00025         ELSE
-                      00026                 MOVLW   HIGH TABLE              ; Загрузить 5 старших бит адреса
-                      00027                 BTFSC   STATUS,C                ; Перешли границу страницы памяти программ?
-                      00028                 ADDLW   1                               ; Если да, увеличить на 1 старшие 5 бит
-                      00029         ENDIF
-                      00030                 MOVWF   PCLATH                  ; Установить старшую часть адреса
-                      00031                 MOVFW   OFFSET                  ; Загрузить рассчитанное значание младшей части адреса
-                      00032                 MOVWF   PCL                             ; Установить младшую часть адреса
-                      00033         TABLE
-                      00034                 ENDM
-                      00035 
-                      00036 ADD_PCL MACRO   TARGET,ADDRESS  ; Макрос, позволяет удобно указывать страницу для следующего за ним кода
-                      00037                                 MOVFW   TARGET  
-                      00038                                 CLRF    PCLATH
-                      00039                         IF      (ADDRESS==0X100)
-                      00040                                 BSF             PCLATH,0
-                      00041                         ENDIF
-                      00042                         IF      (ADDRESS==0X200)
-                      00043                                 BSF             PCLATH,1
-                      00044                         ENDIF
-                      00045                         IF      (ADDRESS==0X300)
-                      00046                                 BSF             PCLATH,0                                
-                      00047                                 BSF             PCLATH,1
-                      00048                         ENDIF
-                      00049                         IF      (ADDRESS==0X400)
-                      00050                                 BSF             PCLATH,2                                
+                      00020                                 CLRF    INDF
+                      00021                                 DECF    FSR
+                      00022                                 MOVFW   FSR
+                      00023                                 SUBLW   0CH-1   ; start RAM
+                      00024                                 BNZ             CLR_RAM
+                      00025                                 ENDM
+                      00026 
+                      00027 MOD_PCL MACRO   TARGET                  ; Макрос, позволяет размещать таблицы на границах страниц
+                      00028                 LOCAL   TABLE
+                      00029                 MOVFW   TARGET
+                      00030                 ADDLW   LOW TABLE               ; Добавить 8 младших бит адреса таблицы к смещению
+                      00031                 MOVWF   OFFSET                  ; Сохранить младшие 8 бит требуемого адреса
+                      00032         IF      USE_SHORT_MOD_PCL
+                      00033                 RLF             KNOWN_ZERO,W    ; так сохраняют бит переполнения от сложения 
+                      00034                 ADDLW   HIGH TABLE              ; Загрузить 5 старших бит адреса
+                      00035         ELSE
+                      00036                 MOVLW   HIGH TABLE              ; Загрузить 5 старших бит адреса
+                      00037                 BTFSC   STATUS,C                ; Перешли границу страницы памяти программ?
+                      00038                 ADDLW   1                               ; Если да, увеличить на 1 старшие 5 бит
+                      00039         ENDIF
+                      00040                 MOVWF   PCLATH                  ; Установить старшую часть адреса
+                      00041                 MOVFW   OFFSET                  ; Загрузить рассчитанное значание младшей части адреса
+                      00042                 MOVWF   PCL                             ; Установить младшую часть адреса
+                      00043         TABLE
+                      00044                 ENDM
+                      00045 
+                      00046 ADD_PCL MACRO   TARGET,ADDRESS  ; Макрос, позволяет удобно указывать страницу для следующего за ним кода
+                      00047                                 MOVFW   TARGET  
+                      00048                                 CLRF    PCLATH
+                      00049                         IF      (ADDRESS==0X100)
+                      00050                                 BSF             PCLATH,0
                       00051                         ENDIF
-                      00052                                 ADDWF   PCL
-                      00053                                 ENDM
-                      00008 
-                      00009 #DEFINE USE_STATIC_CURSOR               0                               ; Всегда рисовать курсор в конце
+                      00052                         IF      (ADDRESS==0X200)
+                      00053                                 BSF             PCLATH,1
+                      00054                         ENDIF
+                      00055                         IF      (ADDRESS==0X300)
+                      00056                                 BSF             PCLATH,0                                
+                      00057                                 BSF             PCLATH,1
+                      00058                         ENDIF
+                      00059                         IF      (ADDRESS==0X400)
+                      00060                                 BSF             PCLATH,2                                
+                      00061                         ENDIF
+                      00062                                 ADDWF   PCL
+                      00063                                 ENDM
+                      00005 
+                      00006 #DEFINE USE_STATIC_CURSOR               0                               ; Всегда рисовать курсор в конце
                              1-й строки
-                      00010 #DEFINE USE_MOVING_CURSOR               1                               ; Использовать перемещаемый курс
+                      00007 #DEFINE USE_MOVING_CURSOR               1                               ; Использовать перемещаемый курс
                             ор (повышает удобство использования меню и размер прошивки)
-                      00011 #DEFINE USE_TOP_LAST_CURSOR             1                               ; Использовать отображение "перв
+Warning[205]: Found directive in column 1. (IF)
+                      00008 IF      USE_MOVING_CURSOR
+                      00009 #DEFINE SAVE_CURSOR_POSITION    1                               ; Сохранять позицию курсора при входе в 
+                            подменю, и восстанавливать ее при выходе в главное меню
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  3
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00010 #DEFINE USE_TOP_LAST_CURSOR             1                               ; Использовать отображение "перв
                             ый пункт всегда сверху" и "последний пункт всегда снизу" (повышает удобство использования меню и
-                      00012 #DEFINE USE_RBIE                                1                               ; Использовать прерывани
+Warning[205]: Found directive in column 1. (ENDIF)
+                      00011 ENDIF
+                      00012 #DEFINE USE_MENU_ACTION                 1                               ; Использовать возможность запус
+                            ка действий при входе в пункт меню
+                      00013 #DEFINE USE_RBIE                                0                               ; Использовать прерывани
                             е по изминению состояния PORTB для обработки кнопок (позволяет использовать сон)
-                      00013 #DEFINE USE_MENU_ACTION                 0                               ; Использовать возможность запус
-                            ка действий при входе в пункт меню (повышает размер прошивки)
                       00014 
 Warning[205]: Found directive in column 1. (IF)
                       00015 IF      USE_MENU_ACTION 
-                      00016 #DEFINE ACTIONS_MENU_FLAGS              B'00000000'             ; Выставленный бит - есть действие при в
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  3
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                            ходе в этот пункт меню (не забыть заполнить обработчик действия !!!)
+                      00016 #DEFINE ACTIONS_MENU_FLAGS              B'00000001'             ; Выставленный бит - есть действие при в
+                            ходе в этот пункт меню (не забыть заполнить обработчик действия)
+Warning[205]: Found directive in column 1. (ENDIF)
                       00017 ENDIF
                       00018 
                       00019 #DEFINE UP                                              PORTB,4
@@ -135,315 +148,341 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00026 #DEFINE PRESS_EXIT                              FLAGS,2
                       00027 #DEFINE PRESS_ENTER                             FLAGS,3 
                       00028 
-                      00029 #DEFINE EXIT_DELAY                              .20                             ; Количество опросов кно
-                            пок, до автовыхода в предыдущий уровень (* 0,8 сек)
+                      00029 ;#define        ZUMER                                   PORTA,0
                       00030 
-                      00031 #DEFINE ZASTAVKA_FIRST_STRING   "  MicroMenuLib"
-                      00032 #DEFINE ZASTAVKA_SECOND_STRING  "  ver 1.0 beta"
-                      00033 
-                      00034 #DEFINE ACTION_COMPLETE_STRING  "Action Complete!"
+                      00031 #DEFINE EXIT_DELAY                              .20                             ; Количество опросов кно
+                            пок, до выхода в предыдущий уровень (* 0,8 сек)
+                      00032 
+                      00033 #DEFINE ZASTAVKA_FIRST_STRING   "  MicroMenuLib"
+                      00034 #DEFINE ZASTAVKA_SECOND_STRING  "  ver 1.0 beta"
                       00035 
-                      00036 #DEFINE NUM_OF_MAIN_MENU_PUNKTS .5                              ; Количество пунктов меню, до 8 (можно и
-                             больше, но действия при входе в меню доступны только для первых 8 пунктов) 
+                      00036 #DEFINE NUM_OF_MAIN_MENU_PUNKTS .6                              ; Количество пунктов меню, до 10 
                       00037 
                       00038 #DEFINE MENU_NAME_1                             "1.Menu_1"
                       00039 #DEFINE MENU_NAME_2                             "2.Menu_2"
                       00040 #DEFINE MENU_NAME_3                             "3.Menu_3"
                       00041 #DEFINE MENU_NAME_4                             "4.Menu_4"
-                      00042 #DEFINE MENU_NAME_5                             "5.Menu_5"      
-                      00043 
-                      00044 #DEFINE NUM_OF_SUBMENU_PUNKTS_1 .3                              ; Количество подпунктов каждого пункта м
-                            еню (в теории до 64, но больше 8 не проверялось, памяти в контроллере не хватило)
-                      00045                                                                                                 ; Не заб
-                            ываем оформить обработчик для каждого действия !!!
-                      00046 #DEFINE MENU_SUBMENU_NAME_1_1   "1.1.SubMenu"
-                      00047 #DEFINE MENU_SUBMENU_NAME_1_2   "1.2.SubMenu"
-                      00048 #DEFINE MENU_SUBMENU_NAME_1_3   "1.3.SubMenu"
-                      00049 
-                      00050 #DEFINE NUM_OF_SUBMENU_PUNKTS_2 .3
+                      00042 #DEFINE MENU_NAME_5                             "5.Menu_5"
+                      00043 #DEFINE MENU_NAME_6                             "6.Menu_6"      
+                      00044 
+                      00045 #DEFINE NUM_OF_SUBMENU_PUNKTS_1 .0                              ; Количество подпунктов каждого пункта м
+                            еню, до 8
+                      00046 
+                      00047 #DEFINE MENU_SUBMENU_NAME_1_1   "1.1.Subm"
+                      00048 #DEFINE MENU_SUBMENU_NAME_1_2   "1.2.Subm"
+                      00049 #DEFINE MENU_SUBMENU_NAME_1_3   "1.3.Subm"
+                      00050 #DEFINE MENU_SUBMENU_NAME_1_4   "1.4.Subm"
                       00051 
-                      00052 #DEFINE MENU_SUBMENU_NAME_2_1   "2.1.SubMenu"
-                      00053 #DEFINE MENU_SUBMENU_NAME_2_2   "2.2.SubMenu"
-                      00054 #DEFINE MENU_SUBMENU_NAME_2_3   "2.3.SubMenu"
-                      00055                                 
-                      00056 #DEFINE NUM_OF_SUBMENU_PUNKTS_3 .3
-                      00057 
-                      00058 #DEFINE MENU_SUBMENU_NAME_3_1   "3.1.SubMenu"
-                      00059 #DEFINE MENU_SUBMENU_NAME_3_2   "3.2.SubMenu"
-                      00060 #DEFINE MENU_SUBMENU_NAME_3_3   "3.3.SubMenu"
-                      00061 
-                      00062 #DEFINE NUM_OF_SUBMENU_PUNKTS_4 .3
-                      00063 
-                      00064 #DEFINE MENU_SUBMENU_NAME_4_1   "4.1.SubMenu"
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  4
+                      00052 #DEFINE NUM_OF_SUBMENU_PUNKTS_2 .1
+                      00053 
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00065 #DEFINE MENU_SUBMENU_NAME_4_2   "4.2.SubMenu"
-                      00066 #DEFINE MENU_SUBMENU_NAME_4_3   "4.3.SubMenu"
+                      00054 #DEFINE MENU_SUBMENU_NAME_2_1   "2.1.Subm"
+                      00055 #DEFINE MENU_SUBMENU_NAME_2_2   "2.2.Subm"
+                      00056 #DEFINE MENU_SUBMENU_NAME_2_3   "2.3.Subm"
+                      00057 #DEFINE MENU_SUBMENU_NAME_2_4   "2.4.Subm"
+                      00058                                 
+                      00059 #DEFINE NUM_OF_SUBMENU_PUNKTS_3 .2
+                      00060 
+                      00061 #DEFINE MENU_SUBMENU_NAME_3_1   "3.1.Subm"
+                      00062 #DEFINE MENU_SUBMENU_NAME_3_2   "3.2.Subm"
+                      00063 #DEFINE MENU_SUBMENU_NAME_3_3   "3.3.Subm"
+                      00064 #DEFINE MENU_SUBMENU_NAME_3_4   "3.4.Subm"
+                      00065 
+                      00066 #DEFINE NUM_OF_SUBMENU_PUNKTS_4 .3
                       00067 
-                      00068 #DEFINE NUM_OF_SUBMENU_PUNKTS_5 .3
-                      00069 
-                      00070 #DEFINE MENU_SUBMENU_NAME_5_1   "5.1.SubMenu"
-                      00071 #DEFINE MENU_SUBMENU_NAME_5_2   "5.2.SubMenu"
-                      00072 #DEFINE MENU_SUBMENU_NAME_5_3   "5.3.SubMenu"
-                      00073 
-                      00074 ;=======================================================================================================
+                      00068 #DEFINE MENU_SUBMENU_NAME_4_1   "4.1.Subm"
+                      00069 #DEFINE MENU_SUBMENU_NAME_4_2   "4.2.Subm"
+                      00070 #DEFINE MENU_SUBMENU_NAME_4_3   "4.3.Subm"
+                      00071 #DEFINE MENU_SUBMENU_NAME_4_4   "4.4.Subm"
+                      00072 
+                      00073 #DEFINE NUM_OF_SUBMENU_PUNKTS_5 .4
+                      00074 
+                      00075 #DEFINE MENU_SUBMENU_NAME_5_1   "5.1.Subm"
+                      00076 #DEFINE MENU_SUBMENU_NAME_5_2   "5.2.Subm"
+                      00077 #DEFINE MENU_SUBMENU_NAME_5_3   "5.3.Subm"
+                      00078 #DEFINE MENU_SUBMENU_NAME_5_4   "5.4.Subm"
+                      00079 
+                      00080 #DEFINE NUM_OF_SUBMENU_PUNKTS_6 .3
+                      00081 
+                      00082 #DEFINE MENU_SUBMENU_NAME_6_1   "6.1.Subm"
+                      00083 #DEFINE MENU_SUBMENU_NAME_6_2   "6.2.Subm"
+                      00084 #DEFINE MENU_SUBMENU_NAME_6_3   "6.3.Subm"
+                      00085 #DEFINE MENU_SUBMENU_NAME_6_4   "6.4.Subm"
+                      00086 ;=======================================================================================================
                             =========
-                      00075 CREATE_MENU_NAMES       MACRO                           ; Макрос, создает имена всех пунктов меню
-                      00076                                         LOCAL   A=1
-                      00077                                         WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00078                                                 MENU_#V(A)
-                      00079                                                 MOD_PCL SYMBOL_POINTER
-                      00080                                                 DT              MENU_NAME_#V(A),0
-                      00081                                                 A+=1
-                      00082                                         ENDW
-                      00083                                         ENDM
-                      00084 ;=======================================================================================================
+                      00087 CREATE_MENU_NAMES       MACRO                           ; Макрос, создает имена всех пунктов меню
+                      00088                         LOCAL   A=1
+                      00089                                 WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00090                                 MENU_#V(A)
+                      00091                                         MOD_PCL SYMBOL_POINTER
+                      00092                                         DT              MENU_NAME_#V(A),0
+                      00093                                         A+=1
+                      00094                                 ENDW
+                      00095                         ENDM
+                      00096 ;=======================================================================================================
                             =========
-                      00085 RETLW_NUM_OF_SUBMENU_PUNKTS     MACRO           ; Макрос, возвращает количество пунктов нужного подменю
-                      00086                                                         MOD_PCL INDEX_MENU
-                      00087                                                         LOCAL   A=1
-                      00088                                                         WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00089                                                                 RETLW   NUM_OF_SUBMENU_PUNKTS_#V(A)
-                      00090                                                                 A+=1
-                      00091                                                         ENDW
-                      00092                                                         ENDM
-                      00093 ;=======================================================================================================
+                      00097 RETLW_NUM_OF_SUBMENU_PUNKTS     MACRO           ; Макрос, возвращает количество пунктов нужного подменю
+                      00098                                 MOD_PCL INDEX_MENU
+                      00099                         LOCAL   A=1
+                      00100                                 WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00101                                         RETLW   NUM_OF_SUBMENU_PUNKTS_#V(A)
+                      00102                                         A+=1
+                      00103                                 ENDW
+                      00104                         ENDM
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00105 ;=======================================================================================================
                             =========
-                      00094 GOTO_PUNKT_MENU MACRO                                   ; Макрос, создает переходы на все пункты меню
-                      00095                                 MOD_PCL INDEX_MENU
-                      00096                                 LOCAL   A=1
-                      00097                                 WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00098                                         GOTO    MENU_#V(A)
-                      00099                                         A+=1
-                      00100                                 ENDW
-                      00101                                 ENDM
-                      00102 ;=======================================================================================================
+                      00106 GOTO_PUNKT_MENU MACRO                                   ; Макрос, создает переходы на все пункты меню
+                      00107                                 MOD_PCL INDEX_MENU
+                      00108                         LOCAL   A=1
+                      00109                                 WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00110                                         GOTO    MENU_#V(A)
+                      00111                                         A+=1
+                      00112                                 ENDW
+                      00113                         ENDM
+                      00114 ;=======================================================================================================
                             =========
-                      00103 GOTO_PUNKT_SUBMENU      MACRO                           ; Макрос, создает переходы на имена всех подпунк
+                      00115 GOTO_PUNKT_SUBMENU      MACRO                           ; Макрос, создает переходы на имена всех подпунк
                             тов меню
-                      00104                                         MOD_PCL INDEX_MENU                              
-                      00105                                         LOCAL   C=1
-                      00106                                         WHILE   C<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00107                                                 GOTO    MENU_#V(C)_TABLE
-                      00108                                                 C+=1
-                      00109                                         ENDW
-                      00110                                         LOCAL   D=1
-                      00111                                         LOCAL   A
-                      00112                                         WHILE           D<NUM_OF_MAIN_MENU_PUNKTS+1
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00113                                                 A=1     
-                      00114                                                 MENU_#V(D)_TABLE
-                      00115                                                 MOD_PCL INDEX_SUBMENU
-                      00116                                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00117                                                         GOTO    MENU_#V(D)_SUBMENU_#V(A)
-                      00118                                                         A+=1
-                      00119                                                 ENDW
-                      00120                                                 D+=1
-                      00121                                         ENDW    
-                      00122                                         ENDM
-                      00123 ;=======================================================================================================
+                      00116                                         MOD_PCL INDEX_MENU                              
+                      00117                                         LOCAL   C=1
+                      00118                                         WHILE   C<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00119                                                 GOTO    MENU_#V(C)_TABLE
+                      00120                                                 C+=1
+                      00121                                         ENDW
+                      00122                                         LOCAL   D=1
+                      00123                                         LOCAL   A
+                      00124                                         WHILE           D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00125                                                 A=1     
+                      00126                                                 MENU_#V(D)_TABLE
+                      00127                                                 MOD_PCL INDEX_SUBMENU
+                      00128                                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00129                                                         GOTO    MENU_#V(D)_SUBMENU_#V(A)
+                      00130                                                         A+=1
+                      00131                                                 ENDW
+                      00132                                                 D+=1
+                      00133                                         ENDW    
+                      00134                                         ENDM
+                      00135 ;=======================================================================================================
                             =========
-                      00124 GOTO_PUNKT_SUBMENU_ACTION       MACRO           ; Макрос, создает переходы на действия всех подпунктов м
+                      00136 GOTO_PUNKT_SUBMENU_ACTION       MACRO           ; Макрос, создает переходы на действия всех подпунктов м
                             еню
-                      00125                                                         MOD_PCL INDEX_MENU                              
-                      00126                                                         LOCAL   C=1
-                      00127                                                         WHILE   C<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00128                                                                 GOTO    MENU_#V(C)_TABLE_ACTION
-                      00129                                                                 C+=1
-                      00130                                                         ENDW
-                      00131                                                         LOCAL   D=1
-                      00132                                                         LOCAL   A
-                      00133                                                         WHILE           D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00134                                                                 A=1     
-                      00135                                                                 MENU_#V(D)_TABLE_ACTION
-                      00136                                                                 MOD_PCL INDEX_SUBMENU
-                      00137                                                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00138                                                                         GOTO    MENU_#V(D)_SUBMENU_#V(A)
-                            _ACTION
-                      00139                                                                         A+=1
-                      00140                                                                 ENDW
-                      00141                                                                 D+=1
+                      00137                                                         MOD_PCL INDEX_MENU                              
+                      00138                                                         LOCAL   C=1
+                      00139                                                         WHILE   C<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00140                                                                 GOTO    MENU_#V(C)_TABLE_ACTION
+                      00141                                                                 C+=1
                       00142                                                         ENDW
-                      00143                                                         ENDM
-                      00144 ;=======================================================================================================
+                      00143                                                         LOCAL   D=1
+                      00144                                                         LOCAL   A
+                      00145                                                         WHILE           D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00146                                                                 A=1     
+                      00147                                                                 MENU_#V(D)_TABLE_ACTION
+                      00148                                                                 MOD_PCL INDEX_SUBMENU
+                      00149                                                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00150                                                                         GOTO    MENU_#V(D)_SUBMENU_#V(A)
+                            _ACTION
+                      00151                                                                         A+=1
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00152                                                                 ENDW
+                      00153                                                                 D+=1
+                      00154                                                         ENDW
+                      00155                                                         ENDM
+                      00156 ;=======================================================================================================
                             =========
-                      00145 CREATE_SUBMENU_NAMES    MACRO                           ; Макрос, создает имена всех подпунктов меню
-                      00146 ; К сожаления, почему-то не получилось создавать имена всех подпунктов меню в цикле, поэтому приходится 
-                            вызывать макрос столько раз, сколько есть пунктов меню
-                      00147 ; Внимание, если количество пунктов в меню превышает 8, просто добавьте еще
-                      00148                                                 LOCAL   D=1
-                      00149 ;-------------------------------------------------------------------------------------------------------
+                      00157 CREATE_SUBMENU_NAMES_   MACRO                           ; Не работающий макрос создания имен всех подпун
+                            ктов меню :(
+                      00158                                                 LOCAL   D=1
+                      00159                                                 LOCAL   A       
+                      00160                                                 WHILE   D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00161                                                         A=1
+                      00162                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1         
+                                                                    
+                      00163                                                                 MENU_#V(D)_SUBMENU_#V(A)
+                      00164                                                                 MOD_PCL SYMBOL_POINTER
+                      00165                                                                 DT      MENU_SUBMENU_NAME_#V(D)_#V(A),0
+                      00166                                                                 A+=1
+                      00167                                                         ENDW
+                      00168                                                         D+=1
+                      00169                                                 ENDW
+                      00170                                                 ENDM
+                      00171 ;=======================================================================================================
+                            =========
+                      00172 CREATE_SUBMENU_NAMES    MACRO                           ; Макрос, создает имена всех подпунктов меню
+                      00173                                 LOCAL   D=1
+                      00174 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00150 ; Подпункты 1 пункта меню
-                      00151 ;-------------------------------------------------------------------------------------------------------
+                      00175 ; Подпункты 1 пункта меню
+                      00176 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00152                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00153                                                         LOCAL   A=1     
-                      00154                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00155                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00156                                                                 MOD_PCL SYMBOL_POINTER
-                      00157                                                                 DT              MENU_SUBMENU_NAME_1_#V(A
-                            ),0
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  6
+                      00177                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00178                                 LOCAL   A=1     
+                      00179                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00180                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00181                                                 MOD_PCL SYMBOL_POINTER
+                      00182                                                 DT              MENU_SUBMENU_NAME_1_#V(A),0
+                      00183                                         A+=1
+                      00184                                 ENDW
+                      00185                                         D+=1
+                      00186                                 ENDIF
+                      00187 ;-------------------------------------------------------------------------------------------------------
+                            ----
+                      00188 ; Подпункты 2 пункта меню
+                      00189 ;-------------------------------------------------------------------------------------------------------
+                            ----
+                      00190                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00191                                 LOCAL   A=1     
+                      00192                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00193                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00194                                                 MOD_PCL SYMBOL_POINTER
+                      00195                                                 DT              MENU_SUBMENU_NAME_2_#V(A),0
+                      00196                                         A+=1
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00158                                                                 A+=1
-                      00159                                                         ENDW
-                      00160                                                         D+=1
-                      00161                                                 ENDIF
-                      00162 ;-------------------------------------------------------------------------------------------------------
+                      00197                                 ENDW
+                      00198                                         D+=1
+                      00199                                 ENDIF
+                      00200 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00163 ; Подпункты 2 пункта меню
-                      00164 ;-------------------------------------------------------------------------------------------------------
+                      00201 ; Подпункты 3 пункта меню
+                      00202 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00165                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00166                                                         LOCAL   A=1     
-                      00167                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00168                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00169                                                                 MOD_PCL SYMBOL_POINTER
-                      00170                                                                 DT              MENU_SUBMENU_NAME_2_#V(A
-                            ),0
-                      00171                                                                 A+=1
-                      00172                                                         ENDW
-                      00173                                                         D+=1
-                      00174                                                 ENDIF
-                      00175 ;-------------------------------------------------------------------------------------------------------
+                      00203                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00204                                 LOCAL   A=1     
+                      00205                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00206                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00207                                                 MOD_PCL SYMBOL_POINTER
+                      00208                                                 DT              MENU_SUBMENU_NAME_3_#V(A),0
+                      00209                                         A+=1
+                      00210                                 ENDW
+                      00211                                         D+=1
+                      00212                                 ENDIF
+                      00213 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00176 ; Подпункты 3 пункта меню
-                      00177 ;-------------------------------------------------------------------------------------------------------
+                      00214 ; Подпункты 4 пункта меню
+                      00215 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00178                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00179                                                         LOCAL   A=1     
-                      00180                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00181                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00182                                                                 MOD_PCL SYMBOL_POINTER
-                      00183                                                                 DT              MENU_SUBMENU_NAME_3_#V(A
-                            ),0
-                      00184                                                                 A+=1
-                      00185                                                         ENDW
-                      00186                                                         D+=1
-                      00187                                                 ENDIF
-                      00188 ;-------------------------------------------------------------------------------------------------------
+                      00216                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00217                                 LOCAL   A=1     
+                      00218                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00219                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00220                                                 MOD_PCL SYMBOL_POINTER
+                      00221                                                 DT              MENU_SUBMENU_NAME_4_#V(A),0
+                      00222                                         A+=1
+                      00223                                 ENDW
+                      00224                                         D+=1
+                      00225                                 ENDIF
+                      00226 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00189 ; Подпункты 4 пункта меню
-                      00190 ;-------------------------------------------------------------------------------------------------------
+                      00227 ; Подпункты 5 пункта меню
+                      00228 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00191                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00192                                                         LOCAL   A=1     
-                      00193                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00194                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00195                                                                 MOD_PCL SYMBOL_POINTER
-                      00196                                                                 DT              MENU_SUBMENU_NAME_4_#V(A
-                            ),0
-                      00197                                                                 A+=1
-                      00198                                                         ENDW
-                      00199                                                         D+=1
-                      00200                                                 ENDIF
-                      00201 ;-------------------------------------------------------------------------------------------------------
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  7
+                      00229                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00230                                 LOCAL   A=1     
+                      00231                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00232                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00233                                                 MOD_PCL SYMBOL_POINTER
+                      00234                                                 DT              MENU_SUBMENU_NAME_5_#V(A),0
+                      00235                                         A+=1
+                      00236                                 ENDW
+                      00237                                         D+=1
+                      00238                                 ENDIF
+                      00239 ;-------------------------------------------------------------------------------------------------------
+                            ----
+                      00240 ; Подпункты 6 пункта меню
+                      00241 ;-------------------------------------------------------------------------------------------------------
+                            ----
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+                      00242                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00243                                 LOCAL   A=1     
+                      00244                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00245                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00246                                                 MOD_PCL SYMBOL_POINTER
+                      00247                                                 DT              MENU_SUBMENU_NAME_6_#V(A),0
+                      00248                                         A+=1
+                      00249                                 ENDW
+                      00250                                         D+=1
+                      00251                                 ENDIF
+                      00252 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00202 ; Подпункты 5 пункта меню
-                      00203 ;-------------------------------------------------------------------------------------------------------
+                      00253 ; Подпункты 7 пункта меню
+                      00254 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00204                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00205                                                         LOCAL   A=1     
-                      00206                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00207                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00208                                                                 MOD_PCL SYMBOL_POINTER
-                      00209                                                                 DT              MENU_SUBMENU_NAME_5_#V(A
-                            ),0
-                      00210                                                                 A+=1
-                      00211                                                         ENDW
-                      00212                                                         D+=1
-                      00213                                                 ENDIF
-                      00214 ;-------------------------------------------------------------------------------------------------------
+                      00255                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00256                                 LOCAL   A=1     
+                      00257                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00258                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00259                                                 MOD_PCL SYMBOL_POINTER
+                      00260                                                 DT              MENU_SUBMENU_NAME_7_#V(A),0
+                      00261                                         A+=1
+                      00262                                 ENDW
+                      00263                                         D+=1
+                      00264                                 ENDIF
+                      00265 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00215 ; Подпункты 6 пункта меню
-                      00216 ;-------------------------------------------------------------------------------------------------------
+                      00266 ; Подпункты 8 пункта меню
+                      00267 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00217                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00218                                                         LOCAL   A=1     
-                      00219                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00220                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00221                                                                 MOD_PCL SYMBOL_POINTER
-                      00222                                                                 DT              MENU_SUBMENU_NAME_5_#V(A
-                            ),0
-                      00223                                                                 A+=1
-                      00224                                                         ENDW
-                      00225                                                         D+=1
-                      00226                                                 ENDIF
-                      00227 ;-------------------------------------------------------------------------------------------------------
+                      00268                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00269                                 LOCAL   A=1     
+                      00270                                 WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
+                      00271                                         MENU_#V(D)_SUBMENU_#V(A)
+                      00272                                                 MOD_PCL SYMBOL_POINTER
+                      00273                                                 DT              MENU_SUBMENU_NAME_8_#V(A),0
+                      00274                                         A+=1
+                      00275                                 ENDW
+                      00276                                         D+=1
+                      00277                                 ENDIF
+                      00278 ;-------------------------------------------------------------------------------------------------------
                             ----
-                      00228 ; Подпункты 7 пункта меню
-                      00229 ;-------------------------------------------------------------------------------------------------------
-                            ----
-                      00230                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00231                                                         LOCAL   A=1     
-                      00232                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00233                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00234                                                                 MOD_PCL SYMBOL_POINTER
-                      00235                                                                 DT              MENU_SUBMENU_NAME_5_#V(A
-                            ),0
-                      00236                                                                 A+=1
-                      00237                                                         ENDW
-                      00238                                                         D+=1
-                      00239                                                 ENDIF
-                      00240 ;-------------------------------------------------------------------------------------------------------
-                            ----
-                      00241 ; Подпункты 8 пункта меню
-                      00242 ;-------------------------------------------------------------------------------------------------------
-                            ----
-                      00243                                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  8
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00244                                                         LOCAL   A=1     
-                      00245                                                         WHILE   A<NUM_OF_SUBMENU_PUNKTS_#V(D)+1
-                      00246                                                                 MENU_#V(D)_SUBMENU_#V(A)
-                      00247                                                                 MOD_PCL SYMBOL_POINTER
-                      00248                                                                 DT              MENU_SUBMENU_NAME_5_#V(A
-                            ),0
-                      00249                                                                 A+=1
-                      00250                                                         ENDW
-                      00251                                                         D+=1
-                      00252                                                 ENDIF
-                      00253 ;-------------------------------------------------------------------------------------------------------
-                            ----
-                      00254                                                 ENDM
-                      00255 ;=======================================================================================================
+                      00279                         ENDM
+                      00280 ;=======================================================================================================
                             =========
 Warning[205]: Found directive in column 1. (IF)
-                      00256 IF      USE_MENU_ACTION 
-                      00257 GOTO_MENU_ACTION        MACRO           ; Макрос, создает переходы на действия всех пунктов меню (если в
+                      00281 IF      USE_MENU_ACTION 
+                      00282 GOTO_MENU_ACTION        MACRO           ; Макрос, создает переходы на действия всех пунктов меню (если в
                             ключена соответствующая опция)
-                      00258                                         MOD_PCL INDEX_MENU                              
-                      00259                                         LOCAL   A=1
-                      00260                                         WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
-                      00261                                                 GOTO    MENU_0_ACTION
-                      00262                                                 A+=1
-                      00263                                         ENDW
-                      00264                                         ENDM
-                      00265 ENDIF
+                      00283                                         MOD_PCL INDEX_MENU                      
+                      00284                                         LOCAL   A=1
+                      00285                                 WHILE   A<NUM_OF_MAIN_MENU_PUNKTS+1
+                      00286                                         GOTO    MENU_#V(A)_ACTION
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE  9
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00287                                         A+=1
+                      00288                                 ENDW
+                      00289                                         ENDM
+Warning[205]: Found directive in column 1. (ENDIF)
+                      00290 ENDIF
+                      00291 ;=======================================================================================================
+                            =========
                       00005 
                       00006 MAIN_UDATA      UDATA_SHR
 0000                  00007 W_TEMP          RES     1
@@ -453,15 +492,14 @@ Warning[205]: Found directive in column 1. (IF)
                       00011 
                       00012         IF      USE_SHORT_MOD_PCL
 0004                  00013 KNOWN_ZERO      RES     1
-Warning[205]: Found directive in column 1. (GLOBAL)
-  0000                00014 GLOBAL  KNOWN_ZERO
+  0000                00014         GLOBAL  KNOWN_ZERO
                       00015         ENDIF
                       00016 
   0000                00017         GLOBAL  FLAGS,OFFSET
                       00018 
   0000                00019         GLOBAL  END_INTERRUPT_HEANDLER,MAIN
   0000                00020         EXTERN  LCD_LINE_INIT,LCD_INIT
-  0000                00021         EXTERN  MENU_HEANDLER,ZASTAVKA
+  0000                00021         EXTERN  MENU_HEANDLER,ZASTAVKA,ENTER_MENU
                       00022 ;==============================================================================================
                       00023 RESET_VECTOR    CODE    0H
 0000   2???           00024         GOTO    INIT
@@ -470,103 +508,112 @@ Warning[205]: Found directive in column 1. (GLOBAL)
 0004                  00027 INTERRUPT_HEANDLER
                       00028         PUSH                                                            ; Сохраним контекст
 0004   00??               M                 MOVWF   W_TEMP
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE  9
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0005   0E03               M                 SWAPF   STATUS,W
 0006   00??               M                 MOVWF   STATUS_TEMP
                       00029 
-Warning[205]: Found directive in column 1. (IF)
-                      00030 IF      USE_RBIE
-0007   100B           00031         BCF             INTCON,RBIF                                     ; Сбросим флаг вызваного прерыва
+                      00030         IF      USE_RBIE
+                      00031         BCF             INTCON,RBIF                                     ; Сбросим флаг вызваного прерыва
                             ния
-0008   0806           00032         MOVFW   PORTB                                           
-0009   380F           00033         IORLW   B'00001111'                                     ; Установим незначущие разряды
-000A   3E01           00034         ADDLW   .1
-000B   1903           00035         BTFSC   STATUS,Z
-000C   2???           00036         GOTO    END_INTERRUPT_HEANDLER          ; Если ни одна кнопка не нажата, пропустим обработку наж
-                            атия
-000D   118B           00037         BCF             INTCON,RBIE                                     ; Запретим все дальнейшие прерыв
+                      00032         MOVFW   PORTB                                           
+                      00033         IORLW   B'00001111'                                     ; Установим незначущие разряды
+                      00034         ADDLW   .1
+                      00035         BZ              END_INTERRUPT_HEANDLER          ; Если ни одна кнопка не нажата, пропустим обраб
+                            отку нажатия
+                      00036         BCF             INTCON,RBIE                                     ; Запретим все дальнейшие прерыв
                             ания от кнопок, до обработки этого нажатия
-000E   1E06           00038         BTFSS   UP
-000F   1400           00039         BSF             PRESS_UP                
-0010   1E86           00040         BTFSS   DOWN
-0011   1480           00041         BSF             PRESS_DOWN
-0012   1F06           00042         BTFSS   ENTER
-0013   1580           00043         BSF             PRESS_ENTER
-0014   1F86           00044         BTFSS   EXIT
-0015   1500           00045         BSF             PRESS_EXIT
-Warning[205]: Found directive in column 1. (ENDIF)
-                      00046 ENDIF
-                      00047 
-0016                  00048 END_INTERRUPT_HEANDLER
-                      00049         POP                                                                     ; Восстановим контекст  
-0016   0E??               M                 SWAPF   STATUS_TEMP,W
-0017   0083               M                 MOVWF   STATUS
-0018   0E??               M                 SWAPF   W_TEMP,F
-0019   0E??               M                 SWAPF   W_TEMP,W
-001A   0009           00050         RETFIE
-                      00051 
-                      00052 ;-------------------------------------------------------------------------------------------------------
-                            ------------
-001B                  00053 INIT
-001B   1683           00054         BANKSEL OPTION_REG
-001C   3000           00055         MOVLW   B'00000000'                                     ; Enable pull-ups resistors on PortB
-Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-001D   0081           00056         MOVWF   OPTION_REG
-001E   2???           00057         CALL    LCD_LINE_INIT                           ; Инициализация линий управления и шины данных д
-                            ля работы с дисплеем
-001F   1283           00058         BANKSEL TMR0
-0020   2???           00059         CALL    LCD_INIT                                        ; Инициалзация самого дисплея
-0021   01??           00060         CLRF    FLAGS
-Warning[205]: Found directive in column 1. (IF)
-                      00061 IF      USE_RBIE
-0022   3088           00062         MOVLW   (1<<RBIE)|(1<<GIE)
-Message[305]: Using default destination of 1 (file).
-0023   048B           00063         IORWF   INTCON
-Warning[205]: Found directive in column 1. (ENDIF)
-                      00064 ENDIF
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE 10
+                      00037         BTFSS   UP
+                      00038         BSF             PRESS_UP                
+                      00039         BTFSS   DOWN
+                      00040         BSF             PRESS_DOWN
+                      00041         BTFSS   ENTER
+                      00042         BSF             PRESS_ENTER
+                      00043         BTFSS   EXIT
+                      00044         BSF             PRESS_EXIT
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0024   2???           00065         GOTO    ZASTAVKA                                        ; Выведем на экран заставку
-0025                  00066 MAIN
-Warning[205]: Found directive in column 1. (IF)
-                      00067 IF      USE_RBIE
-0025   0063           00068         SLEEP
-0026   0000           00069         NOP
-0027   08??           00070         MOVFW   FLAGS                                           
-0028   390F           00071         ANDLW   B'00001111'                                     ; Занулим незначущие разряды
-0029   1903           00072         BTFSC   STATUS,Z
-Warning[205]: Found directive in column 1. (ELSE)
-                      00073 ELSE
-                      00074         MOVFW   PORTB                                           
-                      00075         IORLW   B'00001111'                                     ; Установим незначущие разряды
-                      00076         ADDLW   .1
-                      00077         BTFSC   STATUS,Z
-                      00078 ENDIF
-002A   2???           00079         GOTO    MAIN                                            ; Если ни одна кнопка не нажата, просто 
+                      00045         ENDIF
+                      00046 
+0007                  00047 END_INTERRUPT_HEANDLER
+                      00048         POP                                                                     ; Восстановим контекст  
+0007   0E??               M                 SWAPF   STATUS_TEMP,W
+0008   0083               M                 MOVWF   STATUS
+0009   0E??               M                 SWAPF   W_TEMP,F
+000A   0E??               M                 SWAPF   W_TEMP,W
+000B   0009           00049         RETFIE
+                      00050 ;-------------------------------------------------------------------------------------------------------
+                            ------------
+000C                  00051 INIT
+                      00052         CLR_RAM_MACRO
+000C   304F               M                                 MOVLW   4FH             ; end of RAM
+000D   0084               M                                 MOVWF   FSR
+Warning[207]: Found label after column 1. (CLR_RAM)
+000E                      M                         CLR_RAM 
+000E   0180               M                                 CLRF    INDF
+Message[305]: Using default destination of 1 (file).
+000F   0384               M                                 DECF    FSR
+0010   0804               M                                 MOVFW   FSR
+0011   3C0B               M                                 SUBLW   0CH-1   ; start RAM
+0012   1D03 2???          M                                 BNZ             CLR_RAM
+0014   1683           00053         BANKSEL OPTION_REG
+0015   3000           00054         MOVLW   B'00000000'                                     ; Enable pull-ups resistors on PortB
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0016   0081           00055         MOVWF   OPTION_REG
+0017   2???           00056         CALL    LCD_LINE_INIT                           ; Инициализация линий управления и шины данных д
+                            ля работы с дисплеем
+0018   1283           00057         BANKSEL TMR0
+0019   2???           00058         CALL    LCD_INIT                                        ; Инициалзация самого дисплея
+001A   01??           00059         CLRF    FLAGS
+                      00060         
+                      00061         IF      USE_RBIE
+                      00062         MOVLW   (1<<RBIE)|(1<<GIE)
+                      00063         IORWF   INTCON
+                      00064         ENDIF
+                      00065         
+001B   2???           00066         GOTO    ZASTAVKA                                        ; Выведем на экран заставку
+001C                  00067 MAIN
+                      00068         IF      USE_RBIE
+                      00069         SLEEP
+                      00070         NOP
+                      00071         MOVFW   FLAGS                                           
+                      00072         ANDLW   B'00001111'                                     ; Занулим незначущие разряды
+                      00073         BTFSC   STATUS,Z
+                      00074 
+                      00075         ELSE
+001C   0806           00076         MOVFW   PORTB                                           
+001D   380F           00077         IORLW   B'00001111'                                     ; Установим незначущие разряды
+001E   3E01           00078         ADDLW   .1
+001F   1903           00079         BTFSC   STATUS,Z
+                      00080         ENDIF
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE 11
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                      00081         
+0020   2???           00082         GOTO    MAIN                                            ; Если ни одна кнопка не нажата, просто 
                             зациклимся
-002B   2???           00080         GOTO    MENU_HEANDLER                           ; Иначе входим в обработчик меню
-                      00081 
-3FF1                  00082         END
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE 11
+0021   2???           00083         GOTO    MENU_HEANDLER                           ; Иначе входим в обработчик меню
+                      00084 
+3FF1                  00085         END
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE 12
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-ACTION_COMPLETE_STRING            "Action Complete!"
+ACTIONS_MENU_FLAGS                B'00000001'
 ADD_PCL                           
 C                                 00000000
+CLR_RAM                           0000000E
+CLR_RAM_MACRO                     
 CREATE_MENU_NAMES                 
 CREATE_SUBMENU_NAMES              
+CREATE_SUBMENU_NAMES_             
 DC                                00000001
 DOWN                              PORTB,5
 EEADR                             00000009
@@ -575,19 +622,21 @@ EECON2                            00000089
 EEDATA                            00000008
 EEIE                              00000006
 EEIF                              00000004
-END_INTERRUPT_HEANDLER            00000016
+END_INTERRUPT_HEANDLER            00000007
 ENTER                             PORTB,6
+ENTER_MENU                        00000000
 EXIT                              PORTB,7
 EXIT_DELAY                        .20
 F                                 00000001
 FLAGS                             00000002
 FSR                               00000004
 GIE                               00000007
+GOTO_MENU_ACTION                  
 GOTO_PUNKT_MENU                   
 GOTO_PUNKT_SUBMENU                
 GOTO_PUNKT_SUBMENU_ACTION         
 INDF                              00000000
-INIT                              0000001B
+INIT                              0000000C
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
@@ -597,44 +646,55 @@ IRP                               00000007
 KNOWN_ZERO                        00000004
 LCD_INIT                          00000000
 LCD_LINE_INIT                     00000000
-MAIN                              00000025
+MAIN                              0000001C
 MENU_HEANDLER                     00000000
 MENU_NAME_1                       "1.Menu_1"
 MENU_NAME_2                       "2.Menu_2"
 MENU_NAME_3                       "3.Menu_3"
 MENU_NAME_4                       "4.Menu_4"
 MENU_NAME_5                       "5.Menu_5"
-MENU_SUBMENU_NAME_1_1             "1.1.SubMenu"
-MENU_SUBMENU_NAME_1_2             "1.2.SubMenu"
-MENU_SUBMENU_NAME_1_3             "1.3.SubMenu"
-MENU_SUBMENU_NAME_2_1             "2.1.SubMenu"
-MENU_SUBMENU_NAME_2_2             "2.2.SubMenu"
-MENU_SUBMENU_NAME_2_3             "2.3.SubMenu"
-MENU_SUBMENU_NAME_3_1             "3.1.SubMenu"
-MENU_SUBMENU_NAME_3_2             "3.2.SubMenu"
-MENU_SUBMENU_NAME_3_3             "3.3.SubMenu"
-MENU_SUBMENU_NAME_4_1             "4.1.SubMenu"
-MENU_SUBMENU_NAME_4_2             "4.2.SubMenu"
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE 12
+MENU_NAME_6                       "6.Menu_6"
+MENU_SUBMENU_NAME_1_1             "1.1.Subm"
+MENU_SUBMENU_NAME_1_2             "1.2.Subm"
+MENU_SUBMENU_NAME_1_3             "1.3.Subm"
+MENU_SUBMENU_NAME_1_4             "1.4.Subm"
+MENU_SUBMENU_NAME_2_1             "2.1.Subm"
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE 13
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-MENU_SUBMENU_NAME_4_3             "4.3.SubMenu"
-MENU_SUBMENU_NAME_5_1             "5.1.SubMenu"
-MENU_SUBMENU_NAME_5_2             "5.2.SubMenu"
-MENU_SUBMENU_NAME_5_3             "5.3.SubMenu"
+MENU_SUBMENU_NAME_2_2             "2.2.Subm"
+MENU_SUBMENU_NAME_2_3             "2.3.Subm"
+MENU_SUBMENU_NAME_2_4             "2.4.Subm"
+MENU_SUBMENU_NAME_3_1             "3.1.Subm"
+MENU_SUBMENU_NAME_3_2             "3.2.Subm"
+MENU_SUBMENU_NAME_3_3             "3.3.Subm"
+MENU_SUBMENU_NAME_3_4             "3.4.Subm"
+MENU_SUBMENU_NAME_4_1             "4.1.Subm"
+MENU_SUBMENU_NAME_4_2             "4.2.Subm"
+MENU_SUBMENU_NAME_4_3             "4.3.Subm"
+MENU_SUBMENU_NAME_4_4             "4.4.Subm"
+MENU_SUBMENU_NAME_5_1             "5.1.Subm"
+MENU_SUBMENU_NAME_5_2             "5.2.Subm"
+MENU_SUBMENU_NAME_5_3             "5.3.Subm"
+MENU_SUBMENU_NAME_5_4             "5.4.Subm"
+MENU_SUBMENU_NAME_6_1             "6.1.Subm"
+MENU_SUBMENU_NAME_6_2             "6.2.Subm"
+MENU_SUBMENU_NAME_6_3             "6.3.Subm"
+MENU_SUBMENU_NAME_6_4             "6.4.Subm"
 MOD_PCL                           
 NOT_PD                            00000003
 NOT_RBPU                          00000007
 NOT_TO                            00000004
-NUM_OF_MAIN_MENU_PUNKTS           .5
-NUM_OF_SUBMENU_PUNKTS_1           .3
-NUM_OF_SUBMENU_PUNKTS_2           .3
-NUM_OF_SUBMENU_PUNKTS_3           .3
+NUM_OF_MAIN_MENU_PUNKTS           .6
+NUM_OF_SUBMENU_PUNKTS_1           .0
+NUM_OF_SUBMENU_PUNKTS_2           .1
+NUM_OF_SUBMENU_PUNKTS_3           .2
 NUM_OF_SUBMENU_PUNKTS_4           .3
-NUM_OF_SUBMENU_PUNKTS_5           .3
+NUM_OF_SUBMENU_PUNKTS_5           .4
+NUM_OF_SUBMENU_PUNKTS_6           .3
 OFFSET                            00000003
 OPTION_REG                        00000081
 PCL                               00000002
@@ -658,6 +718,12 @@ RA3                               00000003
 RA4                               00000004
 RB0                               00000000
 RB1                               00000001
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE 14
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 RB2                               00000002
 RB3                               00000003
 RB4                               00000004
@@ -670,16 +736,11 @@ RD                                00000000
 RETLW_NUM_OF_SUBMENU_PUNKTS       
 RP0                               00000005
 RP1                               00000006
+SAVE_CURSOR_POSITION              1
 STATUS                            00000003
 STATUS_TEMP                       00000001
 T0CS                              00000005
 T0IE                              00000005
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE 13
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 T0IF                              00000002
 T0SE                              00000004
 TMR0                              00000001
@@ -701,9 +762,9 @@ TRISB5                            00000005
 TRISB6                            00000006
 TRISB7                            00000007
 UP                                PORTB,4
-USE_MENU_ACTION                   0
+USE_MENU_ACTION                   1
 USE_MOVING_CURSOR                 1
-USE_RBIE                          1
+USE_RBIE                          0
 USE_SHORT_MOD_PCL                 1
 USE_STATIC_CURSOR                 0
 USE_TOP_LAST_CURSOR               1
@@ -716,6 +777,12 @@ Z                                 00000002
 ZASTAVKA                          00000000
 ZASTAVKA_FIRST_STRING             "  MicroMenuLib"
 ZASTAVKA_SECOND_STRING            "  ver 1.0 beta"
+MPASM  5.51                          MAIN.ASM   12-21-2018  19:45:28         PAGE 15
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
 _CONFIG                           00002007
 _CP_OFF                           00003FFF
 _CP_ON                            0000000F
@@ -733,12 +800,6 @@ _PWRTE_OFF                        00003FFF
 _PWRTE_ON                         00003FF7
 _RC_OSC                           00003FFF
 _WDTE_OFF                         00003FFB
-MPASM  5.51                          MAIN.ASM   12-15-2018  10:35:25         PAGE 14
-
-
-SYMBOL TABLE
-  LABEL                             VALUE 
-
 _WDTE_ON                          00003FFF
 _WDT_OFF                          00003FFB
 _WDT_ON                           00003FFF
@@ -746,7 +807,7 @@ _XT_OSC                           00003FFD
 __16F84                           00000001
 
 Errors   :     0
-Warnings :    11 reported,     0 suppressed
+Warnings :     9 reported,     0 suppressed
 Messages :     3 reported,     0 suppressed
 
 

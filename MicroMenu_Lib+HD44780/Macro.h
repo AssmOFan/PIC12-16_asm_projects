@@ -1,4 +1,3 @@
-
 #define	USE_SHORT_MOD_PCL	1	; Использовать "укороченную" версию макроса модификации PCL, позволяет экономить 1 слово памяти на каждом вызове макроса ценой 1 лишней ячейки ОЗУ
 
 push	macro
@@ -13,6 +12,17 @@ pop		macro
 		swapf	w_temp,f
 		swapf	w_temp,w
 		endm
+
+CLR_RAM_macro	macro
+				movlw	4Fh		; end of RAM
+				movwf	FSR
+			CLR_RAM	
+				clrf	INDF
+				decf	FSR
+				movfw	FSR
+				sublw	0Ch-1	; start RAM
+				bnz		CLR_RAM
+				endm
 
 mod_PCL	macro	target			; Макрос, позволяет размещать таблицы на границах страниц
 		local	Table
