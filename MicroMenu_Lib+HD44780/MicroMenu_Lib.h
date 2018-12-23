@@ -3,12 +3,10 @@
 include	hardware_profile.inc
 include	Macro.h	
 
-#define	USE_STATIC_CURSOR		0				; Всегда рисовать курсор в конце 1-й строки
-#define	USE_MOVING_CURSOR		1				; Использовать перемещаемый курсор (повышает удобство использования меню и размер прошивки)
-if 	USE_MOVING_CURSOR
-#define	SAVE_CURSOR_POSITION	1				; Сохранять позицию курсора при входе в подменю, и восстанавливать ее при выходе в главное меню
-#define	USE_TOP_LAST_CURSOR		1				; Использовать отображение "первый пункт всегда сверху" и "последний пункт всегда снизу" (повышает удобство использования меню и размер прошивки)
-endif
+#define	USE_STATIC_CURSOR		1				; Всегда рисовать курсор в конце 1-й строки
+#define	USE_MOVING_CURSOR		0				; Использовать перемещаемый курсор (повышает удобство использования меню и размер прошивки)
+#define	USE_TOP_LAST_CURSOR		0				; Использовать отображение "первый пункт всегда сверху" и "последний пункт всегда снизу" (повышает удобство использования меню и размер прошивки)
+#define	SAVE_CURSOR_POSITION	0				; Сохранять позицию курсора при входе в подменю, и восстанавливать ее при выходе в главное меню
 #define	USE_MENU_ACTION			1				; Использовать возможность запуска действий при входе в пункт меню
 #define	USE_RBIE				0				; Использовать прерывание по изминению состояния PORTB для обработки кнопок (позволяет использовать сон)
 
@@ -21,10 +19,10 @@ endif
 #define	ENTER					PORTB,6
 #define	EXIT					PORTB,7
 
-#define	Press_UP				flags,0
-#define	Press_DOWN				flags,1
-#define	Press_EXIT				flags,2
-#define	Press_ENTER				flags,3	
+#define	Press_UP				buttons,0
+#define	Press_DOWN				buttons,1
+#define	Press_EXIT				buttons,2
+#define	Press_ENTER				buttons,3	
 
 ;#define	ZUMER					PORTA,0
 
@@ -33,7 +31,7 @@ endif
 #define	ZASTAVKA_FIRST_STRING	"  MicroMenuLib"
 #define	ZASTAVKA_SECOND_STRING	"  ver 1.0 beta"
 
-#define	NUM_OF_MAIN_MENU_PUNKTS	.6				; Количество пунктов меню, до 10 
+#define	NUM_OF_MAIN_MENU_PUNKTS	.5				; Количество пунктов меню, до 10 
 
 #define	MENU_NAME_1				"1.Menu_1"
 #define	MENU_NAME_2				"2.Menu_2"
@@ -76,13 +74,6 @@ endif
 #define	MENU_SUBMENU_NAME_5_2	"5.2.Subm"
 #define	MENU_SUBMENU_NAME_5_3	"5.3.Subm"
 #define	MENU_SUBMENU_NAME_5_4	"5.4.Subm"
-
-#define	NUM_OF_SUBMENU_PUNKTS_6	.3
-
-#define	MENU_SUBMENU_NAME_6_1	"6.1.Subm"
-#define	MENU_SUBMENU_NAME_6_2	"6.2.Subm"
-#define	MENU_SUBMENU_NAME_6_3	"6.3.Subm"
-#define	MENU_SUBMENU_NAME_6_4	"6.4.Subm"
 ;================================================================================================================
 Create_Menu_Names	macro				; Макрос, создает имена всех пунктов меню
 			local	a=1
@@ -288,4 +279,49 @@ goto_Menu_action	macro		; Макрос, создает переходы на действия всех пунктов меню
 				endw
 					endm
 endif
+;================================================================================================================
+MicroMenu_Init	macro
+				call	LCD_Init					; Инициалзация самого дисплея	
+				clrf	buttons						; Очистим флаги нажатых кнопок
+				if	USE_RBIE
+				bcf		INTCON,RBIF			
+				movlw	(1<<RBIE)|(1<<GIE)
+				iorwf	INTCON
+				endif
+				endm
+;================================================================================================================
+if	USE_RBIE
+Button_Heandler	macro								; Обработчик нажатия кнопок
+				bcf		INTCON,RBIF					; Сбросим флаг вызваного прерывания
+				movfw	PORTB						
+				iorlw	b'00001111'					; Установим незначущие разряды
+				addlw	.1
+				bz		End_Interrupt_Heandler		; Если ни одна кнопка не нажата, пропустим обработку нажатия
+				btfss	UP
+				bsf		Press_UP		
+				btfss	DOWN
+				bsf		Press_DOWN
+				btfss	ENTER
+				bsf		Press_ENTER
+				btfss	EXIT
+				bsf		Press_EXIT
+				bcf		INTCON,RBIE					; Запретим все дальнейшие прерывания от кнопок, до обработки этого нажатия
+				endm
+endif
+;================================================================================================================
+Check_buttons_macro	macro
+					if	USE_RBIE
+					sleep
+					nop
+					movfw	buttons						
+					andlw	b'00001111'					; Занулим незначущие разряды
+					bnz		Menu_heandler				; Если хоть одна кнопка нажата, входим в обработчик меню
+				
+					else
+					movfw	PORTB						
+					iorlw	b'00001111'					; Установим незначущие разряды
+					addlw	.1
+					bnz		Menu_heandler				; Если хоть одна кнопка нажата, входим в обработчик меню
+					endif
+					endm
 ;================================================================================================================

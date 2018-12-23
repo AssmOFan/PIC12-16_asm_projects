@@ -1,4 +1,4 @@
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  1
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00037 
                       00038         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && ONLY_WRITE)
                       00039 E                               EQU             4
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  2
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -93,42 +93,49 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
   00000080            00066 DD_RAM_ADDR             EQU             B'10000000'             ; Least Significant 7-bit are for addres
                             s
   00000080            00067 DD_RAM_UL               EQU             B'10000000'             ; Upper Left coner of the Display
-  000000C0            00068 SECOND_LINE             EQU             B'11000000'             ; Move cursor to second line
-  0000008F            00069 LAST_SYMBOL_FIRST_LINE  EQU     B'10001111'     ; Установим курсор на последний символ 1-й строки
-  000000CF            00070 LAST_SYMBOL_SECOND_LINE EQU     B'11001111'     ; Установим курсор на последний символ 2-й строки
-                      00071 
-                      00072 PRINT_LCD_STRING_MACRO  MACRO   LABEL
-                      00073                                                 LOCAL   PRINT_LCD_STRING,END_LCD_STRING 
-                      00074                                                 CLRF    SYMBOL_POINTER
-                      00075                                         PRINT_LCD_STRING
-                      00076                                                 CALL    LABEL
-                      00077                                                 ANDLW   0FFH
-                      00078                                                 BTFSC   STATUS,Z
-                      00079                                                 GOTO    END_LCD_STRING          
-                      00080                                                 CALL    SEND_LCD_SYMBOL
-                      00081                                                 INCF    SYMBOL_POINTER  
-                      00082                                                 GOTO    PRINT_LCD_STRING
-                      00083                                         END_LCD_STRING  
-                      00084                                                 ENDM
-                      00085 ;=======================================================================================================
+  00000080            00068 FIRST_LINE              EQU             B'10000000'             ; Move cursor to first line
+  000000C0            00069 SECOND_LINE             EQU             B'11000000'             ; Move cursor to second line
+  0000008F            00070 LAST_SYMBOL_FIRST_LINE  EQU     B'10001111'     ; Установим курсор на последний символ 1-й строки
+  000000CF            00071 LAST_SYMBOL_SECOND_LINE EQU     B'11001111'     ; Установим курсор на последний символ 2-й строки
+                      00072 
+                      00073 PRINT_LCD_STRING_MACRO  MACRO   LABEL
+                      00074                                                 LOCAL   PRINT_LCD_STRING,END_LCD_STRING 
+                      00075                                                 CLRF    SYMBOL_POINTER
+                      00076                                         PRINT_LCD_STRING
+                      00077                                                 CALL    LABEL
+                      00078                                                 ANDLW   0FFH
+                      00079                                                 BTFSC   STATUS,Z
+                      00080                                                 GOTO    END_LCD_STRING          
+                      00081                                                 CALL    SEND_LCD_SYMBOL
+                      00082                                                 INCF    SYMBOL_POINTER  
+                      00083                                                 GOTO    PRINT_LCD_STRING
+                      00084                                         END_LCD_STRING  
+                      00085                                                 ENDM
+                      00086 ;=======================================================================================================
                             =========
-                      00086 DRAW_CURSOR     MACRO   SYMBOL
-                      00087                         MOVLW   SYMBOL
-                      00088                         CALL    DRAW_CURSOR_ROUTINE
-                      00089                         ENDM
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  3
+                      00087 DRAW_CURSOR     MACRO   SYMBOL
+                      00088                         MOVLW   SYMBOL
+                      00089                         CALL    DRAW_CURSOR_ROUTINE
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-                      00090 ;=======================================================================================================
+                      00090                         ENDM
+                      00091 ;=======================================================================================================
                             =========
-                      00091 SECOND_LINE_MACRO       MACRO
-                      00092                                         MOVLW   SECOND_LINE     
-                      00093                                         CALL    SEND_LCD_COMMAND
-                      00094                                         ENDM
-                      00095 ;=======================================================================================================
+                      00092 SECOND_LINE_MACRO       MACRO
+                      00093                                         MOVLW   SECOND_LINE     
+                      00094                                         CALL    SEND_LCD_COMMAND
+                      00095                                         ENDM
+                      00096 ;=======================================================================================================
+                            =========
+                      00097 FIRST_LINE_MACRO        MACRO
+                      00098                                         MOVLW   FIRST_LINE      
+                      00099                                         CALL    SEND_LCD_COMMAND
+                      00100                                         ENDM
+                      00101 ;=======================================================================================================
                             =========
                       00002                                 
                       00003 LCD_LIB_UDATA   UDATA_SHR
@@ -168,6 +175,12 @@ Message[305]: Using default destination of 1 (file).
                       00034         CALL    STROB
                       00035 
                       00036         ELSE
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  4
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0008   00??           00037         MOVWF   SYMBOL
 0009   0E??           00038         SWAPF   SYMBOL,W
 000A   0086           00039         MOVWF   LCD_DATA
@@ -175,12 +188,6 @@ Message[305]: Using default destination of 1 (file).
 000C   08??           00041         MOVFW   SYMBOL
 000D   0086           00042         MOVWF   LCD_DATA
 000E   2???           00043         CALL    STROB
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  4
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
                       00044         ENDIF
                       00045 
 000F   0008           00046         RETURN
@@ -227,6 +234,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00084 
                       00085         ELSE
                       00086         MOVLW   B'00000000'
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  5
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                       00087         ENDIF
                       00088 
 Message[305]: Using default destination of 1 (file).
@@ -234,12 +247,6 @@ Message[302]: Register in operand not in bank 0.  Ensure that bank bits are corr
 001B   0586           00089         ANDWF   LCD_DATA_TRIS
 001C   30F5           00090         MOVLW   CNTL_TRIS_MASK                          ; RS and E as outputs, if RW not used - as input
 Message[305]: Using default destination of 1 (file).
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  5
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 001D   0585           00091         ANDWF   LCD_CNTL_TRIS
 001E   0008           00092         RETURN                                           
@@ -286,6 +293,12 @@ Message[305]: Using default destination of 1 (file).
                       00124         ENDIF
                       00125 
                       00126 ; Дальше надо бы читать состояния флага шины (BF), но легче тупить задержками по 100 мкс (в составе проц
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  6
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
                             едуры Strob)
                       00127 
                       00128         IF      (USE_4_BIT_MODE && !USE_HIGH_NIBLE)
@@ -293,12 +306,6 @@ Message[305]: Using default destination of 1 (file).
                             полубайт
 002E   0086           00130         MOVWF   LCD_DATA
 002F   2???           00131         CALL    STROB
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  6
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0030   3002           00132         MOVLW   B'00000010'                                     ; Опять старший полубайт, потому что мы 
                             перед этим переключились на 4-х битную шину и его надо переслать опять
 0031   0086           00133         MOVWF   LCD_DATA
@@ -345,6 +352,12 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 003F                  00165 CLR_DISPLAY_ROUTINE                                             ; Подпрограмма очистки дисплея
 003F   3001           00166         MOVLW   CLR_DISP
 0040   2???           00167         CALL    SEND_LCD_COMMAND
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  7
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
 0041   2???           00168         CALL    DELAY_4MS                                       ; Обязательная задержка после очистки ди
                             сплея !!!
 0042   0008           00169         RETURN
@@ -352,12 +365,6 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0043                  00171 DELAY_4MS
 0043   3005           00172         MOVLW   .5
 0044   00??           00173         MOVWF   TEMP_2
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  7
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
 0045   01??           00174         CLRF    TEMP_1          
 Message[305]: Using default destination of 1 (file).
 0046   0B??           00175         DECFSZ  TEMP_1
@@ -368,7 +375,7 @@ Message[305]: Using default destination of 1 (file).
 004A   0008           00179         RETURN
                       00180 ;===================================================================================================
                       00181         END
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  8
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  8
 
 
 SYMBOL TABLE
@@ -399,6 +406,8 @@ ENTRY_DEC_S                       00000005
 ENTRY_INC                         00000006
 ENTRY_INC_S                       00000007
 F                                 00000001
+FIRST_LINE                        00000080
+FIRST_LINE_MACRO                  
 FSR                               00000004
 GIE                               00000007
 INDF                              00000000
@@ -425,14 +434,14 @@ PCL                               00000002
 PCLATH                            0000000A
 PORTA                             00000005
 PORTB                             00000006
-PRINT_LCD_STRING_MACRO            
-PS0                               00000000
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE  9
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  9
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+PRINT_LCD_STRING_MACRO            
+PS0                               00000000
 PS1                               00000001
 PS2                               00000002
 PSA                               00000003
@@ -484,14 +493,14 @@ TRISB2                            00000002
 TRISB3                            00000003
 TRISB4                            00000004
 TRISB5                            00000005
-TRISB6                            00000006
-TRISB7                            00000007
-MPASM  5.51                   HD44780_LIB.ASM   12-21-2018  19:55:12         PAGE 10
+MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE 10
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
+TRISB6                            00000006
+TRISB7                            00000007
 USE_4_BIT_MODE                    00000001
 USE_HIGH_NIBLE                    00000000
 USE_ONE_PORT                      00000000

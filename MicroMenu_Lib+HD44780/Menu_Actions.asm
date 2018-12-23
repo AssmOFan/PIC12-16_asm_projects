@@ -86,15 +86,3 @@ Menu_5_Submenu_4_action					; Выполняем действие 4 подпункта 5 пункта
 ;	nop
 	goto	End_Action
 ;---------------------------------------------------------------------------------------------------
-Menu_6_Submenu_1_action					; Выполняем действие 1 подпункта 5 пункта
-;	nop
-	goto	End_Action
-Menu_6_Submenu_2_action					; Выполняем действие 2 подпункта 5 пункта
-;	nop
-	goto	End_Action
-Menu_6_Submenu_3_action					; Выполняем действие 2 подпункта 5 пункта
-;	nop
-	goto	End_Action
-Menu_6_Submenu_4_action					; Выполняем действие 2 подпункта 5 пункта
-;	nop
-	goto	End_Action
