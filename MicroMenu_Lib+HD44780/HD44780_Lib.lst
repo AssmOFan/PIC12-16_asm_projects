@@ -1,4 +1,4 @@
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  1
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00037 
                       00038         IF      (USE_4_BIT_MODE && USE_ONE_PORT && !USE_HIGH_NIBLE && ONLY_WRITE)
                       00039 E                               EQU             4
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  2
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00087 DRAW_CURSOR     MACRO   SYMBOL
                       00088                         MOVLW   SYMBOL
                       00089                         CALL    DRAW_CURSOR_ROUTINE
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  3
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -175,7 +175,7 @@ Message[305]: Using default destination of 1 (file).
                       00034         CALL    STROB
                       00035 
                       00036         ELSE
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  4
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00084 
                       00085         ELSE
                       00086         MOVLW   B'00000000'
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  5
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ Message[305]: Using default destination of 1 (file).
                       00124         ENDIF
                       00125 
                       00126 ; Дальше надо бы читать состояния флага шины (BF), но легче тупить задержками по 100 мкс (в составе проц
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  6
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 003F                  00165 CLR_DISPLAY_ROUTINE                                             ; Подпрограмма очистки дисплея
 003F   3001           00166         MOVLW   CLR_DISP
 0040   2???           00167         CALL    SEND_LCD_COMMAND
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  7
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -375,7 +375,7 @@ Message[305]: Using default destination of 1 (file).
 004A   0008           00179         RETURN
                       00180 ;===================================================================================================
                       00181         END
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  8
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  8
 
 
 SYMBOL TABLE
@@ -434,7 +434,7 @@ PCL                               00000002
 PCLATH                            0000000A
 PORTA                             00000005
 PORTB                             00000006
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE  9
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE  9
 
 
 SYMBOL TABLE
@@ -493,7 +493,7 @@ TRISB2                            00000002
 TRISB3                            00000003
 TRISB4                            00000004
 TRISB5                            00000005
-MPASM  5.51                   HD44780_LIB.ASM   12-23-2018  23:07:25         PAGE 10
+MPASM  5.51                   HD44780_LIB.ASM   12-24-2018  10:37:53         PAGE 10
 
 
 SYMBOL TABLE

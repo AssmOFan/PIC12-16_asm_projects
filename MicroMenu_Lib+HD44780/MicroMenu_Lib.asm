@@ -149,9 +149,14 @@ Loop_Menu								; Вычисляем нажатую клавишу
 	goto	Zastavka					; Вышел таймаут нахождения в меню, выходим в заставку	
 ;-----------------------------------------------------------------
 Cursor_UP_menu							; Была нажата клавиша "Вверх"
-	if	USE_MOVING_CURSOR & !USE_RBIE	; При использовании прерываний этот флаг и так выставляется в обработчике
+	if	USE_MOVING_CURSOR & !USE_RBIE	; При использовании RBIE этот флаг и так выставляется в обработчике
 	clrf	buttons						; Очистим флаги нажатых кнопок					
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
+	endif
+
+	if	USE_MOVING_CURSOR & SAVE_CURSOR_POSITION & USE_RBIE
+	movfw	buttons						; При использовании RBIE
+	movwf	save_position				; Сохраним позицию курсора тут, иначе она будет потеряна при нажатии кнопки входа в меню
 	endif
 
 	decf	index_menu					; Берем предыдущий пункт меню
@@ -162,9 +167,14 @@ Cursor_UP_menu							; Была нажата клавиша "Вверх"
 	goto	Draw_Menu					; Отрисовываем новый текущий пункт меню
 ;-----------------------------------------------------------------
 Cursor_DOWN_menu						; Была нажата клавиша "Вниз"
-	if	USE_MOVING_CURSOR & !USE_RBIE	; При использовании прерываний этот флаг и так выставляется в обработчике
+	if	USE_MOVING_CURSOR & !USE_RBIE	; При использовании RBIE этот флаг и так выставляется в обработчике
 	clrf	buttons						; Очистим флаги нажатых кнопок					
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
+	endif
+
+	if	USE_MOVING_CURSOR & SAVE_CURSOR_POSITION & USE_RBIE
+	movfw	buttons						; При использовании RBIE
+	movwf	save_position				; Сохраним позицию курсора тут, иначе она будет потеряна при нажатии кнопки входа в меню
 	endif
 
 	incf	index_menu					; Берем следущий пункт меню
@@ -203,9 +213,9 @@ End_Menu_Action
 	bz		Draw_Menu					; Если 0, сразу на выход без прорисовки подпунктов
 	clrf	index_submenu				; Очистим индекс пункта подменю	
 
-	if	USE_MOVING_CURSOR & SAVE_CURSOR_POSITION
-	movfw	buttons
-	movwf	save_position				; Сохраним позицию курсора
+	if	USE_MOVING_CURSOR & SAVE_CURSOR_POSITION & !USE_RBIE
+	movfw	buttons						; Если не используем RBIE
+	movwf	save_position				; Можно сохранить позицию курсора 1 раз, уже находясь в пункте меню
 	endif
 
 	if	USE_MOVING_CURSOR & !USE_TOP_LAST_CURSOR
@@ -335,6 +345,11 @@ Cursor_UP_submenu						; Была нажата клавиша "Вверх"
 	bsf		Press_UP					; И установим признак нажатия только для кнопки "ВВЕРХ"
 	endif
 
+	if	USE_MOVING_CURSOR & SAVE_CURSOR_POSITION & USE_RBIE
+	movfw	buttons						; При использовании RBIE
+	movwf	save_position				; Сохраним позицию курсора тут, иначе она будет потеряна при нажатии кнопки входа в подменю
+	endif
+
 	decf	index_submenu				; Уменьшаем индекс подменю
 	btfss	index_submenu,.7			; Проверяем на "<0"	простой проверкой 7 бита, максимальное количество пунктов подменю ограничено 64
 	goto	Draw_Submenu		
@@ -346,6 +361,11 @@ Cursor_DOWN_submenu						; Была нажата клавиша "Вниз"
 	if	USE_MOVING_CURSOR & !USE_RBIE	; При использовании прерываний этот флаг и так выставляется в обработчике
 	clrf	buttons						; Очистим флаги нажатых кнопок					
 	bsf		Press_DOWN					; И установим признак нажатия только для кнопки "ВНИЗ"
+	endif
+
+	if	USE_MOVING_CURSOR & SAVE_CURSOR_POSITION & USE_RBIE
+	movfw	buttons						; При использовании RBIE
+	movwf	save_position				; Сохраним позицию курсора тут, иначе она будет потеряна при нажатии кнопки входа в подменю
 	endif
 
 	incf	index_submenu				; Увеличиваем индекс подменю
@@ -376,6 +396,11 @@ End_Action
 	decfsz	temp_3
 	goto	$-2
 ;-----------------------------------------------------------------
+	if USE_MOVING_CURSOR & SAVE_CURSOR_POSITION & USE_RBIE
+	movfw	save_position				; При использовании RBIE
+	movwf	buttons						; Восстановим позицию курсора, так флаги в buttons были изменены при входе в подменю
+	endif
+
 	goto	Draw_Submenu				; И идем отрисовывать подпункт меню, курсор на том же подпункте, что и был
 ;===================================================================================================
 Debounce_Delay							; Подпрограмма антидребезговой задержки

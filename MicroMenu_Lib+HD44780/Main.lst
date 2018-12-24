@@ -1,4 +1,4 @@
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  1
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ Warning[205]: Found directive in column 1. (INCLUDE)
                       00016 CLR_RAM_MACRO   MACRO
                       00017                                 MOVLW   4FH             ; end of RAM
                       00018                                 MOVWF   FSR
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  2
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -109,14 +109,14 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00062                                 ADDWF   PCL
                       00063                                 ENDM
                       00005 
-                      00006 #DEFINE USE_STATIC_CURSOR               1                               ; Всегда рисовать курсор в конце
+                      00006 #DEFINE USE_STATIC_CURSOR               0                               ; Всегда рисовать курсор в конце
                              1-й строки
-                      00007 #DEFINE USE_MOVING_CURSOR               0                               ; Использовать перемещаемый курс
+                      00007 #DEFINE USE_MOVING_CURSOR               1                               ; Использовать перемещаемый курс
                             ор (повышает удобство использования меню и размер прошивки)
-                      00008 #DEFINE USE_TOP_LAST_CURSOR             0                               ; Использовать отображение "перв
+                      00008 #DEFINE USE_TOP_LAST_CURSOR             1                               ; Использовать отображение "перв
                             ый пункт всегда сверху" и "последний пункт всегда снизу" (повышает удобство использования меню и
-                      00009 #DEFINE SAVE_CURSOR_POSITION    0                               ; Сохранять позицию курсора при входе в 
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  3
+                      00009 #DEFINE SAVE_CURSOR_POSITION    1                               ; Сохранять позицию курсора при входе в 
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -125,7 +125,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             подменю, и восстанавливать ее при выходе в главное меню
                       00010 #DEFINE USE_MENU_ACTION                 1                               ; Использовать возможность запус
                             ка действий при входе в пункт меню
-                      00011 #DEFINE USE_RBIE                                0                               ; Использовать прерывани
+                      00011 #DEFINE USE_RBIE                                1                               ; Использовать прерывани
                             е по изминению состояния PORTB для обработки кнопок (позволяет использовать сон)
                       00012 
 Warning[205]: Found directive in column 1. (IF)
@@ -175,7 +175,7 @@ Warning[205]: Found directive in column 1. (ENDIF)
                       00052 #DEFINE MENU_SUBMENU_NAME_2_1   "2.1.Subm"
                       00053 #DEFINE MENU_SUBMENU_NAME_2_2   "2.2.Subm"
                       00054 #DEFINE MENU_SUBMENU_NAME_2_3   "2.3.Subm"
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  4
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -234,7 +234,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00102                                         A+=1
                       00103                                 ENDW
                       00104                         ENDM
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  5
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -293,7 +293,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             ктов меню :(
                       00149                                                 LOCAL   D=1
                       00150                                                 LOCAL   A       
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  6
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -352,7 +352,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             ----
                       00194                                 IF              D<NUM_OF_MAIN_MENU_PUNKTS+1
                       00195                                 LOCAL   A=1     
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  7
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  7
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -411,7 +411,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                       00240                                 ENDW
                       00241                                         D+=1
                       00242                                 ENDIF
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  8
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  8
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -470,7 +470,7 @@ Warning[205]: Found directive in column 1. (ENDIF)
                       00283 MICROMENU_INIT  MACRO
                       00284                                 CALL    LCD_INIT                                        ; Инициалзация с
                             амого дисплея   
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE  9
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE  9
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -480,7 +480,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             нажатых кнопок
                       00286                                 IF      USE_RBIE
                       00287                                 BCF             INTCON,RBIF                     
-                      00288                                 MOVLW   (1<<RBIE)|(1<<GIE)
+                      00288                                 MOVLW   1<<RBIE|1<<GIE
                       00289                                 IORWF   INTCON
                       00290                                 ENDIF
                       00291                                 ENDM
@@ -509,6 +509,7 @@ Warning[205]: Found directive in column 1. (IF)
                       00308                                 BCF             INTCON,RBIE                                     ; Запрет
                             им все дальнейшие прерывания от кнопок, до обработки этого нажатия
                       00309                                 ENDM
+Warning[205]: Found directive in column 1. (ENDIF)
                       00310 ENDIF
                       00311 ;=======================================================================================================
                             =========
@@ -528,13 +529,13 @@ Warning[205]: Found directive in column 1. (IF)
                             вим незначущие разряды
                       00323                                         ADDLW   .1
                       00324                                         BNZ             MENU_HEANDLER                           ; Если х
-                            оть одна кнопка нажата, входим в обработчик меню
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE 10
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 10
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
+                            оть одна кнопка нажата, входим в обработчик меню
                       00325                                         ENDIF
                       00326                                         ENDM
                       00327 ;=======================================================================================================
@@ -568,76 +569,100 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0004   00??               M                 MOVWF   W_TEMP
 0005   0E03               M                 SWAPF   STATUS,W
 0006   00??               M                 MOVWF   STATUS_TEMP
-Warning[207]: Found label after column 1. (BUTTON_HEANDLER)
-0007                  00030         BUTTON_HEANDLER
-0007                  00031 END_INTERRUPT_HEANDLER
-                      00032         POP                                                                     ; Восстановим контекст  
-0007   0E??               M                 SWAPF   STATUS_TEMP,W
-0008   0083               M                 MOVWF   STATUS
-0009   0E??               M                 SWAPF   W_TEMP,F
-000A   0E??               M                 SWAPF   W_TEMP,W
-000B   0009           00033         RETFIE
-                      00034 ;==============================================================================================
-000C                  00035 INIT
-                      00036         CLR_RAM_MACRO                                           ; Макрос очистки памяти. Требует коррекц
-                            ии диапазона под каждый конкретный МК (см. datasheet)
-000C   304F               M                                 MOVLW   4FH             ; end of RAM
-000D   0084               M                                 MOVWF   FSR
-Warning[207]: Found label after column 1. (CLR_RAM)
-000E                      M                         CLR_RAM 
-000E   0180               M                                 CLRF    INDF
-Message[305]: Using default destination of 1 (file).
-000F   0384               M                                 DECF    FSR
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE 11
+                      00030         BUTTON_HEANDLER
+0007   100B               M                                 BCF             INTCON,RBIF                                     ; Сброси
+                            м флаг вызваного прерывания
+0008   0806               M                                 MOVFW   PORTB                                           
+0009   380F               M                                 IORLW   B'00001111'                                     ; Установим незн
+                            ачущие разряды
+000A   3E01               M                                 ADDLW   .1
+000B   1903 2???          M                                 BZ              END_INTERRUPT_HEANDLER          ; Если ни одна кнопка не
+                             нажата, пропустим обработку нажатия
+000D   1E06               M                                 BTFSS   UP
+000E   1400               M                                 BSF             PRESS_UP                
+000F   1E86               M                                 BTFSS   DOWN
+0010   1480               M                                 BSF             PRESS_DOWN
+0011   1F06               M                                 BTFSS   ENTER
+0012   1580               M                                 BSF             PRESS_ENTER
+0013   1F86               M                                 BTFSS   EXIT
+0014   1500               M                                 BSF             PRESS_EXIT
+0015   118B               M                                 BCF             INTCON,RBIE                                     ; Запрет
+                            им все дальнейшие прерывания от кнопок, до обработки этого нажатия
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 11
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0010   0804               M                                 MOVFW   FSR
-0011   3C0B               M                                 SUBLW   0CH-1   ; start RAM
-0012   1D03 2???          M                                 BNZ             CLR_RAM
-0014   1683           00037         BANKSEL OPTION_REG
-0015   3000           00038         MOVLW   B'00000000'                                     ; Enable pull-ups resistors on PortB
+0016                  00031 END_INTERRUPT_HEANDLER
+                      00032         POP                                                                     ; Восстановим контекст  
+0016   0E??               M                 SWAPF   STATUS_TEMP,W
+0017   0083               M                 MOVWF   STATUS
+0018   0E??               M                 SWAPF   W_TEMP,F
+0019   0E??               M                 SWAPF   W_TEMP,W
+001A   0009           00033         RETFIE
+                      00034 ;==============================================================================================
+001B                  00035 INIT
+                      00036         CLR_RAM_MACRO                                           ; Макрос очистки памяти. Требует коррекц
+                            ии диапазона под каждый конкретный МК (см. datasheet)
+001B   304F               M                                 MOVLW   4FH             ; end of RAM
+001C   0084               M                                 MOVWF   FSR
+Warning[207]: Found label after column 1. (CLR_RAM)
+001D                      M                         CLR_RAM 
+001D   0180               M                                 CLRF    INDF
+Message[305]: Using default destination of 1 (file).
+001E   0384               M                                 DECF    FSR
+001F   0804               M                                 MOVFW   FSR
+0020   3C0B               M                                 SUBLW   0CH-1   ; start RAM
+0021   1D03 2???          M                                 BNZ             CLR_RAM
+0023   1683           00037         BANKSEL OPTION_REG
+0024   3000           00038         MOVLW   B'00000000'                                     ; Enable pull-ups resistors on PortB
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0016   0081           00039         MOVWF   OPTION_REG
-0017   2???           00040         CALL    LCD_LINE_INIT                           ; Инициализация линий управления и шины данных д
+0025   0081           00039         MOVWF   OPTION_REG
+0026   2???           00040         CALL    LCD_LINE_INIT                           ; Инициализация линий управления и шины данных д
                             ля работы с дисплеем
-0018   1283           00041         BANKSEL TMR0
+0027   1283           00041         BANKSEL TMR0
                       00042         MICROMENU_INIT                                          ; Инициализация MicroMenu       
-0019   2???               M                                 CALL    LCD_INIT                                        ; Инициалзация с
+0028   2???               M                                 CALL    LCD_INIT                                        ; Инициалзация с
                             амого дисплея   
-001A   01??               M                                 CLRF    BUTTONS                                         ; Очистим флаги 
+0029   01??               M                                 CLRF    BUTTONS                                         ; Очистим флаги 
                             нажатых кнопок
                           M                                 IF      USE_RBIE
-                          M                                 BCF             INTCON,RBIF                     
-                          M                                 MOVLW   (1<<RBIE)|(1<<GIE)
-                          M                                 IORWF   INTCON
+002A   100B               M                                 BCF             INTCON,RBIF                     
+002B   3088               M                                 MOVLW   1<<RBIE|1<<GIE
+Message[305]: Using default destination of 1 (file).
+002C   048B               M                                 IORWF   INTCON
                           M                                 ENDIF
-001B   2???           00043         GOTO    ZASTAVKA                                        ; Выведем на экран заставку
-001C                  00044 MAIN
+002D   2???           00043         GOTO    ZASTAVKA                                        ; Выведем на экран заставку
+002E                  00044 MAIN
                       00045         CHECK_BUTTONS_MACRO     
                           M                                         IF      USE_RBIE
-                          M                                         SLEEP
-                          M                                         NOP
-                          M                                         MOVFW   BUTTONS                                         
-                          M                                         ANDLW   B'00001111'                                     ; Занули
+002E   0063               M                                         SLEEP
+002F   0000               M                                         NOP
+0030   08??               M                                         MOVFW   BUTTONS                                         
+0031   390F               M                                         ANDLW   B'00001111'                                     ; Занули
                             м незначущие разряды
-                          M                                         BNZ             MENU_HEANDLER                           ; Если х
+0032   1D03 2???          M                                         BNZ             MENU_HEANDLER                           ; Если х
                             оть одна кнопка нажата, входим в обработчик меню
                           M                                 
                           M                                         ELSE
-001C   0806               M                                         MOVFW   PORTB                                           
-001D   380F               M                                         IORLW   B'00001111'                                     ; Устано
+                          M                                         MOVFW   PORTB                                           
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 12
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+                          M                                         IORLW   B'00001111'                                     ; Устано
                             вим незначущие разряды
-001E   3E01               M                                         ADDLW   .1
-001F   1D03 2???          M                                         BNZ             MENU_HEANDLER                           ; Если х
+                          M                                         ADDLW   .1
+                          M                                         BNZ             MENU_HEANDLER                           ; Если х
                             оть одна кнопка нажата, входим в обработчик меню
                           M                                         ENDIF
-0021   2???           00046         GOTO    MAIN                                            ; Иначе продолжаем опрос кнопок
+0034   2???           00046         GOTO    MAIN                                            ; Иначе продолжаем опрос кнопок
                       00047 ;==============================================================================================
 3FF1                  00048         END
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE 12
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 13
 
 
 SYMBOL TABLE
@@ -646,10 +671,10 @@ SYMBOL TABLE
 ACTIONS_MENU_FLAGS                B'00000001'
 ADD_PCL                           
 BUTTONS                           00000000
-BUTTON_HEANDLER                   00000007
+BUTTON_HEANDLER                   
 C                                 00000000
 CHECK_BUTTONS_MACRO               
-CLR_RAM                           0000000E
+CLR_RAM                           0000001D
 CLR_RAM_MACRO                     
 CREATE_MENU_NAMES                 
 CREATE_SUBMENU_NAMES              
@@ -662,7 +687,7 @@ EECON2                            00000089
 EEDATA                            00000008
 EEIE                              00000006
 EEIF                              00000004
-END_INTERRUPT_HEANDLER            00000007
+END_INTERRUPT_HEANDLER            00000016
 ENTER                             PORTB,6
 EXIT                              PORTB,7
 EXIT_DELAY                        .20
@@ -674,7 +699,7 @@ GOTO_PUNKT_MENU
 GOTO_PUNKT_SUBMENU                
 GOTO_PUNKT_SUBMENU_ACTION         
 INDF                              00000000
-INIT                              0000000C
+INIT                              0000001B
 INTCON                            0000000B
 INTE                              00000004
 INTEDG                            00000006
@@ -684,7 +709,7 @@ IRP                               00000007
 KNOWN_ZERO                        00000003
 LCD_INIT                          00000000
 LCD_LINE_INIT                     00000000
-MAIN                              0000001C
+MAIN                              0000002E
 MENU_HEANDLER                     00000000
 MENU_NAME_1                       "1.Menu_1"
 MENU_NAME_2                       "2.Menu_2"
@@ -696,7 +721,7 @@ MENU_SUBMENU_NAME_1_1             "1.1.Subm"
 MENU_SUBMENU_NAME_1_2             "1.2.Subm"
 MENU_SUBMENU_NAME_1_3             "1.3.Subm"
 MENU_SUBMENU_NAME_1_4             "1.4.Subm"
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE 13
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 14
 
 
 SYMBOL TABLE
@@ -755,7 +780,7 @@ RB1                               00000001
 RB2                               00000002
 RB3                               00000003
 RB4                               00000004
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE 14
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 15
 
 
 SYMBOL TABLE
@@ -770,7 +795,7 @@ RD                                00000000
 RETLW_NUM_OF_SUBMENU_PUNKTS       
 RP0                               00000005
 RP1                               00000006
-SAVE_CURSOR_POSITION              0
+SAVE_CURSOR_POSITION              1
 STATUS                            00000003
 STATUS_TEMP                       00000001
 T0CS                              00000005
@@ -797,11 +822,11 @@ TRISB6                            00000006
 TRISB7                            00000007
 UP                                PORTB,4
 USE_MENU_ACTION                   1
-USE_MOVING_CURSOR                 0
-USE_RBIE                          0
+USE_MOVING_CURSOR                 1
+USE_RBIE                          1
 USE_SHORT_MOD_PCL                 1
-USE_STATIC_CURSOR                 1
-USE_TOP_LAST_CURSOR               0
+USE_STATIC_CURSOR                 0
+USE_TOP_LAST_CURSOR               1
 W                                 00000000
 WR                                00000001
 WREN                              00000002
@@ -814,7 +839,7 @@ ZASTAVKA_SECOND_STRING            "  ver 1.0 beta"
 _CONFIG                           00002007
 _CP_OFF                           00003FFF
 _CP_ON                            0000000F
-MPASM  5.51                          MAIN.ASM   12-23-2018  23:07:24         PAGE 15
+MPASM  5.51                          MAIN.ASM   12-24-2018  10:37:53         PAGE 16
 
 
 SYMBOL TABLE
@@ -842,6 +867,6 @@ __16F84                           00000001
 
 Errors   :     0
 Warnings :     9 reported,     0 suppressed
-Messages :     3 reported,     0 suppressed
+Messages :     4 reported,     0 suppressed
 
 
